@@ -36,15 +36,28 @@ class Field extends React.Component {
     // 3500)
     window.addEventListener('keydown', (event) => {
       console.log(event.key)
-      if (event.key === 'a') {
-        this.setState({
-          ship: {
-            pos: {
-              d: 270
+      let keypress = event.key
+      const keybindings = {
+        'w': 0,
+        'd': 90,
+        's': 180,
+        'a': 270
+      }
+      if (keybindings[keypress]) {
+        this.setState(function (state, props) {
+          return {
+            ship: {
+              pos: {
+                ...this.state.ship.pos,
+                d: keybindings[keypress]
+              },
+              vel: {
+                ...this.state.ship.vel
+              }
             },
-            ...this.state.ship
+            asteroids: [...this.state.asteroids]
           }
-        }, ()=>{console.log(this.state.ship)})
+        }, () => {console.log(this.state)})
       }
     })
   }

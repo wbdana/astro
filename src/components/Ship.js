@@ -26,6 +26,10 @@ class Ship extends React.Component {
     ctx.restore()
   }
 
+  componentDidUpdate() {
+    this.drawShip()
+  }
+
   drawShip = () => {
       let c = document.getElementById('AstroField')
       console.log(c)
@@ -34,16 +38,13 @@ class Ship extends React.Component {
       ctx.strokeStyle = '#FFFFFF'
       ctx.fillStyle = '#000000'
       ctx.lineWidth = 2;
-      // ctx.beginPath()
+      ctx.beginPath()
       ctx.moveTo(this.state.pos.x, this.state.pos.y)
-      // draw left side
       ctx.lineTo(this.state.pos.x - 5, this.state.pos.y + 17)
-      // reset point
-      ctx.moveTo(this.state.pos.x, this.state.pos.y)
-      // draw right side
+      ctx.lineTo(this.state.pos.x - 4, this.state.pos.y + 14)
+      ctx.lineTo(this.state.pos.x + 4, this.state.pos.y + 14)
       ctx.lineTo(this.state.pos.x + 5, this.state.pos.y + 17)
-      // TODO: draw arc
-      // ctx.closePath()
+      ctx.closePath()
       ctx.fill()
       ctx.stroke()
       ctx.restore()
