@@ -35,7 +35,6 @@ class Field extends React.Component {
     //   }),
     // 3500)
     window.addEventListener('keydown', (event) => {
-      console.log(event.key)
       let keypress = event.key
       const keybindings = {
         'w': 0,
@@ -43,21 +42,49 @@ class Field extends React.Component {
         's': 180,
         'a': 270
       }
-      if (keybindings[keypress]) {
-        this.setState(function (state, props) {
-          return {
-            ship: {
-              pos: {
-                ...this.state.ship.pos,
-                d: keybindings[keypress]
-              },
-              vel: {
-                ...this.state.ship.vel
-              }
+      // if (keybindings[keypress]) {
+      //   this.setState(function (state, props) {
+      //     return {
+      //       ship: {
+      //         pos: {
+      //           ...this.state.ship.pos,
+      //           d: keybindings[keypress]
+      //         },
+      //         vel: {
+      //           ...this.state.ship.vel
+      //         }
+      //       },
+      //       asteroids: [...this.state.asteroids]
+      //     }
+      //   }, () => {console.log(this.state)})
+      // }
+
+      // if keypress is a (left), rotate ship counterclockwise
+      if (keypress === 'a') {
+        this.setState({
+          ship: {
+            pos: {
+              ...this.state.ship.pos,
+              d: this.state.ship.pos.d - 1,
             },
-            asteroids: [...this.state.asteroids]
+            vel: {
+              ...this.state.ship.vel
+            }
           }
-        }, () => {console.log(this.state)})
+        }, ()=>{console.log(this.state.ship)})
+      }
+      if (keypress === 'd') {
+        this.setState({
+          ship: {
+            pos: {
+              ...this.state.ship.pos,
+              d: this.state.ship.pos.d + 1,
+            },
+            vel: {
+              ...this.state.ship.vel
+            }
+          }
+        }, ()=>{console.log(this.state.ship)})
       }
     })
   }
