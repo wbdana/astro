@@ -5,8 +5,8 @@ class Field extends React.Component {
   state = {
     ship: {
       pos: {
-        x: 500,
-        y: 500,
+        x: 950,
+        y: 550,
         d: 0
       },
       vel: {

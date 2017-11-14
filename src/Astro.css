@@ -6,3 +6,12 @@
 #AstroField {
   background-color: #000000;
 }
+
+span.VectorVelocity {
+  color: grey;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: #FFFFFF;
+  z-index: -1;
+}

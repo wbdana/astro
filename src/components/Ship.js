@@ -18,79 +18,58 @@ class Ship extends React.Component {
 
     // Redraw ship every 20ms, applying velocity to position each time
     //(TODO: Check that this actually works)
-    setInterval(() => {
-      this.setState({
-        pos: {
-          ...this.state.pos,
-          x: this.state.pos.x + this.state.vel.x,
-          y: this.state.pos.y + this.state.vel.y,
-        },
-        vel: {
-          ...this.state.vel
-        }
-      })
-      this.drawShip()
-    }, 5)
+    this.updateAndConfineShipToField()
 
     // Add keydown event listener to facilitate control
     window.addEventListener('keydown', (event) => {
-
       let keypress = event.key
-
-      // If keypress is a (left), rotate ship counterclockwise
+      // If keypress is 'a' (left), rotate ship counterclockwise
       if (keypress === 'a') {
         this.setState({
+          ...this.state,
           pos: {
             ...this.state.pos,
-            d: this.state.pos.d - 7
-          },
-          vel: {
-            ...this.state.vel
+            d: this.state.pos.d - 5
           }
         }, ()=>{console.log(this.state)})
       }
-
-      // If keypress is d (right), rotate ship clockwise
+      // If keypress is 'd' (right), rotate ship clockwise
       if (keypress === 'd') {
         this.setState({
+          ...this.state,
           pos: {
             ...this.state.pos,
-            d: this.state.pos.d + 7
-          },
-          vel: {
-            ...this.state.vel
+            d: this.state.pos.d + 5
           }
         }, ()=>{console.log(this.state)})
       }
-      // If keypress is w (forward), calculate x- and y-components of current
+      // If keypress is 'w' (forward), calculate x- and y-components of current
       // vector and add them to velocity
       // The current value of pixels (force) to be added per keypress is 1
       // (see multiplier below)
       if (keypress === 'w') {
-        console.log("Current this.state.pos.d: ", this.state.pos.d)
         // this.updateOrLimitVelocity()
         this.setState({
-          pos: {
-            ...this.state.pos
-          },
+          ...this.state,
           vel: {
-            x: this.state.vel.x + (0.5*(Math.sin(this.state.pos.d*Math.PI/180))),
-            y: this.state.vel.y - (0.5*(Math.cos(this.state.pos.d*Math.PI/180)))
+            x: this.state.vel.x + (0.25*(Math.sin(this.state.pos.d*Math.PI/180))),
+            y: this.state.vel.y - (0.25*(Math.cos(this.state.pos.d*Math.PI/180)))
           }
         }, ()=>{console.log(this.state.vel.x);console.log(this.state.vel.y)})
       }
     })
   }
 
+  // Intended to increase the velocity in the current direction when 'w' is
+  // pressed, provided that the Ship is not going too fast. Does not
+  // work as intended.
   updateOrLimitVelocity = () => {
     console.log("updateOrLimitVelocity()")
     let newVelX = this.state.vel.x + (0.5*(Math.sin(this.state.pos.d*Math.PI/180)))
     let newVelY = this.state.vel.y - (0.5*(Math.sin(this.state.pos.d*Math.PI/180)))
     if (newVelX >= 2 && this.state.vel.x > 0) {
       this.setState({
-        pos: {
-          ...this.state.pos
-        },
+        ...this.state,
         vel: {
           ...this.state.vel,
           x: 2
@@ -98,9 +77,7 @@ class Ship extends React.Component {
       })
     } else if (newVelX <= -2 && this.state.vel.x < 0) {
       this.setState({
-        pos: {
-          ...this.state.pos
-        },
+        ...this.state,
         vel: {
           ...this.state.vel,
           x: -2
@@ -108,9 +85,7 @@ class Ship extends React.Component {
       })
     } else {
       this.setState({
-        pos: {
-          ...this.state.pos
-        },
+        ...this.state,
         vel: {
           ...this.state.vel,
           x: newVelX
@@ -119,9 +94,7 @@ class Ship extends React.Component {
     }
     if (newVelY >= 2 && this.state.vel.y > 0) {
       this.setState({
-        pos: {
-          ...this.state.pos
-        },
+        ...this.state,
         vel: {
           ...this.state.vel,
           y: 2
@@ -129,9 +102,7 @@ class Ship extends React.Component {
       })
     } else if (newVelY <= -2 && this.state.vel.y < 0){
       this.setState({
-        pos: {
-          ...this.state.pos
-        },
+        ...this.state,
         vel: {
           ...this.state.vel,
           y: -2
@@ -139,9 +110,7 @@ class Ship extends React.Component {
       })
     } else {
       this.setState({
-        pos: {
-          ...this.statepos
-        },
+        ...this.state,
         vel: {
           ...this.state.vel,
           y: newVelY
@@ -150,6 +119,102 @@ class Ship extends React.Component {
     }
     console.log(this.state.vel.x)
     console.log(this.state.vel.y)
+  }
+
+  updateAndConfineShipToField = () => {
+    setInterval(() => {
+      // If Ship goes off screen bottom right corner, come out top left corner
+      if (((this.state.pos.x + this.state.vel.x) >= 1898) && ((this.state.pos.y + this.state.vel.y) >= 954)) {
+        this.setState({
+          ...this.state,
+          pos: {
+            ...this.state.pos,
+            x: 0,
+            y: 0,
+          }
+        })
+      // If Ship goes off screen right, come out on left side
+      } else if ((this.state.pos.x + this.state.vel.x) >= 1898) {
+        this.setState({
+          ...this.state,
+          pos: {
+            ...this.state.pos,
+            x: 0,
+            y: this.state.pos.y + this.state.vel.y
+          }
+        })
+      // If Ship goes off screen left, come out on right side
+      } else if ((this.state.pos.x + this.state.vel.x) <= 0) {
+        this.setState({
+          ...this.state,
+          pos: {
+            ...this.state.pos,
+            x: 1898,
+            y: this.state.pos.y + this.state.vel.y
+          }
+        })
+      // If Ship goes off screen bottom, come out on top side
+      } else if ((this.state.pos.y + this.state.vel.y) >= 954) {
+        this.setState({
+          ...this.state,
+          pos: {
+            ...this.state.pos,
+            x: this.state.pos.x + this.state.vel.x,
+            y: 0,
+          }
+        })
+      // If Ship goes off screen top, come out on bottom side
+      } else if ((this.state.pos.y + this.state.vel.y) <= 0) {
+        this.setState({
+          ...this.state,
+          pos: {
+            ...this.state.pos,
+            x: this.state.pos.x + this.state.vel.x,
+            y: 954
+          }
+        })
+      // If Ship goes off screen bottom left corner, come out on top right side
+      } else if (((this.state.pos.x + this.state.vel.x) <= 0) && ((this.state.pos.y + this.state.vel.y) >= 954)) {
+        this.setState({
+          ...this.state,
+          pos: {
+            ...this.state.pos,
+            x: 1898,
+            y: 0
+          }
+        })
+      // If Ship goes off screen top right corner, come out on bottom left corner
+      } else if (((this.state.pos.x + this.state.vel.x) >= 1898) && ((this.state.pos.y + this.state.vel.y) <= 0)) {
+        this.setState({
+          ...this.state,
+          pos: {
+            ...this.state.pos,
+            x: 0,
+            y: 954
+          }
+        })
+      // If Ship goes off screen top left corner, come out on bottom right corner
+      } else if (((this.state.pos.x + this.state.vel.x) <= 0) && ((this.state.pos.y + this.state.vel.y) <= 0)) {
+        this.setState({
+          ...this.state,
+          pos: {
+            ...this.state.pos,
+            x: 1898,
+            y: 954
+          }
+        })
+      } else {
+        this.setState({
+          ...this.state,
+          pos: {
+            ...this.state.pos,
+            x: this.state.pos.x + this.state.vel.x,
+            y: this.state.pos.y + this.state.vel.y,
+          }
+        })
+      }
+      this.drawShip()
+    }, 5)
   }
 
   drawShip = () => {
@@ -170,11 +235,11 @@ class Ship extends React.Component {
       // console.log("Rotated")
       ctx.beginPath()
       // ctx.move()
-      ctx.moveTo(0,-7)
-      ctx.lineTo(-5,15)
+      ctx.moveTo(0,-9)
+      ctx.lineTo(-7,17)
       ctx.lineTo(-4,12)
       ctx.lineTo(4,12)
-      ctx.lineTo(5,15)
+      ctx.lineTo(7,17)
       // ctx.moveTo(this.state.pos.x, this.state.pos.y)
       // ctx.lineTo(this.state.pos.x - 5, this.state.pos.y + 17)
       // ctx.lineTo(this.state.pos.x - 4, this.state.pos.y + 14)
@@ -195,7 +260,8 @@ class Ship extends React.Component {
     // console.log("RENDERING")
     return(
       <div className='Ship'>
-
+        <span className='VectorVelocity'>x: {this.state.vel.x}</span>
+        <span className='VectorVelocity'>y: {this.state.vel.y}</span>
       </div>
     )
   }
