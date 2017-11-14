@@ -42,17 +42,26 @@ class Ship extends React.Component {
       }
       // If keypress is 'w' (forward), calculate x- and y-components of current
       // vector and add them to velocity
-      // The current value of pixels (force) to be added per keypress is 1
-      // (see multiplier below)
       if (keypress === 'w') {
-        // this.updateOrLimitVelocity()
+        this.updateOrLimitVelocity()
+        // this.setState({
+        //   ...this.state,
+        //   vel: {
+        //     x: this.state.vel.x + (0.25*(Math.sin(this.state.pos.d*Math.PI/180))),
+        //     y: this.state.vel.y - (0.25*(Math.cos(this.state.pos.d*Math.PI/180)))
+        //   }
+        // }, ()=>{console.log(this.state.vel.x);console.log(this.state.vel.y)})
+      }
+
+      // If keypress is 's' (stop), stop Ship
+      if (keypress === 's') {
         this.setState({
           ...this.state,
           vel: {
-            x: this.state.vel.x + (0.25*(Math.sin(this.state.pos.d*Math.PI/180))),
-            y: this.state.vel.y - (0.25*(Math.cos(this.state.pos.d*Math.PI/180)))
+            x: 0,
+            y: 0
           }
-        }, ()=>{console.log(this.state.vel.x);console.log(this.state.vel.y)})
+        })
       }
     })
   }
@@ -62,24 +71,36 @@ class Ship extends React.Component {
   // work as intended.
   updateOrLimitVelocity = () => {
     console.log("updateOrLimitVelocity()")
-    let newVelX = this.state.vel.x + (0.5*(Math.sin(this.state.pos.d*Math.PI/180)))
-    let newVelY = this.state.vel.y - (0.5*(Math.sin(this.state.pos.d*Math.PI/180)))
-    if (newVelX >= 2 && this.state.vel.x > 0) {
+    // Assign newVelX (new x velocity) and newVelY (new y velocity)
+    // Multiplier is currently 1: adjust to change rate of acceleration of Ship
+    console.log(this.state)
+    let newVelX = this.state.vel.x + (1*(Math.sin(this.state.pos.d*Math.PI/180)))
+    let newVelY = this.state.vel.y - (1*(Math.sin(this.state.pos.d*Math.PI/180)))
+    // Set new x value for Ship velocity, ensuring that velocity does not
+    // exceed 20
+    // If you're already going right (x is positive), and the new total speed is
+    // >= 20, limit speed in that direction to 20
+    if (newVelX >= 20 && this.state.vel.x > 0) {
       this.setState({
         ...this.state,
         vel: {
           ...this.state.vel,
-          x: 2
+          x: 20
         }
       })
-    } else if (newVelX <= -2 && this.state.vel.x < 0) {
+    // If you're aready going left (x is negative), and the new total speed is
+    // <= -20, limit speed in that direction to -20
+    } else if (newVelX <= -20 && this.state.vel.x < 0) {
       this.setState({
         ...this.state,
         vel: {
           ...this.state.vel,
-          x: -2
+          x: -20
         }
       })
+    // Otherwise (i.e., you're EITHER A. not moving, B. moving against your
+    // current vector, c) moving with your current vector, but not above the
+    // speed limit), allow normal acceleration
     } else {
       this.setState({
         ...this.state,
@@ -89,22 +110,31 @@ class Ship extends React.Component {
         }
       })
     }
-    if (newVelY >= 2 && this.state.vel.y > 0) {
+    // Set new y value for Ship velocity, ensuring that velocity does not
+    // exceed 20
+    // If you're already going down (y is positive), and the new total speed is
+    // >= 20, limit speed in that direction to 20
+    if (newVelY >= 20 && this.state.vel.y > 0) {
       this.setState({
         ...this.state,
         vel: {
           ...this.state.vel,
-          y: 2
+          y: 20
         }
       })
-    } else if (newVelY <= -2 && this.state.vel.y < 0){
+    // If you're already going up (y is negative), and the new total speed is
+    // <= -20, limit speed in that direction to -20
+    } else if (newVelY <= -20 && this.state.vel.y < 0){
       this.setState({
         ...this.state,
         vel: {
           ...this.state.vel,
-          y: -2
+          y: -20
         }
       })
+    // Otherwise (i.e., you're EITHER A. not moving, B. moving against your
+    // current vector, c) moving with your current vector, but not above the
+    // speed limit), allow normal acceleration
     } else {
       this.setState({
         ...this.state,
@@ -114,11 +144,11 @@ class Ship extends React.Component {
         }
       })
     }
-    console.log(this.state.vel.x)
-    console.log(this.state.vel.y)
   }
 
   updateAndConfineShipToField = () => {
+    // setInterval() to position the ship based on this.state.pos, as adjusted
+    // by the boundaries of the Field
     setInterval(() => {
       // If Ship goes off screen bottom right corner, come out top left corner
       if (((this.state.pos.x + this.state.vel.x) >= 1898) && ((this.state.pos.y + this.state.vel.y) >= 954)) {
@@ -226,7 +256,7 @@ class Ship extends React.Component {
       ctx.translate((this.state.pos.x + this.state.vel.x), (this.state.pos.y + this.state.vel.y))
       ctx.rotate(angle*Math.PI/180)
       ctx.beginPath()
-      ctx.moveTo(0,-9)
+      ctx.moveTo(0,0)
       ctx.lineTo(-7,17)
       ctx.lineTo(-4,12)
       ctx.lineTo(4,12)
@@ -237,13 +267,7 @@ class Ship extends React.Component {
       ctx.restore()
   }
 
-  // componentDidUpdate() {
-  //   console.log("DidUpdate")
-  //   this.drawShip()
-  // }
-
   render() {
-    // console.log("RENDERING")
     return(
       <div className='Ship'>
         <span className='VectorVelocity'>x: {this.state.vel.x}</span>

@@ -7,7 +7,7 @@ class Field extends React.Component {
       pos: {
         x: 950,
         y: 550,
-        d: 0
+        d: 360
       },
       vel: {
         x: 0,
@@ -21,7 +21,7 @@ class Field extends React.Component {
     this.setState({
       ...this.state,
       ship: shipState
-    }, ()=>{console.log(this.state.ship)})
+    })
   }
 
   render() {
