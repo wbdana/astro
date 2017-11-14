@@ -17,6 +17,13 @@ class Field extends React.Component {
     asteroids: []
   }
 
+  updateShipState = (shipState) => {
+    this.setState({
+      ...this.state,
+      ship: shipState
+    }, ()=>{console.log(this.state.ship)})
+  }
+
   // componentDidMount() {
   //   window.addEventListener('keydown', (event) => {
   //
@@ -70,6 +77,7 @@ class Field extends React.Component {
         <Ship
           pos={this.state.ship.pos}
           vel={this.state.ship.vel}
+          updateField={this.updateShipState}
         />
       </canvas>
     )

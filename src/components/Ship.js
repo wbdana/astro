@@ -14,13 +14,10 @@ class Ship extends React.Component {
   }
 
   componentDidMount() {
-    // console.log("DidMount")
-
     // Redraw ship every 20ms, applying velocity to position each time
-    //(TODO: Check that this actually works)
     this.updateAndConfineShipToField()
 
-    // Add keydown event listener to facilitate control
+    // Add keydown event listener to facilitate control of Ship
     window.addEventListener('keydown', (event) => {
       let keypress = event.key
       // If keypress is 'a' (left), rotate ship counterclockwise
@@ -132,7 +129,7 @@ class Ship extends React.Component {
             x: 0,
             y: 0,
           }
-        })
+        }, ()=>{this.props.updateField(this.state)})
       // If Ship goes off screen right, come out on left side
       } else if ((this.state.pos.x + this.state.vel.x) >= 1898) {
         this.setState({
@@ -142,7 +139,7 @@ class Ship extends React.Component {
             x: 0,
             y: this.state.pos.y + this.state.vel.y
           }
-        })
+        }, ()=>{this.props.updateField(this.state)})
       // If Ship goes off screen left, come out on right side
       } else if ((this.state.pos.x + this.state.vel.x) <= 0) {
         this.setState({
@@ -152,7 +149,7 @@ class Ship extends React.Component {
             x: 1898,
             y: this.state.pos.y + this.state.vel.y
           }
-        })
+        }, ()=>{this.props.updateField(this.state)})
       // If Ship goes off screen bottom, come out on top side
       } else if ((this.state.pos.y + this.state.vel.y) >= 954) {
         this.setState({
@@ -162,7 +159,7 @@ class Ship extends React.Component {
             x: this.state.pos.x + this.state.vel.x,
             y: 0,
           }
-        })
+        }, ()=>{this.props.updateField(this.state)})
       // If Ship goes off screen top, come out on bottom side
       } else if ((this.state.pos.y + this.state.vel.y) <= 0) {
         this.setState({
@@ -172,7 +169,7 @@ class Ship extends React.Component {
             x: this.state.pos.x + this.state.vel.x,
             y: 954
           }
-        })
+        }, ()=>{this.props.updateField(this.state)})
       // If Ship goes off screen bottom left corner, come out on top right side
       } else if (((this.state.pos.x + this.state.vel.x) <= 0) && ((this.state.pos.y + this.state.vel.y) >= 954)) {
         this.setState({
@@ -182,7 +179,7 @@ class Ship extends React.Component {
             x: 1898,
             y: 0
           }
-        })
+        }, ()=>{this.props.updateField(this.state)})
       // If Ship goes off screen top right corner, come out on bottom left corner
       } else if (((this.state.pos.x + this.state.vel.x) >= 1898) && ((this.state.pos.y + this.state.vel.y) <= 0)) {
         this.setState({
@@ -192,7 +189,7 @@ class Ship extends React.Component {
             x: 0,
             y: 954
           }
-        })
+        }, ()=>{this.props.updateField(this.state)})
       // If Ship goes off screen top left corner, come out on bottom right corner
       } else if (((this.state.pos.x + this.state.vel.x) <= 0) && ((this.state.pos.y + this.state.vel.y) <= 0)) {
         this.setState({
@@ -202,7 +199,7 @@ class Ship extends React.Component {
             x: 1898,
             y: 954
           }
-        })
+        }, ()=>{this.props.updateField(this.state)})
       } else {
         this.setState({
           ...this.state,
@@ -211,7 +208,7 @@ class Ship extends React.Component {
             x: this.state.pos.x + this.state.vel.x,
             y: this.state.pos.y + this.state.vel.y,
           }
-        })
+        }, ()=>{this.props.updateField(this.state)})
       }
       this.drawShip()
     }, 5)
