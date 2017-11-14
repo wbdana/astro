@@ -72,10 +72,10 @@ class Ship extends React.Component {
   updateOrLimitVelocity = () => {
     console.log("updateOrLimitVelocity()")
     // Assign newVelX (new x velocity) and newVelY (new y velocity)
-    // Multiplier is currently 1: adjust to change rate of acceleration of Ship
+    // Multiplier is currently 0.25: adjust to change rate of acceleration of Ship
     console.log(this.state)
-    let newVelX = this.state.vel.x + (1*(Math.sin(this.state.pos.d*Math.PI/180)))
-    let newVelY = this.state.vel.y - (1*(Math.sin(this.state.pos.d*Math.PI/180)))
+    let newVelX = this.state.vel.x + (0.25*(Math.sin(this.state.pos.d*Math.PI/180)))
+    let newVelY = this.state.vel.y - (0.25*(Math.cos(this.state.pos.d*Math.PI/180)))
     // Set new x value for Ship velocity, ensuring that velocity does not
     // exceed 20
     // If you're already going right (x is positive), and the new total speed is
@@ -256,10 +256,10 @@ class Ship extends React.Component {
       ctx.translate((this.state.pos.x + this.state.vel.x), (this.state.pos.y + this.state.vel.y))
       ctx.rotate(angle*Math.PI/180)
       ctx.beginPath()
-      ctx.moveTo(0,0)
+      ctx.moveTo(0,-8.5)
       ctx.lineTo(-7,17)
-      ctx.lineTo(-4,12)
-      ctx.lineTo(4,12)
+      ctx.lineTo(-4,4.5)
+      ctx.lineTo(4,4.5)
       ctx.lineTo(7,17)
       ctx.closePath()
       ctx.fill()
