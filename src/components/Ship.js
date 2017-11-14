@@ -215,7 +215,6 @@ class Ship extends React.Component {
   }
 
   drawShip = () => {
-      // console.log("drawShip()")
       let c = document.getElementById('AstroField')
       let ctx = c.getContext('2d')
       let angle = this.state.pos.d
@@ -225,33 +224,23 @@ class Ship extends React.Component {
       ctx.fillStyle = '#000000'
       ctx.lineWidth = 2;
       ctx.translate((this.state.pos.x + this.state.vel.x), (this.state.pos.y + this.state.vel.y))
-      // console.log("Rotating... I hope")
-      // console.log(angle)
-      // console.log(this.state.pos.d)
       ctx.rotate(angle*Math.PI/180)
-      // console.log("Rotated")
       ctx.beginPath()
-      // ctx.move()
       ctx.moveTo(0,-9)
       ctx.lineTo(-7,17)
       ctx.lineTo(-4,12)
       ctx.lineTo(4,12)
       ctx.lineTo(7,17)
-      // ctx.moveTo(this.state.pos.x, this.state.pos.y)
-      // ctx.lineTo(this.state.pos.x - 5, this.state.pos.y + 17)
-      // ctx.lineTo(this.state.pos.x - 4, this.state.pos.y + 14)
-      // ctx.lineTo(this.state.pos.x + 4, this.state.pos.y + 14)
-      // ctx.lineTo(this.state.pos.x + 5, this.state.pos.y + 17)
       ctx.closePath()
       ctx.fill()
       ctx.stroke()
       ctx.restore()
   }
 
-  componentDidUpdate() {
-    // console.log("DidUpdate")
-    this.drawShip()
-  }
+  // componentDidUpdate() {
+  //   console.log("DidUpdate")
+  //   this.drawShip()
+  // }
 
   render() {
     // console.log("RENDERING")

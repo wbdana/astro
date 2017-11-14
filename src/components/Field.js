@@ -24,49 +24,6 @@ class Field extends React.Component {
     }, ()=>{console.log(this.state.ship)})
   }
 
-  // componentDidMount() {
-  //   window.addEventListener('keydown', (event) => {
-  //
-  //     let keypress = event.key
-  //
-  //     const keybindings = {
-  //       'w': 0,
-  //       'd': 90,
-  //       's': 180,
-  //       'a': 270
-  //     }
-  //
-  //     // if keypress is a (left), rotate ship counterclockwise
-  //     if (keypress === 'a') {
-  //       this.setState({
-  //         ship: {
-  //           pos: {
-  //             ...this.state.ship.pos,
-  //             d: this.state.ship.pos.d - 1,
-  //           },
-  //           vel: {
-  //             ...this.state.ship.vel
-  //           }
-  //         }
-  //       }, ()=>{console.log(this.state.ship)})
-  //     }
-  //     // if keypress is d (right), rotate ship clockwise
-  //     if (keypress === 'd') {
-  //       this.setState({
-  //         ship: {
-  //           pos: {
-  //             ...this.state.ship.pos,
-  //             d: this.state.ship.pos.d + 1,
-  //           },
-  //           vel: {
-  //             ...this.state.ship.vel
-  //           }
-  //         }
-  //       }, ()=>{console.log(this.state.ship)})
-  //     }
-  //   })
-  // }
-
   render() {
     return(
       <canvas

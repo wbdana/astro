@@ -14,4 +14,6 @@ span.VectorVelocity {
   left: 10px;
   background-color: #FFFFFF;
   z-index: -1;
+  height: auto;
+  width: auto;
 }
