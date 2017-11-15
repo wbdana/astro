@@ -195,31 +195,32 @@ class Ship extends React.Component {
     // by the boundaries of the Field
     setInterval(() => {
 
+			// Increase velocity while 'w' is held down
 			if (this.state.keys.w === true) {
 				this.updateOrLimitVelocity()
 			}
 
+			// Adjust direction counterclockwise while 'a' is held down
 			if (this.state.keys.a === true) {
 				this.setState({
 		      ...this.state,
 		      pos: {
 		        ...this.state.pos,
-		        d: this.state.pos.d - 1
+		        d: this.state.pos.d - 5
 		      }
 				})
 			}
 
+			// Adjust direction clockwise while 'd' is held down
 			if (this.state.keys.d === true) {
 				this.setState({
 					...this.state,
 					pos: {
 						...this.state.pos,
-						d: this.state.pos.d + 1
+						d: this.state.pos.d + 5
 					}
 				})
 			}
-
-
 
       // If Ship goes off screen bottom right corner, come out top left corner
       if (((this.state.pos.x + this.state.vel.x) >= 1898) && ((this.state.pos.y + this.state.vel.y) >= 954)) {
@@ -312,7 +313,7 @@ class Ship extends React.Component {
         }, ()=>{this.props.updateField(this.state)})
       }
       this.drawShip()
-    }, 5)
+    }, 20)
   }
 
   drawShip = () => {
