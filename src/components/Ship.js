@@ -26,7 +26,7 @@ class Ship extends React.Component {
 		// while the key is down
 		window.addEventListener('keydown', (event) => {
 			let keypress = event.key
-			console.log(keypress)
+
 			if (keypress === 'w' || keypress === 'a' || keypress === 'd') {
 				this.setState({
 					...this.state,
@@ -35,6 +35,21 @@ class Ship extends React.Component {
 						[keypress]: true
 					}
 				}, ()=>{console.log(this.state.keys)})
+			}
+
+			if (keypress === 's') {
+				this.setState({
+					...this.state,
+					vel: {
+						x: 0,
+						y: 0
+					},
+					keys: {
+						w: false,
+						a: false,
+						d: false
+					}
+				})
 			}
 		})
 
@@ -48,7 +63,7 @@ class Ship extends React.Component {
 						...this.state.keys,
 						[keypress]: false
 					}
-				})
+				}, ()=>{console.log(this.state.keys)})
 			}
 		})
 
@@ -179,6 +194,33 @@ class Ship extends React.Component {
     // Set interval to position (redraw) the ship based on this.state.pos, as adjusted
     // by the boundaries of the Field
     setInterval(() => {
+
+			if (this.state.keys.w === true) {
+				this.updateOrLimitVelocity()
+			}
+
+			if (this.state.keys.a === true) {
+				this.setState({
+		      ...this.state,
+		      pos: {
+		        ...this.state.pos,
+		        d: this.state.pos.d - 1
+		      }
+				})
+			}
+
+			if (this.state.keys.d === true) {
+				this.setState({
+					...this.state,
+					pos: {
+						...this.state.pos,
+						d: this.state.pos.d + 1
+					}
+				})
+			}
+
+
+
       // If Ship goes off screen bottom right corner, come out top left corner
       if (((this.state.pos.x + this.state.vel.x) >= 1898) && ((this.state.pos.y + this.state.vel.y) >= 954)) {
         this.setState({
