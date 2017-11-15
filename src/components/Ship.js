@@ -44,13 +44,6 @@ class Ship extends React.Component {
       // vector and add them to velocity
       if (keypress === 'w') {
         this.updateOrLimitVelocity()
-        // this.setState({
-        //   ...this.state,
-        //   vel: {
-        //     x: this.state.vel.x + (0.25*(Math.sin(this.state.pos.d*Math.PI/180))),
-        //     y: this.state.vel.y - (0.25*(Math.cos(this.state.pos.d*Math.PI/180)))
-        //   }
-        // }, ()=>{console.log(this.state.vel.x);console.log(this.state.vel.y)})
       }
 
       // If keypress is 's' (stop), stop Ship
@@ -144,7 +137,7 @@ class Ship extends React.Component {
   }
 
   updateAndConfineShipToField = () => {
-    // setInterval() to position the ship based on this.state.pos, as adjusted
+    // Set interval to position (redraw) the ship based on this.state.pos, as adjusted
     // by the boundaries of the Field
     setInterval(() => {
       // If Ship goes off screen bottom right corner, come out top left corner
@@ -264,6 +257,7 @@ class Ship extends React.Component {
       ctx.restore()
   }
 
+	// Need to figure out the spans
   render() {
     return(
       <div className='Ship'>
