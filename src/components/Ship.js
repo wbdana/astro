@@ -66,14 +66,11 @@ class Ship extends React.Component {
     })
   }
 
-  // Intended to increase the velocity in the current direction when 'w' is
-  // pressed, provided that the Ship is not going too fast. Does not
-  // work as intended.
+  // Increase the velocity in the current direction when 'w' is
+  // pressed, provided that the Ship is not going too fast.
   updateOrLimitVelocity = () => {
-    console.log("updateOrLimitVelocity()")
     // Assign newVelX (new x velocity) and newVelY (new y velocity)
     // Multiplier is currently 0.25: adjust to change rate of acceleration of Ship
-    console.log(this.state)
     let newVelX = this.state.vel.x + (0.25*(Math.sin(this.state.pos.d*Math.PI/180)))
     let newVelY = this.state.vel.y - (0.25*(Math.cos(this.state.pos.d*Math.PI/180)))
     // Set new x value for Ship velocity, ensuring that velocity does not
@@ -258,8 +255,8 @@ class Ship extends React.Component {
       ctx.beginPath()
       ctx.moveTo(0,-8.5)
       ctx.lineTo(-7,17)
-      ctx.lineTo(-4,4.5)
-      ctx.lineTo(4,4.5)
+      ctx.lineTo(-4,12)
+      ctx.lineTo(4,12)
       ctx.lineTo(7,17)
       ctx.closePath()
       ctx.fill()
