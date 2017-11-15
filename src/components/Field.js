@@ -12,6 +12,11 @@ class Field extends React.Component {
       vel: {
         x: 0,
         y: 0
+      },
+      keys: {
+  			w: false,
+  			a: false,
+  			d: false
       }
     },
     asteroids: []

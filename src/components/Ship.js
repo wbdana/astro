@@ -10,53 +10,92 @@ class Ship extends React.Component {
     vel: {
       x: this.props.vel.x,
       y: this.props.vel.y
-    }
+    },
+		keys: {
+			w: false,
+			a: false,
+			d: false
+		}
   }
 
   componentDidMount() {
     // Redraw ship every 20ms, applying velocity to position each time
     this.updateAndConfineShipToField()
 
-    // Add keydown event listener to facilitate control of Ship
-    window.addEventListener('keydown', (event) => {
-      let keypress = event.key
-      // If keypress is 'a' (left), rotate ship counterclockwise
-      if (keypress === 'a') {
-        this.setState({
-          ...this.state,
-          pos: {
-            ...this.state.pos,
-            d: this.state.pos.d - 5
-          }
-        }, ()=>{console.log(this.state)})
-      }
-      // If keypress is 'd' (right), rotate ship clockwise
-      if (keypress === 'd') {
-        this.setState({
-          ...this.state,
-          pos: {
-            ...this.state.pos,
-            d: this.state.pos.d + 5
-          }
-        }, ()=>{console.log(this.state)})
-      }
-      // If keypress is 'w' (forward), calculate x- and y-components of current
-      // vector and add them to velocity
-      if (keypress === 'w') {
-        this.updateOrLimitVelocity()
-      }
+		// If keypress is 'w', 'a', or 'd', set state to begin applying acceleration
+		// while the key is down
+		window.addEventListener('keydown', (event) => {
+			let keypress = event.key
+			console.log(keypress)
+			if (keypress === 'w' || keypress === 'a' || keypress === 'd') {
+				this.setState({
+					...this.state,
+					keys: {
+						...this.state.keys,
+						[keypress]: true
+					}
+				}, ()=>{console.log(this.state.keys)})
+			}
+		})
 
-      // If keypress is 's' (stop), stop Ship
-      if (keypress === 's') {
-        this.setState({
-          ...this.state,
-          vel: {
-            x: 0,
-            y: 0
-          }
-        })
-      }
-    })
+		// On keyup for 'w', 'a', or 'd', set state to stop applying acceleration
+		window.addEventListener('keyup', (event) => {
+			let keypress = event.key
+			if (keypress === 'w' || keypress === 'a' || keypress === 'd') {
+				this.setState({
+					...this.state,
+					keys: {
+						...this.state.keys,
+						[keypress]: false
+					}
+				})
+			}
+		})
+
+		// OLD PHYSICS START (works, but poorly)
+
+    // Add keydown event listener to facilitate control of Ship
+    // window.addEventListener('keydown', (event) => {
+    //   let keypress = event.key
+    //   // If keypress is 'a' (left), rotate ship counterclockwise
+    //   if (keypress === 'a') {
+    //     this.setState({
+    //       ...this.state,
+    //       pos: {
+    //         ...this.state.pos,
+    //         d: this.state.pos.d - 5
+    //       }
+    //     }, ()=>{console.log(this.state)})
+    //   }
+    //   // If keypress is 'd' (right), rotate ship clockwise
+    //   if (keypress === 'd') {
+    //     this.setState({
+    //       ...this.state,
+    //       pos: {
+    //         ...this.state.pos,
+    //         d: this.state.pos.d + 5
+    //       }
+    //     }, ()=>{console.log(this.state)})
+    //   }
+    //   // If keypress is 'w' (forward), calculate x- and y-components of current
+    //   // vector and add them to velocity
+    //   if (keypress === 'w') {
+    //     this.updateOrLimitVelocity()
+    //   }
+		//
+    //   // If keypress is 's' (stop), stop Ship
+    //   if (keypress === 's') {
+    //     this.setState({
+    //       ...this.state,
+    //       vel: {
+    //         x: 0,
+    //         y: 0
+    //       }
+    //     })
+    //   }
+    // })
+
+		// OLD PHYSICS END
   }
 
   // Increase the velocity in the current direction when 'w' is
