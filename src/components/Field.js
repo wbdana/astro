@@ -1,5 +1,7 @@
 import React from 'react'
 import Ship from './Ship'
+// import AsteroidContainer from './AsteroidContainer'
+import Asteroid from './Asteroid'
 
 class Field extends React.Component {
   state = {
@@ -29,6 +31,39 @@ class Field extends React.Component {
     })
   }
 
+  updateAsteroidState = (asteroidContainerState) => {
+    // this.setState({
+    //   ...this.state,
+    //   asteroids: asteroidContainerState
+    // })
+    this.setState({
+      ...this.state,
+      asteroids: [
+        ...this.state.asteroids,
+        asteroidContainerState
+      ]
+    })
+  }
+
+  // drawField = (drawShip, drawAsteroids) => {
+  //
+  // }
+
+  componentDidMount() {
+    // this.drawField()
+    setInterval(()=>{console.log(this.state)}, 5000)
+  }
+  // componentDidMount() {
+  //   setTimeout(()=>{console.log(this.state)}, 4000)
+  // }
+
+  // <AsteroidContainer
+  //   asteroids={this.state.asteroids}
+  //   rocks={this.state.rocks}
+  //   pebbles={this.state.pebbles}
+  //   updateField={this.updateAsteroidContainerState}
+  // />
+
   render() {
     return(
       <canvas
@@ -40,6 +75,10 @@ class Field extends React.Component {
           pos={this.state.ship.pos}
           vel={this.state.ship.vel}
           updateField={this.updateShipState}
+        />
+        <Asteroid
+          size={2}
+          updateAsteroidState={this.updateAsteroidState}
         />
       </canvas>
     )
