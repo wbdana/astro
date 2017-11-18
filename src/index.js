@@ -13,7 +13,7 @@ const store = createStore(astroReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && w
 
 ReactDOM.render(
   <Provider store={store}>
-    <Astro store={store}>
+    <Astro store={store} />
   </Provider>, document.getElementById('root')
 );
 registerServiceWorker();
