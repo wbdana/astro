@@ -18,8 +18,7 @@ export default function astroReducer(state = {
   asteroids: []
 }, action) {
   switch(action.type) {
-    case 'INCREASE_SHIP_X_POS' {
-      return
-    }
+    default:
+      return state
   }
 }
