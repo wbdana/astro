@@ -3,6 +3,8 @@ import Ship from './Ship'
 // import AsteroidContainer from './AsteroidContainer'
 import Asteroid from './Asteroid'
 
+import { connect } from 'react-redux'
+
 class Field extends React.Component {
   state = {
     ship: {
@@ -72,11 +74,11 @@ class Field extends React.Component {
         height='961px'
       >
         <Ship
-          pos={this.state.ship.pos}
-          vel={this.state.ship.vel}
+          store={this.props.store}
           updateField={this.updateShipState}
         />
         <Asteroid
+          store={this.props.store}
           size={2}
           updateAsteroidState={this.updateAsteroidState}
         />
@@ -85,4 +87,8 @@ class Field extends React.Component {
   }
 }
 
-export default Field
+const mapStateToProps = (state) => {
+  return { state }
+}
+
+export default connect(mapStateToProps)(Field)

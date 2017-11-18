@@ -1,9 +1,9 @@
 export default function astroReducer(state = {
   ship: {
     pos: {
-      x: 0,
-      y: 0,
-      d: 0
+      x: 950,
+      y: 550,
+      d: 360
     },
     vel: {
       x: 0,
@@ -21,15 +21,25 @@ export default function astroReducer(state = {
     angles: [],
     sides: [],
     pos: {
-      x: 500, // defaul testing starting position
+      x: 500, // default testing starting position
       y: 500 // default testing starting position
     },
     vel: {
-
+      x: 0, // default testing static
+      y: 0  // default testing static
     }
   }
 }, action) {
   switch(action.type) {
+    case 'STOP_SHIP':
+      console.log("reducer hit!")
+      return { ship: {
+        ...state.ship,
+        vel: {
+          x: 0,
+          y: 0
+        }
+      } }
     default:
       return state
   }

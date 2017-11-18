@@ -1,5 +1,6 @@
 import React from 'react'
 import { getRandomIntInclusive } from '../Helpers'
+import { connect } from 'react-redux'
 
 class Asteroid extends React.Component {
   // 7 angles for 8 sides; 8th angle is ctx.closePath()
@@ -144,4 +145,8 @@ class Asteroid extends React.Component {
   }
 }
 
-export default Asteroid
+const mapStateToProps = (state) => {
+return { asteroid: { ...state } }
+}
+
+export default connect(mapStateToProps)(Asteroid)

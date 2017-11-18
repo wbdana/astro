@@ -1,25 +1,28 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 class Ship extends React.Component {
   state = {
-    pos: {
-      x: this.props.pos.x,
-      y: this.props.pos.y,
-      d: this.props.pos.d
-    },
-    vel: {
-      x: this.props.vel.x,
-      y: this.props.vel.y
-    },
-		keys: {
-			w: false,
-			a: false,
-			d: false
-		}
+    ...this.props.store.getState().ship
+    // pos: {
+    //   x: this.props.pos.x,
+    //   y: this.props.pos.y,
+    //   d: this.props.pos.d
+    // },
+    // vel: {
+    //   x: this.props.vel.x,
+    //   y: this.props.vel.y
+    // },
+		// keys: {
+		// 	w: false,
+		// 	a: false,
+		// 	d: false
+		// }
   }
 
   componentDidMount() {
     // Redraw ship every 20ms, applying velocity to position each time
+    console.log(this.props.store.getState())
     this.updateAndConfineShipToField()
 
 		// If keypress is 'w', 'a', or 'd', set state to begin applying acceleration
@@ -37,20 +40,28 @@ class Ship extends React.Component {
 				}, ()=>{console.log(this.state.keys)})
 			}
 
-			if (keypress === 's') {
-				this.setState({
-					...this.state,
-					vel: {
-						x: 0,
-						y: 0
-					},
-					keys: {
-						w: false,
-						a: false,
-						d: false
-					}
-				})
-			}
+      if (keypress === 's') {
+        console.log(this.props.store.dispatch)
+        this.props.store.dispatch({
+          type: 'STOP_SHIP'
+        })
+      }
+
+      // If keypress is 's', stop the Ship!
+			// if (keypress === 's') {
+			// 	this.setState({
+			// 		...this.state,
+			// 		vel: {
+			// 			x: 0,
+			// 			y: 0
+			// 		},
+			// 		keys: {
+			// 			w: false,
+			// 			a: false,
+			// 			d: false
+			// 		}
+			// 	})
+			// }
 		})
 
 		// On keyup for 'w', 'a', or 'd', set state to stop applying acceleration
@@ -350,4 +361,8 @@ class Ship extends React.Component {
   }
 }
 
-export default Ship
+const mapStateToProps = (state) => {
+  return { ship: { ...state } }
+}
+
+export default connect(mapStateToProps)(Ship)
