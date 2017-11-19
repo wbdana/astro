@@ -67,81 +67,28 @@ class Field extends React.Component {
   drawField = () => {
 
     setInterval(() => {
-      // Update Ship position
-      
+
       // Canvas context
       let c = document.getElementById('AstroField')
       let ctx = c.getContext('2d')
 
+      // Reset and save
       ctx.clearRect(0, 0, c.width, c.height)
       ctx.save()
+
+      // Styling
       ctx.strokeStyle = '#FFFFFF'
       ctx.fillStyle = '#000000'
       ctx.lineWidth = 2
+
+      // Draw
       this.drawShip(c, ctx)
       this.drawAsteroid(c, ctx)
+
+      // Restore
       ctx.restore()
-
-      // if (ctx) {
-
-      // }
-      // Ship position
-      // let shipAngle = this.props.store.getState().ship.pos.d
-      // let shipDrawX = this.props.store.getState().ship.pos.x
-      // let shipDrawY = this.props.store.getState().ship.pos.y
-      // let i
-
-      // Field setup
-      // ctx.clearRect(0,0,c.width,c.height)
-      // ctx.save()
-      // ctx.strokeStyle = '#FFFFFF'
-      // ctx.fillStyle = '#000000'
-      // ctx.lineWidth = 2
-
-      // drawShip()
-      // this.drawShip(c, ctx)
-
-      // drawAsteroid()
-      // this.drawAsteroid(c, ctx)
-
-      // Move to Ship position and draw Ship
-      // ctx.translate(shipDrawX, shipDrawY)
-      // ctx.rotate(shipAngle * Math.PI/180)
-      // ctx.beginPath()
-      // ctx.moveTo(0,-8.5)
-      // ctx.lineTo(-7,17)
-      // ctx.lineTo(-4,12)
-      // ctx.lineTo(4,12)
-      // ctx.lineTo(7,17)
-      // ctx.closePath()
-
-      // Move to Asteroid position and draw
-      // Asteroid
-
-      // ctx.beginPath()
-      // ctx.translate(this.props.store.getState().asteroid.pos.x, this.props.store.getState().asteroid.pos.y)
-      // for (i = 0; i < this.props.store.getState().asteroid.angles.length; i++) {
-      //   // ctx.rotate(this.props.store.getState().asteroid.angles[i] * Math.PI/180)
-      //   ctx.lineTo(0,this.props.store.getState().asteroid.sides[i])
-      // }
-      // ctx.closePath()
-      
-
-
-      // Fill Field, draw Ship and Asteroids,
-      // restore
-      // ctx.fill()
-      // ctx.stroke()
-      // ctx.restore()
     }, 20) // 20ms canvas refresh
   }
-
-  // <AsteroidContainer
-  //   asteroids={this.state.asteroids}
-  //   rocks={this.state.rocks}
-  //   pebbles={this.state.pebbles}
-  //   updateField={this.updateAsteroidContainerState}
-  // />
 
   render() {
     return(
@@ -152,11 +99,9 @@ class Field extends React.Component {
       >
         <Ship
           store={this.props.store}
-          ref={instance => {this.ship = instance}}
         />
         <Asteroid
           store={this.props.store}
-          ref={instance => {this.asteroid = instance}}
           size={2}
         />
       </canvas>
