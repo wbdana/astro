@@ -190,6 +190,7 @@ export default function astroReducer(state = {
         }
       )
     case 'ADJUST_TOP_LEFT':
+      // Move to top left
       return(
         {
           ...state,
@@ -204,6 +205,7 @@ export default function astroReducer(state = {
         }
       )
     case 'ADJUST_TOP_RIGHT':
+      // Move to top right
       return(
         {
           ...state,
@@ -218,6 +220,7 @@ export default function astroReducer(state = {
         }
       )
     case 'ADJUST_BOTTOM_LEFT':
+      // Move to bottom left
       return(
         {
           ...state,
@@ -232,6 +235,7 @@ export default function astroReducer(state = {
         }
       )
     case 'ADJUST_BOTTOM_RIGHT':
+      // Move to bottom right
       return(
         {
           ...state,
@@ -246,6 +250,7 @@ export default function astroReducer(state = {
         }
       )
     case 'ADJUST_LEFT':
+      // Move to left side of Field
       return(
         {
           ...state,
@@ -260,6 +265,7 @@ export default function astroReducer(state = {
         }
       )
     case 'ADJUST_RIGHT':
+      // Move to right side of Field
       return(
         {
           ...state,
@@ -274,6 +280,7 @@ export default function astroReducer(state = {
         }
       )
     case 'ADJUST_TOP':
+      // Move to top of Field
       return(
         {
           ...state,
@@ -288,6 +295,7 @@ export default function astroReducer(state = {
         }
       )
     case 'ADJUST_BOTTOM':
+      // Move to bottom of Field
       return(
        {
           ...state,
@@ -302,6 +310,7 @@ export default function astroReducer(state = {
         }
       )
     case 'UPDATE_SHIP_LOCATION':
+      // Move ship within boundaries
       return(
         {
           ...state,
@@ -312,6 +321,18 @@ export default function astroReducer(state = {
               x: state.ship.pos.x + state.ship.vel.x,
               y: state.ship.pos.y + state.ship.vel.y
             }
+          }
+        }
+      )
+    case 'INITIALIZE_ASTEROID':
+    console.log("INIT AST")
+      return(
+        {
+          ...state,
+          asteroid: {
+            ...state.asteroid,
+            angles: action.payload.angles,
+            sides: action.payload.sides
           }
         }
       )

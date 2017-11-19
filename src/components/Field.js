@@ -55,6 +55,7 @@ class Field extends React.Component {
   componentDidMount() {
     // this.drawField()
     // setInterval(()=>{console.log(this.state)}, 5000)
+    // Asteroid.initializeAsteroid(this.props)
   }
   // componentDidMount() {
   //   setTimeout(()=>{console.log(this.state)}, 4000)
@@ -76,12 +77,10 @@ class Field extends React.Component {
       >
         <Ship
           store={this.props.store}
-          updateField={this.updateShipState}
         />
         <Asteroid
           store={this.props.store}
           size={2}
-          updateAsteroidState={this.updateAsteroidState}
         />
       </canvas>
     )
