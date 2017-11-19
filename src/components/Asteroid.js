@@ -5,16 +5,8 @@ import { connect } from 'react-redux'
 class Asteroid extends React.Component {
 
   componentDidMount() {
-    // this.props.updateAsteroidContainer(this.state)
-
-    // this.drawAsteroid()
-    // Generate asteroid number of sides for drawing
-    // this.initializeAsteroid(this.props)
-    // this.updateAndConfineAsteroidsToField(this.props)
-    // console.log(this.props)
-    // this.updateAndConfineAsteroidsToField()
-    // this.props.updateAsteroidState(this.state)
     this.initializeAsteroid()
+    this.updateAndConfineAsteroidToField()
   }
 
   controlAsteroid = (actionType, payload) => {
@@ -34,6 +26,9 @@ class Asteroid extends React.Component {
     // shape) using min
     let angles = []
     let sides = []
+    let d = getRandomIntInclusive(0,359)
+    let velX = getRandomIntInclusive(1,10)
+    let velY = getRandomIntInclusive(1,10)
     for (i = 0; i < numSides; i++) {
       let newAngle = getRandomIntInclusive(min,45)
       let newSideMultiplier = getRandomIntInclusive(10,100)
@@ -43,49 +38,70 @@ class Asteroid extends React.Component {
     }
     this.controlAsteroid('INITIALIZE_ASTEROID', {
       angles,
-      sides
+      sides,
+      d,
+      velX,
+      velY
     })
   }
 
-  // setAngles = (min) => {
-  //   let newAngle =
-  //   Math.random(min, 137)
-  //   this.setState({
-  //     angles: [
-  //       ...this.props.store.getState().asteroid.angles,
-  //       newAngle
-  //     ]
-  //   })
-  // }
+  updateAndConfineAsteroidToField = () => {
 
-  drawAsteroid = (props) => {
-    let c = document.getElementById('AstroField')
-    let ctx = c.getContext('2d')
+    // Set interval to position (redraw) the asteroid based on
+    // this.props.getState().asteroid, as adjusted by the boundaries
+    // of the Field
+    setInterval(() => {
 
-    ctx.clearRect(0,0,c.width,c.height)
-    ctx.save()
-    ctx.strokeStyle = '#FFFFFF'
-    ctx.fillStyle = '#000000'
-    ctx.lineWidth = 1;
-    ctx.translate(500,500)
-    // ctx.rotate(angle*Math.PI/180)
-    ctx.beginPath()
-    ctx.moveTo(0,0)
+      // CONFINE SHIP TO FIELD
 
-    let i;
-    for (i = 0; i < this.props.store.getState().asteroid.angles.length; i++) {
-      console.log(this.props.store.getState().asteroid.angles[i])
-      ctx.rotate(this.props.store.getState().asteroid.angles[i]*Math.PI/180)
-      ctx.lineTo(0,this.props.store.getState().asteroid.sides[i])
-    }
-    ctx.closePath()
-    ctx.fill()
-    ctx.stroke()
-    ctx.restore()
-  }
+      // If Asteroid goes off screen bottom right corner,
+      // come out top left corner
+      if (((this.props.store.getState().asteroid.pos.x + this.props.store.getState().asteroid.vel.x) >= 1898) && ((this.props.store.getState().asteroid.pos.y + this.props.store.getState().asteroid.vel.y) >= 954)) {
+        this.controlAsteroid('ADJUST_ASTEROID_TOP_LEFT', null)
+      }
 
-  updateAndConfineAsteroidsToField = (props) => {
-    this.drawAsteroid(this.props)
+      // If Asteroid goes off screen bottom left corner, come out on top right side
+      else if (((this.props.store.getState().asteroid.pos.x + this.props.store.getState().asteroid.vel.x) <= 0) && ((this.props.store.getState().asteroid.pos.y + this.props.store.getState().asteroid.vel.y) >= 954)) {
+        this.controlAsteroid('ADJUST_ASTEROID_TOP_RIGHT', null)
+      }
+
+      // If Asteroid goes off screen top right corner, come out on bottom left corner
+      else if (((this.props.store.getState().asteroid.pos.x + this.props.store.getState().asteroid.vel.x) >= 1898) && ((this.props.store.getState().asteroid.pos.y + this.props.store.getState().asteroid.vel.y) <= 0)) {
+        this.controlAsteroid('ADJUST_ASTEROID_BOTTOM_LEFT', null)
+      }
+
+      // If Asteroid goes off screen top left corner, come out on bottom right corner
+      else if (((this.props.store.getState().asteroid.pos.x + this.props.store.getState().asteroid.vel.x) <= 0) && ((this.props.store.getState().asteroid.pos.y + this.props.store.getState().asteroid.vel.y) <= 0)) {
+        this.controlAsteroid('ADJUST_ASTEROID_BOTTOM_RIGHT', null)
+      }
+
+      // If Asteroid goes off screen right, come out on left side
+      else if ((this.props.store.getState().asteroid.pos.x + this.props.store.getState().asteroid.vel.x) >= 1898) {
+        this.controlAsteroid('ADJUST_ASTEROID_LEFT', null)
+      }
+
+      // If Asteroid goes off screen left, come out on right side
+      else if ((this.props.store.getState().asteroid.pos.x + this.props.store.getState().asteroid.vel.x) <= 0) {
+        this.controlAsteroid('ADJUST_ASTEROID_RIGHT', null)
+      }
+
+      // If Asteroid goes off screen bottom, come out on top side
+      else if ((this.props.store.getState().asteroid.pos.y + this.props.store.getState().asteroid.vel.y) >= 954) {
+        this.controlAsteroid('ADJUST_ASTEROID_TOP', null)
+      }
+
+      // If Asteroid goes off screen top, come out on bottom side
+      else if ((this.props.store.getState().asteroid.pos.y + this.props.store.getState().asteroid.vel.y) <= 0) {
+        this.controlAsteroid('ADJUST_ASTEROID_BOTTOM', null)
+      }
+
+      // Or, if we are within the boundaries already...
+      else {
+        this.controlAsteroid('UPDATE_ASTEROID_LOCATION', null)
+      }
+
+    }, 20) // 20ms refresh rate
+
   }
 
   render() {

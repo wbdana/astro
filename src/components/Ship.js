@@ -91,10 +91,9 @@ class Ship extends React.Component {
   updateAndConfineShipToField = () => {
 
     // Set interval to position (redraw) the ship based on
-    // this.props.getState()ship, as adjusted by the boundaries
+    // this.props.getState().ship, as adjusted by the boundaries
     // of the Field
     setInterval( () => {
-      // SHIP CONTROLS
 
       // Increase velocity while 'w' is held down
       if (this.props.store.getState().ship.keys.w === true) {
@@ -159,38 +158,8 @@ class Ship extends React.Component {
         this.controlShip('UPDATE_SHIP_LOCATION', null)
       }
 
-      // this.drawShip()
-
     }, 20) // 20ms refresh rate
   
-  }
-
-  drawShip = () => {
-    // console.log("this.drawShip()")
-      let c = document.getElementById('AstroField')
-      let ctx = c.getContext('2d')
-      // let angle = this.state.pos.d
-      console.log(this.props.store.getState().ship)
-      let angle = this.props.store.getState().ship.pos.d
-      let drawX = this.props.store.getState().ship.pos.x + this.props.store.getState().ship.vel.x
-      let drawY = this.props.store.getState().ship.pos.y + this.props.store.getState().ship.vel.y
-      ctx.clearRect(0,0,c.width,c.height)
-      ctx.save()
-      ctx.strokeStyle = '#FFFFFF'
-      ctx.fillStyle = '#000000'
-      ctx.lineWidth = 2;
-      ctx.translate(drawX, drawY)
-      ctx.rotate(angle*Math.PI/180)
-      ctx.beginPath()
-      ctx.moveTo(0,-8.5)
-      ctx.lineTo(-7,17)
-      ctx.lineTo(-4,12)
-      ctx.lineTo(4,12)
-      ctx.lineTo(7,17)
-      ctx.closePath()
-      ctx.fill()
-      ctx.stroke()
-      ctx.restore()
   }
 
   render() {

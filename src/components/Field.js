@@ -4,7 +4,6 @@ import Ship from './Ship'
 import Asteroid from './Asteroid'
 
 import { connect } from 'react-redux'
-// import { Math } from 'core-js/library/web/timers';
 
 class Field extends React.Component {
 
@@ -29,7 +28,6 @@ class Field extends React.Component {
     })
   }
 
-
   componentDidMount() {
     this.drawField()
   }
@@ -49,6 +47,9 @@ class Field extends React.Component {
     ctx.closePath()
     ctx.fill()
     ctx.stroke()
+
+    // Reset canvas path origin for Asteroid
+    ctx.translate((shipDrawX * -1), (shipDrawY * -1))
   }
 
   drawAsteroid = (c, ctx) => {
@@ -81,8 +82,10 @@ class Field extends React.Component {
       ctx.fillStyle = '#000000'
       ctx.lineWidth = 2
 
-      // Draw
+      // Draw Ship
       this.drawShip(c, ctx)
+
+      // Reset path origin and draw Asteroid 
       this.drawAsteroid(c, ctx)
 
       // Restore
