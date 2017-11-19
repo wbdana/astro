@@ -195,7 +195,6 @@ class Ship extends React.Component {
       ctx.lineWidth = 2;
       ctx.translate(drawX, drawY)
       ctx.rotate(angle*Math.PI/180)
-
       ctx.beginPath()
       ctx.moveTo(0,-8.5)
       ctx.lineTo(-7,17)

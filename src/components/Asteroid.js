@@ -28,35 +28,6 @@ class Asteroid extends React.Component {
     this.initializeAsteroid()
     // this.updateAndConfineAsteroidsToField()
     // this.props.updateAsteroidState(this.state)
-
-
-
-
-    // this.setState({
-    //   ...this.state,
-    //   numSides: Math.random(3,9)
-    // }, ()=>{
-    //   // Then generate angles to draw
-    //   this.setState({
-    //     var i;
-    //     let min = 0;
-    //     for (i = 0; i < this.state.numSides; i++) {
-    //       this.setAngles(min)
-    //       min = this.state.angles[this.state.angles.length - 1]
-    //     }
-    //   }, ()=>{
-    //     // Then generate the length of each side
-    //     for (i = 0; i < this.state.numSides; i++) {
-    //       this.setState({
-    //         ...this.state,
-    //         sides: [
-    //           ...this.state.sides,
-    //           Math.random(10,100)
-    //         ]
-    //       })
-    //     }
-    //   })
-    // })
   }
 
   initializeAsteroid = ()  => {
