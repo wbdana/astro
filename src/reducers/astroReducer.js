@@ -30,9 +30,12 @@ export default function astroReducer(state = {
     }
   }
 }, action) {
+  console.log(action.type)
   switch(action.type) {
     // Something is breaking here. It breaks everything. This is a bad reducer. It doesn't work because I did it wrong.
-    case 'ACCELERATE_SHIP':
+    case 'MOVE_SHIP':
+      // Keydown on 'w', 'a', or 'd'
+      // action.payload structure: 'w', 'a', or 'd'
       return(
         {
           ...state,
@@ -40,12 +43,14 @@ export default function astroReducer(state = {
             ...state.ship,
             keys: {
               ...state.ship.keys,
-              w: true
+              [action.payload]: true
             }
           }
         }
       )
-    case 'STOP_ACCELERATING':
+    case 'STOP_MOVE_SHIP':
+      // Keyup on 'w', 'a', or 'd'
+      // action.payload structure: 'w', 'a', or 'd'
       return(
         {
           ...state,
@@ -53,15 +58,263 @@ export default function astroReducer(state = {
             ...state.ship,
             keys: {
               ...state.ship.keys,
-              w: false
+              [action.payload]: false
             }
           }
         }
       )
     case 'STOP_SHIP':
-      console.log("reducer hit!")
-      console.log(state)
-      return({ ship: { vel: { x: 0, y: 0 } }})
+      // Keydown on 's'
+      return(
+        {
+          ...state,
+          ship: {
+            ...state.ship,
+            vel: {
+              x: 0,
+              y: 0
+            }
+          }
+        }
+      )
+    case 'INCREASE_VELX_POS_LIMITED':
+      // Accelerating to the right, velocity limited
+      return(
+        {
+          ...state,
+          ship: {
+            ...state.ship,
+            vel: {
+              ...state.ship.vel,
+              x: 20
+            }
+          }
+        }
+      )
+    case 'INCREASE_VELX_NEG_LIMITED':
+      // Accelerating to the left, velocity
+      return(
+        {
+          ...state,
+          ship: {
+            ...state.ship,
+            vel: {
+              ...state.ship.vel,
+              x: -20
+            }
+          }
+        }
+      )
+    case 'SET_NEW_VELX':
+      // Accelerating on x-axis, presently unlimited
+      return(
+        {
+          ...state,
+          ship: {
+            ...state.ship,
+            vel: {
+              ...state.ship.vel,
+              x: action.payload
+            }
+          }
+        }
+      )
+    case 'INCREASE_VELY_POS_LIMITED':
+      // Accelerating towards the bottom, velocity limited
+      return(
+        {
+          ...state,
+          ship: {
+            ...state.ship,
+            vel: {
+              ...state.ship.vel,
+              y: 20
+            }
+          }
+        }
+      )
+    case 'INCREASE_VELY_NEG_LIMITED':
+      // Accelerating towards the top, velocity limited
+      return(
+        {
+          ...state,
+          ship: {
+            ...state.ship,
+            vel: {
+              ...state.ship.vel,
+              y: -20
+            }
+          }
+        }
+      )
+    case 'SET_NEW_VELY':
+      // Accelerating on y-axis, presently unlimited
+      return(
+        {
+          ...state,
+          ship: {
+            ...state.ship,
+            vel: {
+              ...state.ship.vel,
+              y: action.payload
+            }
+          }
+        }
+      )
+    case 'ROTATE_COUNTERCLOCKWISE':
+      // Rotating to the left
+      return(
+        {
+          ...state,
+          ship: {
+            ...state.ship,
+            pos: {
+              ...state.ship.pos,
+              d: state.ship.pos.d - 5
+            }
+          }
+        }
+      )
+    case 'ROTATE_CLOCKWISE':
+      // Rotating to the right
+      return (
+        {
+          ...state,
+          ship: {
+            ...state.ship,
+            pos: {
+              ...state.ship.pos,
+              d: state.ship.pos.d + 5
+            }
+          }
+        }
+      )
+    case 'ADJUST_TOP_LEFT':
+      return(
+        {
+          ...state,
+          ship: {
+            ...state.ship,
+            pos: {
+              ...state.ship.pos,
+              x: 0,
+              y: 0
+            }
+          }
+        }
+      )
+    case 'ADJUST_TOP_RIGHT':
+      return(
+        {
+          ...state,
+          ship: {
+            ...state.ship,
+            pos: {
+              ...state.ship.pos,
+              x: 1898,
+              y: 0
+            }
+          }
+        }
+      )
+    case 'ADJUST_BOTTOM_LEFT':
+      return(
+        {
+          ...state,
+          ship: {
+            ...state.ship,
+            pos: {
+              ...state.ship.pos,
+              x: 0,
+              y: 954
+            }
+          }
+        }
+      )
+    case 'ADJUST_BOTTOM_RIGHT':
+      return(
+        {
+          ...state,
+          ship: {
+            ...state.ship,
+            pos: {
+              ...state.ship.pos,
+              x: 1898,
+              y: 954
+            }
+          }
+        }
+      )
+    case 'ADJUST_LEFT':
+      return(
+        {
+          ...state,
+          ship: {
+            ...state.ship,
+            pos: {
+              ...state.ship.pos,
+              x: 0,
+              y: state.ship.pos.y + state.ship.vel.y
+            }
+          }
+        }
+      )
+    case 'ADJUST_RIGHT':
+      return(
+        {
+          ...state,
+          ship: {
+            ...state.ship,
+            pos: {
+              ...state.ship.pos,
+              x: 1898,
+              y: state.ship.pos.y + state.ship.vel.y
+            }
+          }
+        }
+      )
+    case 'ADJUST_TOP':
+      return(
+        {
+          ...state,
+          ship: {
+            ...state.ship,
+            pos: {
+              ...state.ship.pos,
+              x: state.ship.pos.x + state.ship.vel.x,
+              y: 0
+            }
+          }
+        }
+      )
+    case 'ADJUST_BOTTOM':
+      return(
+       {
+          ...state,
+          ship: {
+            ...state.ship,
+            pos: {
+              ...state.ship.pos,
+              x: state.ship.pos.x + state.ship.vel.x,
+              y: 954
+            }
+          }
+        }
+      )
+    case 'UPDATE_SHIP_LOCATION':
+      return(
+        {
+          ...state,
+          ship: {
+            ...state.ship,
+            pos: {
+              ...state.ship.pos,
+              x: state.ship.pos.x + state.ship.vel.x,
+              y: state.ship.pos.y + state.ship.vel.y
+            }
+          }
+        }
+      )
     default:
       return state
   }
