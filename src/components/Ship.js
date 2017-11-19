@@ -5,6 +5,7 @@ class Ship extends React.Component {
 
   componentDidMount() {
     // Redraw ship every 20ms, applying velocity to position each time
+    console.log(this.state)
     console.log(this.props.store.getState())
     this.updateAndConfineShipToField()
 
@@ -30,13 +31,6 @@ class Ship extends React.Component {
 			let keypress = event.key
 			if (keypress === 'w' || keypress === 'a' || keypress === 'd') {
         this.controlShip('STOP_MOVE_SHIP', keypress)
-				// this.setState({
-				// 	...this.state,
-				// 	keys: {
-				// 		...this.state.keys,
-				// 		[keypress]: false
-				// 	}
-				// }, ()=>{console.log(this.state.keys)})
 			}
 		})
   }
@@ -48,7 +42,6 @@ class Ship extends React.Component {
     })
   }
 
-  // REDUX updateOrLimitVelocity
   // Increase the velocity in the current direction when 'w' is
   // pressed, provided that the Ship is not going too fast.
   updateOrLimitVelocity = () => {
@@ -79,23 +72,17 @@ class Ship extends React.Component {
       this.controlShip('SET_NEW_VELX', newVelX)
     }
 
-    // Set new y value for Ship velocity, ensuring that velocity does not
-    // exceed 20
-    // If you're already going down (y is positive), and the new total speed is
-    // >= 20, limit speed in that direction to 20
+    // Same for Y
     if (newVelY >= 20 && this.props.store.getState().ship.vel.y > 0) {
       this.controlShip('INCREASE_VELY_POS_LIMITED', null)
     }
 
-    // If you're already going up (y is negative), and the new total speed is
-    // <= -20, limit speed in that direction to -20
+    // Same for Y
     else if (newVelY <= -20 && this.props.store.getState().ship.vel.y < 0) {
       this.controlShip('INCREASE_VELY_NEG_LIMITED', null)
     }
 
-    // Otherwise (i.e., you're EITHER A. not moving, B. moving against your
-    // current vector, c) moving with your current vector, but not above the
-    // speed limit), allow normal acceleration
+    // Same for Y
     else {
       this.controlShip('SET_NEW_VELY', newVelY)
     }
@@ -106,73 +93,76 @@ class Ship extends React.Component {
     // Set interval to position (redraw) the ship based on
     // this.props.getState()ship, as adjusted by the boundaries
     // of the Field
+    setInterval( () => {
+      // SHIP CONTROLS
 
-    // SHIP CONTROLS
+      // Increase velocity while 'w' is held down
+      if (this.props.store.getState().ship.keys.w === true) {
+        this.updateOrLimitVelocity()
+      }
 
-    // Increase velocity while 'w' is held down
-    if (this.props.store.getState().ship.keys.w === true) {
-      this.updateOrLimitVelocity()
-    }
+      // Adjust direction counterclockwise while 'a' is held down
+      if (this.props.store.getState().ship.keys.a === true) {
+        this.controlShip('ROTATE_COUNTERCLOCKWISE', null)
+      }
 
-    // Adjust direction counterclockwise while 'a' is held down
-    if (this.props.store.getState().ship.keys.a === true) {
-      this.controlShip('ROTATE_COUNTERCLOCKWISE', null)
-    }
+      // Adjust direction clockwise while 'd' is held down
+      if (this.props.store.getState().ship.keys.d === true) {
+        this.controlShip('ROTATE_CLOCKWISE', null)
+      }
 
-    // Adjust direction clockwise while 'd' is held down
-    if (this.props.store.getState().ship.keys.d === true) {
-      this.controlShip('ROTATE_CLOCKWISE', null)
-    }
+      // CONFINE SHIP TO FIELD
 
-    // CONFINE SHIP TO FIELD
+      // If Ship goes off screen bottom right corner,
+      // come out top left corner
+      if (((this.props.store.getState().ship.pos.x + this.props.store.getState().ship.vel.x) >= 1898) && ((this.props.store.getState().ship.pos.y + this.props.store.getState().ship.vel.y) >= 954)) {
+        this.controlShip('ADJUST_TOP_LEFT', null)
+      }
 
-    // If Ship goes off screen bottom right corner,
-    // come out top left corner
-    if (((this.props.store.getState().ship.pos.x + this.props.store.getState().ship.vel.x) >= 1898) && ((this.props.store.getState().ship.pos.y +this.props.store.getState().ship.vel.y) >= 954)) {
-      this.controlShip('ADJUST_TOP_LEFT', null)
-    }
+      // If Ship goes off screen bottom left corner, come out on top right side
+      else if (((this.props.store.getState().ship.pos.x + this.props.store.getState().ship.vel.x) <= 0) && ((this.props.store.getState().ship.pos.y + this.props.store.getState().ship.vel.y) >= 954)) {
+        this.controlShip('ADJUST_TOP_RIGHT', null)
+      }
 
-    // If Ship goes off screen bottom left corner, come out on top right side
-    else if (((this.props.store.getState().ship.pos.x + this.props.store.getState().ship.vel.x) <= 0) && ((this.props.store.getState().ship.pos.y + this.props.store.getState().ship.vel.y) >= 954)) {
-      this.controlShip('ADJUST_TOP_RIGHT', null)
-    }
+      // If Ship goes off screen top right corner, come out on bottom left corner
+      else if (((this.props.store.getState().ship.pos.x + this.props.store.getState().ship.vel.x) >= 1898) && ((this.props.store.getState().ship.pos.y + this.props.store.getState().ship.vel.y) <= 0)) {
+        this.controlShip('ADJUST_BOTTOM_LEFT', null)
+      }
 
-    // If Ship goes off screen top right corner, come out on bottom left corner
-    else if (((this.props.store.getState().ship.pos.x + this.props.store.getState().ship.vel.x) >= 1898) && ((this.props.store.getState().ship.pos.y + this.props.store.getState().ship.vel.y) <= 0)) {
-      this.controlShip('ADJUST_BOTTOM_LEFT', null)
-    }
+      // If Ship goes off screen top left corner, come out on bottom right corner
+      else if (((this.props.store.getState().ship.pos.x + this.props.store.getState().ship.vel.x) <= 0) && ((this.props.store.getState().ship.pos.y + this.props.store.getState().ship.vel.y) <= 0)) {
+        this.controlShip('ADJUST_BOTTOM_RIGHT', null)
+      }
 
-    // If Ship goes off screen top left corner, come out on bottom right corner
-    else if (((this.props.store.getState().ship.pos.x + this.props.store.getState().ship.vel.x) <= 0) && ((this.props.store.getState().ship.pos.y + this.props.store.getState().ship.vel.y) <= 0)) {
-      this.controlShip('ADJUST_BOTTOM_RIGHT', null)
-    }
+      // If Ship goes off screen right, come out on left side
+      else if ((this.props.store.getState().ship.pos.x + this.props.store.getState().ship.vel.x) >= 1898) {
+        this.controlShip('ADJUST_LEFT', null)
+      }
 
-    // If Ship goes off screen right, come out on left side
-    else if ((this.props.store.getState().ship.pos.x + this.props.store.getState().ship.vel.x) >= 1898) {
-      this.controlShip('ADJUST_LEFT', null)
-    }
+      // If Ship goes off screen left, come out on right side
+      else if ((this.props.store.getState().ship.pos.x + this.props.store.getState().ship.vel.x) <= 0) {
+        this.controlShip('ADJUST_RIGHT', null)
+      }
 
-    // If Ship goes off screen left, come out on right side
-    else if ((this.props.store.getState().ship.pos.x + this.props.store.getState().ship.vel.x) <= 0) {
-      this.controlShip('ADJUST_RIGHT', null)
-    }
+      // If Ship goes off screen bottom, come out on top side
+      else if ((this.props.store.getState().ship.pos.y + this.props.store.getState().ship.vel.y) >= 954) {
+        this.controlShip('ADJUST_TOP', null)
+      }
 
-    // If Ship goes off screen bottom, come out on top side
-    else if ((this.props.store.getState().ship.pos.y + this.props.store.getState().ship.vel.y) >= 954) {
-      this.controlShip('ADJUST_TOP', null)
-    }
+      // If Ship goes off screen top, come out on bottom side
+      else if ((this.props.store.getState().ship.pos.y + this.props.store.getState().ship.vel.y) <= 0) {
+        this.controlShip('ADJUST_BOTTOM', null)
+      }
 
-    // If Ship goes off screen top, come out on bottom side
-    else if ((this.props.store.getState().ship.pos.y + this.props.store.getState().ship.vel.y) <= 0) {
-      this.controlShip('ADJUST_BOTTOM', null)
-    }
+      // Or, if we are within the boundaries already...
+      else {
+        this.controlShip('UPDATE_SHIP_LOCATION', null)
+      }
 
-    // Or, if we are within the boundaries already...
-    else {
-      this.controlShip('UPDATE_SHIP_LOCATION', null)
-    }
+      // this.drawShip()
+
+    }, 20) // 20ms refresh rate
   
-    this.drawShip()
   }
 
   drawShip = () => {

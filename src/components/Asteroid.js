@@ -14,6 +14,7 @@ class Asteroid extends React.Component {
     // console.log(this.props)
     // this.updateAndConfineAsteroidsToField()
     // this.props.updateAsteroidState(this.state)
+    this.initializeAsteroid()
   }
 
   controlAsteroid = (actionType, payload) => {

@@ -1,4 +1,12 @@
 export default function astroReducer(state = {
+  canvas: {
+    c: function () {
+      return(document.getElementById('AstroField'))
+    },
+    ctx: function () {
+      return(document.getElementById('AstroField'))
+    }
+  },
   ship: {
     pos: {
       x: 950,
@@ -30,7 +38,7 @@ export default function astroReducer(state = {
     }
   }
 }, action) {
-  console.log(action.type)
+  console.log(state.canvas)
   switch(action.type) {
     // Something is breaking here. It breaks everything. This is a bad reducer. It doesn't work because I did it wrong.
     case 'MOVE_SHIP':
