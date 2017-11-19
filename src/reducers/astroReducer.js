@@ -31,7 +31,33 @@ export default function astroReducer(state = {
   }
 }, action) {
   switch(action.type) {
-    // Something is breaking here. It breaks everything.
+    // Something is breaking here. It breaks everything. This is a bad reducer. It doesn't work because I did it wrong.
+    case 'ACCELERATE_SHIP':
+      return(
+        {
+          ...state,
+          ship: {
+            ...state.ship,
+            keys: {
+              ...state.ship.keys,
+              w: true
+            }
+          }
+        }
+      )
+    case 'STOP_ACCELERATING':
+      return(
+        {
+          ...state,
+          ship: {
+            ...state.ship,
+            keys: {
+              ...state.ship.keys,
+              w: false
+            }
+          }
+        }
+      )
     case 'STOP_SHIP':
       console.log("reducer hit!")
       console.log(state)
