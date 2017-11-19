@@ -84,9 +84,7 @@ class Asteroid extends React.Component {
   }
 
   updateAndConfineAsteroidsToField = (props) => {
-    setInterval(() => {
-      this.drawAsteroid(this.props)
-    }, 20)
+    this.drawAsteroid(this.props)
   }
 
   render() {
