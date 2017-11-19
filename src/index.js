@@ -18,3 +18,7 @@ ReactDOM.render(
 );
 registerServiceWorker();
 console.log("store: " + store)
+store.dispatch({
+  type: '@@INIT'
+})
+console.log("store: " + store)

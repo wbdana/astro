@@ -40,14 +40,11 @@ class Ship extends React.Component {
 				}, ()=>{console.log(this.state.keys)})
 			}
 
+      // If keypress is 's', stop the Ship!
       if (keypress === 's') {
-        console.log(this.props.store.dispatch)
-        this.props.store.dispatch({
-          type: 'STOP_SHIP'
-        })
+        this.controlShip('STOP_SHIP')
       }
 
-      // If keypress is 's', stop the Ship!
 			// if (keypress === 's') {
 			// 	this.setState({
 			// 		...this.state,
@@ -77,51 +74,16 @@ class Ship extends React.Component {
 				}, ()=>{console.log(this.state.keys)})
 			}
 		})
+  }
 
-		// OLD PHYSICS START (works, but poorly)
-
-    // Add keydown event listener to facilitate control of Ship
-    // window.addEventListener('keydown', (event) => {
-    //   let keypress = event.key
-    //   // If keypress is 'a' (left), rotate ship counterclockwise
-    //   if (keypress === 'a') {
-    //     this.setState({
-    //       ...this.state,
-    //       pos: {
-    //         ...this.state.pos,
-    //         d: this.state.pos.d - 5
-    //       }
-    //     }, ()=>{console.log(this.state)})
-    //   }
-    //   // If keypress is 'd' (right), rotate ship clockwise
-    //   if (keypress === 'd') {
-    //     this.setState({
-    //       ...this.state,
-    //       pos: {
-    //         ...this.state.pos,
-    //         d: this.state.pos.d + 5
-    //       }
-    //     }, ()=>{console.log(this.state)})
-    //   }
-    //   // If keypress is 'w' (forward), calculate x- and y-components of current
-    //   // vector and add them to velocity
-    //   if (keypress === 'w') {
-    //     this.updateOrLimitVelocity()
-    //   }
-		//
-    //   // If keypress is 's' (stop), stop Ship
-    //   if (keypress === 's') {
-    //     this.setState({
-    //       ...this.state,
-    //       vel: {
-    //         x: 0,
-    //         y: 0
-    //       }
-    //     })
-    //   }
-    // })
-
-		// OLD PHYSICS END
+  controlShip = (actionType) => {
+    this.props.store.dispatch({
+      type: actionType,
+      vel: {
+        x: 0,
+        y: 0
+      }
+    })
   }
 
   // Increase the velocity in the current direction when 'w' is
@@ -324,20 +286,29 @@ class Ship extends React.Component {
         }, ()=>{this.props.updateField(this.state)})
       }
       this.drawShip()
+      // let shipState = this.props.store.getState().ship
+      // console.log(shipState.pos.d)
+      // console.log(this.props.store.getState().ship)
     }, 20)
   }
 
   drawShip = () => {
       let c = document.getElementById('AstroField')
       let ctx = c.getContext('2d')
-      let angle = this.state.pos.d
+      // let angle = this.state.pos.d
+      let shipState = this.props.store.getState().ship
+      let angle = shipState.pos.d
+      let drawX = shipState.pos.x + shipState.vel.x
+      let drawY = shipState.pos.y + shipState.vel.y
       ctx.clearRect(0,0,c.width,c.height)
       ctx.save()
       ctx.strokeStyle = '#FFFFFF'
       ctx.fillStyle = '#000000'
       ctx.lineWidth = 2;
-      ctx.translate((this.state.pos.x + this.state.vel.x), (this.state.pos.y + this.state.vel.y))
+      ctx.translate(drawX, drawY)
+      // ctx.translate((this.state.pos.x + this.state.vel.x), (this.state.pos.y + this.state.vel.y))
       ctx.rotate(angle*Math.PI/180)
+
       ctx.beginPath()
       ctx.moveTo(0,-8.5)
       ctx.lineTo(-7,17)

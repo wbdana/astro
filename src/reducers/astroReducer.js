@@ -31,15 +31,11 @@ export default function astroReducer(state = {
   }
 }, action) {
   switch(action.type) {
+    // Something is breaking here. It breaks everything.
     case 'STOP_SHIP':
       console.log("reducer hit!")
-      return { ship: {
-        ...state.ship,
-        vel: {
-          x: 0,
-          y: 0
-        }
-      } }
+      console.log(state)
+      return({ ship: { vel: { x: 0, y: 0 } }})
     default:
       return state
   }

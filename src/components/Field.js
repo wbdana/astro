@@ -7,23 +7,24 @@ import { connect } from 'react-redux'
 
 class Field extends React.Component {
   state = {
-    ship: {
-      pos: {
-        x: 950,
-        y: 550,
-        d: 360
-      },
-      vel: {
-        x: 0,
-        y: 0
-      },
-      keys: {
-  			w: false,
-  			a: false,
-  			d: false
-      }
-    },
-    asteroids: []
+    ...this.props.store.getState()
+    // ship: {
+    //   pos: {
+    //     x: 950,
+    //     y: 550,
+    //     d: 360
+    //   },
+    //   vel: {
+    //     x: 0,
+    //     y: 0
+    //   },
+    //   keys: {
+  	// 		w: false,
+  	// 		a: false,
+  	// 		d: false
+    //   }
+    // },
+    // asteroids: []
   }
 
   updateShipState = (shipState) => {
@@ -53,7 +54,7 @@ class Field extends React.Component {
 
   componentDidMount() {
     // this.drawField()
-    setInterval(()=>{console.log(this.state)}, 5000)
+    // setInterval(()=>{console.log(this.state)}, 5000)
   }
   // componentDidMount() {
   //   setTimeout(()=>{console.log(this.state)}, 4000)

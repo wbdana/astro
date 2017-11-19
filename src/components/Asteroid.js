@@ -5,18 +5,19 @@ import { connect } from 'react-redux'
 class Asteroid extends React.Component {
   // 7 angles for 8 sides; 8th angle is ctx.closePath()
   state = {
-    size: this.props.size,
-    // angles: [null, null, null, null, null, null, null]
-    angles: [],
-    sides: [],
-    pos: {
-      x: 500,
-      y: 500
-    },
-    vel: {
-      x: 0,
-      y: 0
-    }
+    ...this.props.store.getState().asteroid
+    // size: this.props.size,
+    // // angles: [null, null, null, null, null, null, null]
+    // angles: [],
+    // sides: [],
+    // pos: {
+    //   x: 500,
+    //   y: 500
+    // },
+    // vel: {
+    //   x: 0,
+    //   y: 0
+    // }
   }
 
   componentDidMount() {
@@ -82,8 +83,9 @@ class Asteroid extends React.Component {
       ...this.state,
       angles: angles,
       sides: sides
-    }, ()=>{this.props.updateAsteroidState(this.state)})
-    setTimeout(()=>{console.log(this.state)}, 5000)
+    }) // ,
+    // ()=>{this.props.updateAsteroidState(this.state)})
+    // setTimeout(()=>{console.log(this.state)}, 5000)
   }
 
   // setAngles = (min) => {
