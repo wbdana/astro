@@ -9,8 +9,8 @@ class Asteroid extends React.Component {
 
     // this.drawAsteroid()
     // Generate asteroid number of sides for drawing
-    this.initializeAsteroid(this.props)
-    this.updateAndConfineAsteroidsToField(this.props)
+    // this.initializeAsteroid(this.props)
+    // this.updateAndConfineAsteroidsToField(this.props)
     // console.log(this.props)
     // this.updateAndConfineAsteroidsToField()
     // this.props.updateAsteroidState(this.state)
