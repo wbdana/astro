@@ -1,4 +1,4 @@
-export default function astroReducer(state = {
+export default function shipReducer(state = {
   canvas: {
     c: function () {
       return(document.getElementById('AstroField'))

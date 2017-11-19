@@ -52,47 +52,47 @@ class Asteroid extends React.Component {
     // of the Field
     setInterval(() => {
 
-      // CONFINE SHIP TO FIELD
+      // CONFINE ASTEROID TO FIELD
 
       // If Asteroid goes off screen bottom right corner,
       // come out top left corner
       if (((this.props.store.getState().asteroid.pos.x + this.props.store.getState().asteroid.vel.x) >= 1898) && ((this.props.store.getState().asteroid.pos.y + this.props.store.getState().asteroid.vel.y) >= 954)) {
-        this.controlAsteroid('ADJUST_ASTEROID_TOP_LEFT', null)
+        this.controlAsteroid('ADJUST_TOP_LEFT', { element: "asteroid" })
       }
 
       // If Asteroid goes off screen bottom left corner, come out on top right side
       else if (((this.props.store.getState().asteroid.pos.x + this.props.store.getState().asteroid.vel.x) <= 0) && ((this.props.store.getState().asteroid.pos.y + this.props.store.getState().asteroid.vel.y) >= 954)) {
-        this.controlAsteroid('ADJUST_ASTEROID_TOP_RIGHT', null)
+        this.controlAsteroid('ADJUST_TOP_RIGHT', { element: "asteroid" })
       }
 
       // If Asteroid goes off screen top right corner, come out on bottom left corner
       else if (((this.props.store.getState().asteroid.pos.x + this.props.store.getState().asteroid.vel.x) >= 1898) && ((this.props.store.getState().asteroid.pos.y + this.props.store.getState().asteroid.vel.y) <= 0)) {
-        this.controlAsteroid('ADJUST_ASTEROID_BOTTOM_LEFT', null)
+        this.controlAsteroid('ADJUST_BOTTOM_LEFT', { element: "asteroid" })
       }
 
       // If Asteroid goes off screen top left corner, come out on bottom right corner
       else if (((this.props.store.getState().asteroid.pos.x + this.props.store.getState().asteroid.vel.x) <= 0) && ((this.props.store.getState().asteroid.pos.y + this.props.store.getState().asteroid.vel.y) <= 0)) {
-        this.controlAsteroid('ADJUST_ASTEROID_BOTTOM_RIGHT', null)
+        this.controlAsteroid('ADJUST_BOTTOM_RIGHT', { element: "asteroid" })
       }
 
       // If Asteroid goes off screen right, come out on left side
       else if ((this.props.store.getState().asteroid.pos.x + this.props.store.getState().asteroid.vel.x) >= 1898) {
-        this.controlAsteroid('ADJUST_ASTEROID_LEFT', null)
+        this.controlAsteroid('ADJUST_LEFT', { element: "asteroid" })
       }
 
       // If Asteroid goes off screen left, come out on right side
       else if ((this.props.store.getState().asteroid.pos.x + this.props.store.getState().asteroid.vel.x) <= 0) {
-        this.controlAsteroid('ADJUST_ASTEROID_RIGHT', null)
+        this.controlAsteroid('ADJUST_RIGHT', { element: "asteroid" })
       }
 
       // If Asteroid goes off screen bottom, come out on top side
       else if ((this.props.store.getState().asteroid.pos.y + this.props.store.getState().asteroid.vel.y) >= 954) {
-        this.controlAsteroid('ADJUST_ASTEROID_TOP', null)
+        this.controlAsteroid('ADJUST_TOP', { element: "asteroid" })
       }
 
       // If Asteroid goes off screen top, come out on bottom side
       else if ((this.props.store.getState().asteroid.pos.y + this.props.store.getState().asteroid.vel.y) <= 0) {
-        this.controlAsteroid('ADJUST_ASTEROID_BOTTOM', null)
+        this.controlAsteroid('ADJUST_BOTTOM', { element: "asteroid" })
       }
 
       // Or, if we are within the boundaries already...

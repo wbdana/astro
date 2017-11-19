@@ -115,42 +115,42 @@ class Ship extends React.Component {
       // If Ship goes off screen bottom right corner,
       // come out top left corner
       if (((this.props.store.getState().ship.pos.x + this.props.store.getState().ship.vel.x) >= 1898) && ((this.props.store.getState().ship.pos.y + this.props.store.getState().ship.vel.y) >= 954)) {
-        this.controlShip('ADJUST_TOP_LEFT', null)
+        this.controlShip('ADJUST_TOP_LEFT', { element: "ship" })
       }
 
       // If Ship goes off screen bottom left corner, come out on top right side
       else if (((this.props.store.getState().ship.pos.x + this.props.store.getState().ship.vel.x) <= 0) && ((this.props.store.getState().ship.pos.y + this.props.store.getState().ship.vel.y) >= 954)) {
-        this.controlShip('ADJUST_TOP_RIGHT', null)
+        this.controlShip('ADJUST_TOP_RIGHT', { element: "ship" })
       }
 
       // If Ship goes off screen top right corner, come out on bottom left corner
       else if (((this.props.store.getState().ship.pos.x + this.props.store.getState().ship.vel.x) >= 1898) && ((this.props.store.getState().ship.pos.y + this.props.store.getState().ship.vel.y) <= 0)) {
-        this.controlShip('ADJUST_BOTTOM_LEFT', null)
+        this.controlShip('ADJUST_BOTTOM_LEFT', { element: "ship" })
       }
 
       // If Ship goes off screen top left corner, come out on bottom right corner
       else if (((this.props.store.getState().ship.pos.x + this.props.store.getState().ship.vel.x) <= 0) && ((this.props.store.getState().ship.pos.y + this.props.store.getState().ship.vel.y) <= 0)) {
-        this.controlShip('ADJUST_BOTTOM_RIGHT', null)
+        this.controlShip('ADJUST_BOTTOM_RIGHT', { element: "ship" })
       }
 
       // If Ship goes off screen right, come out on left side
       else if ((this.props.store.getState().ship.pos.x + this.props.store.getState().ship.vel.x) >= 1898) {
-        this.controlShip('ADJUST_LEFT', null)
+        this.controlShip('ADJUST_LEFT', { element: "ship" })
       }
 
       // If Ship goes off screen left, come out on right side
       else if ((this.props.store.getState().ship.pos.x + this.props.store.getState().ship.vel.x) <= 0) {
-        this.controlShip('ADJUST_RIGHT', null)
+        this.controlShip('ADJUST_RIGHT', { element: "ship" })
       }
 
       // If Ship goes off screen bottom, come out on top side
       else if ((this.props.store.getState().ship.pos.y + this.props.store.getState().ship.vel.y) >= 954) {
-        this.controlShip('ADJUST_TOP', null)
+        this.controlShip('ADJUST_TOP', { element: "ship" })
       }
 
       // If Ship goes off screen top, come out on bottom side
       else if ((this.props.store.getState().ship.pos.y + this.props.store.getState().ship.vel.y) <= 0) {
-        this.controlShip('ADJUST_BOTTOM', null)
+        this.controlShip('ADJUST_BOTTOM', { element: "ship" })
       }
 
       // Or, if we are within the boundaries already...
