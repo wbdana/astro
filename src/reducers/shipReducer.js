@@ -1,13 +1,4 @@
 export default function shipReducer(state = {
-  // canvas: {
-  //   c: function () {
-  //     return(document.getElementById('AstroField'))
-  //   },
-  //   ctx: function () {
-  //     return(document.getElementById('AstroField'))
-  //   }
-  // },
-  // ship: {
     pos: {
       x: 950,
       y: 550,
@@ -22,21 +13,6 @@ export default function shipReducer(state = {
       a: false,
       d: false
     }
-  // },
-  // asteroids: [] // In actual game, we will spawn many asteroids
-  // asteroid: {
-  //   size: 2, // default size = 2 (large)
-  //   angles: [],
-  //   sides: [],
-  //   pos: {
-  //     x: 500, // default testing starting position
-  //     y: 500 // default testing starting position
-  //   },
-  //   vel: {
-  //     x: 0, // default testing static
-  //     y: 0  // default testing static
-  //   }
-  // }
 }, action) {
   let newState
   switch(action.type) {

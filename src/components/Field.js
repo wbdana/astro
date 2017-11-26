@@ -29,6 +29,7 @@ class Field extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props)
     this.drawField()
   }
 
@@ -112,7 +113,7 @@ class Field extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { state }
+  return { ...state }
 }
 
 export default connect(mapStateToProps)(Field)

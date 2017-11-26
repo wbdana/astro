@@ -15,7 +15,6 @@ class Ship extends React.Component {
 			let keypress = event.key
       
       if (keypress === 'w' || keypress === 'a' || keypress === 'd') {
-        console.log(this.props)
         // this.controlShip('MOVE_SHIP', keypress)
         this.props.moveShip(keypress)
       }
