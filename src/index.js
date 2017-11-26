@@ -12,28 +12,9 @@ import shipReducer from './reducers/shipReducer'
 // Store
 import { store } from './store'
 
-
-
-// TODO
-// Link this to './store' and configure store there
-// Combine reducers and import those to './store'
-// Figure out how to direct specific actions to
-//  the correct reducer (or combined reducer?)
-// mapDispatchToProps()!
-
-
-
-
-
-
-// const store = createStore(shipReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
-
 ReactDOM.render(
   <Provider store={store}>
     <Astro store={store} />
   </Provider>, document.getElementById('root')
 );
 registerServiceWorker();
-// store.dispatch({
-  // type: '@@INIT'
-// })
