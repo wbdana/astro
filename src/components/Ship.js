@@ -7,7 +7,6 @@ class Ship extends React.Component {
 
   componentDidMount() {
     // Redraw ship every 20ms, applying velocity to position each time
-    setInterval(()=>{console.log(this.props)}, 1000)
     this.updateAndConfineShipToField()
 
 		// If keypress is 'w', 'a', or 'd', set state to begin applying acceleration
@@ -190,15 +189,6 @@ class Ship extends React.Component {
     )
   }
 }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return bindActionCreators({
-//     getSingleUserByID: getSingleUserByID,
-//     getUserCharacters: getUserCharacters,
-//     getSecondUsersCharacters: getSecondUsersCharacters
-//   }, dispatch);
-// }
-
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
