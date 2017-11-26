@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 class Asteroid extends React.Component {
 
   componentDidMount() {
-    this.initializeAsteroid()
-    this.updateAndConfineAsteroidToField()
+    // this.initializeAsteroid()
+    // this.updateAndConfineAsteroidToField()
   }
 
   controlAsteroid = (actionType, payload) => {

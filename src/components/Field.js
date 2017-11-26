@@ -29,7 +29,7 @@ class Field extends React.Component {
   }
 
   componentDidMount() {
-    this.drawField()
+    // this.drawField()
   }
 
   drawShip = (c, ctx) => {
@@ -101,9 +101,7 @@ class Field extends React.Component {
         width='1905px'
         height='961px'
       >
-        <Ship
-          store={this.props.store}
-        />
+        <Ship />
         <Asteroid
           store={this.props.store}
           size={2}

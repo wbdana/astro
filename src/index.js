@@ -10,7 +10,7 @@ import registerServiceWorker from './registerServiceWorker';
 import shipReducer from './reducers/shipReducer'
 
 // Store
-// import { store } from './store'
+import { store } from './store'
 
 
 
@@ -26,7 +26,7 @@ import shipReducer from './reducers/shipReducer'
 
 
 
-const store = createStore(shipReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+// const store = createStore(shipReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 ReactDOM.render(
   <Provider store={store}>
@@ -34,6 +34,6 @@ ReactDOM.render(
   </Provider>, document.getElementById('root')
 );
 registerServiceWorker();
-store.dispatch({
-  type: '@@INIT'
-})
+// store.dispatch({
+  // type: '@@INIT'
+// })

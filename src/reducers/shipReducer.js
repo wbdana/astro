@@ -1,13 +1,13 @@
 export default function shipReducer(state = {
-  canvas: {
-    c: function () {
-      return(document.getElementById('AstroField'))
-    },
-    ctx: function () {
-      return(document.getElementById('AstroField'))
-    }
-  },
-  ship: {
+  // canvas: {
+  //   c: function () {
+  //     return(document.getElementById('AstroField'))
+  //   },
+  //   ctx: function () {
+  //     return(document.getElementById('AstroField'))
+  //   }
+  // },
+  // ship: {
     pos: {
       x: 950,
       y: 550,
@@ -22,23 +22,22 @@ export default function shipReducer(state = {
       a: false,
       d: false
     }
-  },
+  // },
   // asteroids: [] // In actual game, we will spawn many asteroids
-  asteroid: {
-    size: 2, // default size = 2 (large)
-    angles: [],
-    sides: [],
-    pos: {
-      x: 500, // default testing starting position
-      y: 500 // default testing starting position
-    },
-    vel: {
-      x: 0, // default testing static
-      y: 0  // default testing static
-    }
-  }
+  // asteroid: {
+  //   size: 2, // default size = 2 (large)
+  //   angles: [],
+  //   sides: [],
+  //   pos: {
+  //     x: 500, // default testing starting position
+  //     y: 500 // default testing starting position
+  //   },
+  //   vel: {
+  //     x: 0, // default testing static
+  //     y: 0  // default testing static
+  //   }
+  // }
 }, action) {
-  console.log(state.canvas)
   switch(action.type) {
     // Something is breaking here. It breaks everything. This is a bad reducer. It doesn't work because I did it wrong.
     case 'MOVE_SHIP':

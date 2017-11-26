@@ -11,5 +11,3 @@ export function configureStore() {
 }
 
 export const store = configureStore()
-
-// export default { store }
