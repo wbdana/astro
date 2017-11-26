@@ -112,7 +112,7 @@ class Asteroid extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-return { asteroid: { ...state } }
+return { asteroid: { ...state.asteroid } }
 }
 
 export default connect(mapStateToProps)(Asteroid)

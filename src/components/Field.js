@@ -49,7 +49,8 @@ class Field extends React.Component {
     ctx.stroke()
 
     // Reset canvas path origin for Asteroid
-    ctx.translate((shipDrawX * -1), (shipDrawY * -1))
+    ctx.translate((shipDrawX * -1), (shipDrawY * -1
+    ))
   }
 
   drawAsteroid = (c, ctx) => {

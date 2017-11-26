@@ -9,7 +9,8 @@ import registerServiceWorker from './registerServiceWorker';
 // Reducers
 import shipReducer from './reducers/shipReducer'
 
-
+// Store
+// import { store } from './store'
 
 
 

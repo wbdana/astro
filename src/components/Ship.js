@@ -5,6 +5,7 @@ class Ship extends React.Component {
 
   componentDidMount() {
     // Redraw ship every 20ms, applying velocity to position each time
+    console.log(this.props.ship)
     console.log(this.state)
     console.log(this.props.store.getState())
     this.updateAndConfineShipToField()
@@ -171,7 +172,7 @@ class Ship extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { ship: { ...state } }
+  return { ship: { ...state.ship } }
 }
 
 export default connect(mapStateToProps)(Ship)
