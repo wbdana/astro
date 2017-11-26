@@ -7,29 +7,7 @@ import { connect } from 'react-redux'
 
 class Field extends React.Component {
 
-  updateShipState = (shipState) => {
-    this.setState({
-      ...this.state,
-      ship: shipState
-    })
-  }
-
-  updateAsteroidState = (asteroidContainerState) => {
-    // this.setState({
-    //   ...this.state,
-    //   asteroids: asteroidContainerState
-    // })
-    this.setState({
-      ...this.state,
-      asteroids: [
-        ...this.state.asteroids,
-        asteroidContainerState
-      ]
-    })
-  }
-
   componentDidMount() {
-    console.log(this.props)
     this.drawField()
   }
 
