@@ -1,6 +1,7 @@
 import React from 'react'
 import { getRandomIntInclusive } from '../Helpers'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
 
 class Asteroid extends React.Component {
 
@@ -111,8 +112,14 @@ class Asteroid extends React.Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+
+  }, dispatch)
+}
+
 const mapStateToProps = (state) => {
-return { asteroid: { ...state.asteroid } }
+  return { ...state.asteroid }
 }
 
 export default connect(mapStateToProps)(Asteroid)

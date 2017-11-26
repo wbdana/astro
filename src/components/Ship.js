@@ -1,6 +1,6 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
-import { moveShip } from '../actions/shipActions'
+import { moveShip, stopMoveShip, stopShip, increaseVelXPosLimited, increaseVelXNegLimited, setNewVelX, increaseVelYPosLimited, increaseVelYNegLimited, setNewVelY, rotateCounterClockwise, rotateClockwise, adjustTopLeft, adjustTopRight, adjustBottomLeft, adjustBottomRight, adjustLeft, adjustRight, adjustTop, adjustBottom, updateShipLocation } from '../actions/shipActions'
 import { connect } from 'react-redux'
 
 class Ship extends React.Component {
@@ -24,7 +24,7 @@ class Ship extends React.Component {
 
       // If keypress is 's', stop the Ship!
       if (keypress === 's') {
-        this.controlShip('STOP_SHIP', null)
+        this.props.stopShip()
       }
 
 		})
@@ -34,7 +34,7 @@ class Ship extends React.Component {
 			let keypress = event.key
 			if (keypress === 'w' || keypress === 'a' || keypress === 'd') {
         // this.controlShip('STOP_MOVE_SHIP', keypress)
-        console.log("Keyup?")
+        this.props.stopMoveShip(keypress)
 			}
 		})
   }
@@ -60,35 +60,41 @@ class Ship extends React.Component {
     // If you're already going right (x is positive), and the new total speed is
     // >= 20, limit speed in that direction to 20
     if (newVelX >= 20 && this.props.ship.vel.x > 0) {
-      this.controlShip('INCREASE_VELX_POS_LIMITED', null)
+      this.props.increaseVelXPosLimited()
+      // this.controlShip('INCREASE_VELX_POS_LIMITED', null)
     }
 
     // If you're aready going left (x is negative), and the new total speed is
     // <= -20, limit speed in that direction to -20
     else if (newVelX <= -20 && this.props.ship.vel.x < 0) {
-      this.controlShip('INCREASE_VELX_NEG_LIMITED', null)
+      // this.controlShip('INCREASE_VELX_NEG_LIMITED', null)
+      this.props.increaseVelXNegLimited()
     }
 
     // Otherwise (i.e., you're EITHER A. not moving, B. moving against your
     // current vector, c) moving with your current vector, but not above the
     // speed limit), allow normal acceleration
     else {
-      this.controlShip('SET_NEW_VELX', newVelX)
+      this.props.setNewVelX(newVelX)
+      // this.controlShip('SET_NEW_VELX', newVelX)
     }
 
     // Same for Y
     if (newVelY >= 20 && this.props.ship.vel.y > 0) {
-      this.controlShip('INCREASE_VELY_POS_LIMITED', null)
+      // this.controlShip('INCREASE_VELY_POS_LIMITED', null)
+      this.props.increaseVelYPosLimited()
     }
 
     // Same for Y
     else if (newVelY <= -20 && this.props.ship.vel.y < 0) {
-      this.controlShip('INCREASE_VELY_NEG_LIMITED', null)
+      this.props.increaseVelYNegLimited()
+      // this.controlShip('INCREASE_VELY_NEG_LIMITED', null)
     }
 
     // Same for Y
     else {
-      this.controlShip('SET_NEW_VELY', newVelY)
+      this.props.setNewVelY(newVelY)
+      // this.controlShip('SET_NEW_VELY', newVelY)
     }
   }
 
@@ -106,12 +112,14 @@ class Ship extends React.Component {
 
       // Adjust direction counterclockwise while 'a' is held down
       if (this.props.ship.keys.a === true) {
-        this.controlShip('ROTATE_COUNTERCLOCKWISE', null)
+        // this.controlShip('ROTATE_COUNTERCLOCKWISE', null)
+        this.props.rotateCounterClockwise()
       }
 
       // Adjust direction clockwise while 'd' is held down
       if (this.props.ship.keys.d === true) {
-        this.controlShip('ROTATE_CLOCKWISE', null)
+        // this.controlShip('ROTATE_CLOCKWISE', null)
+        this.props.rotateClockwise()
       }
 
       // CONFINE SHIP TO FIELD
@@ -119,47 +127,56 @@ class Ship extends React.Component {
       // If Ship goes off screen bottom right corner,
       // come out top left corner
       if (((this.props.ship.pos.x + this.props.ship.vel.x) >= 1898) && ((this.props.ship.pos.y + this.props.ship.vel.y) >= 954)) {
-        this.controlShip('ADJUST_TOP_LEFT', { element: "ship" })
+        // this.controlShip('ADJUST_TOP_LEFT', { element: "ship" })
+        this.props.adjustTopLeft()
       }
 
       // If Ship goes off screen bottom left corner, come out on top right side
       else if (((this.props.ship.pos.x + this.props.ship.vel.x) <= 0) && ((this.props.ship.pos.y + this.props.ship.vel.y) >= 954)) {
-        this.controlShip('ADJUST_TOP_RIGHT', { element: "ship" })
+        // this.controlShip('ADJUST_TOP_RIGHT', { element: "ship" })
+        this.props.adjustTopRight()
       }
 
       // If Ship goes off screen top right corner, come out on bottom left corner
       else if (((this.props.ship.pos.x + this.props.ship.vel.x) >= 1898) && ((this.props.ship.pos.y + this.props.ship.vel.y) <= 0)) {
-        this.controlShip('ADJUST_BOTTOM_LEFT', { element: "ship" })
+        // this.controlShip('ADJUST_BOTTOM_LEFT', { element: "ship" })
+        this.props.adjustBottomLeft()
       }
 
       // If Ship goes off screen top left corner, come out on bottom right corner
       else if (((this.props.ship.pos.x + this.props.ship.vel.x) <= 0) && ((this.props.ship.pos.y + this.props.ship.vel.y) <= 0)) {
-        this.controlShip('ADJUST_BOTTOM_RIGHT', { element: "ship" })
+        // this.controlShip('ADJUST_BOTTOM_RIGHT', { element: "ship" })
+        this.props.adjustBottomRight()
       }
 
       // If Ship goes off screen right, come out on left side
       else if ((this.props.ship.pos.x + this.props.ship.vel.x) >= 1898) {
-        this.controlShip('ADJUST_LEFT', { element: "ship" })
+        // this.controlShip('ADJUST_LEFT', { element: "ship" })
+        this.props.adjustLeft()
       }
 
       // If Ship goes off screen left, come out on right side
       else if ((this.props.ship.pos.x + this.props.ship.vel.x) <= 0) {
-        this.controlShip('ADJUST_RIGHT', { element: "ship" })
+        // this.controlShip('ADJUST_RIGHT', { element: "ship" })
+        this.props.adjustRight()
       }
 
       // If Ship goes off screen bottom, come out on top side
       else if ((this.props.ship.pos.y + this.props.ship.vel.y) >= 954) {
-        this.controlShip('ADJUST_TOP', { element: "ship" })
+        // this.controlShip('ADJUST_TOP', { element: "ship" })
+        this.props.adjustTop()
       }
 
       // If Ship goes off screen top, come out on bottom side
       else if ((this.props.ship.pos.y + this.props.ship.vel.y) <= 0) {
-        this.controlShip('ADJUST_BOTTOM', { element: "ship" })
+        // this.controlShip('ADJUST_BOTTOM', { element: "ship" })
+        this.props.adjustBottom()
       }
 
       // Or, if we are within the boundaries already...
       else {
-        this.controlShip('UPDATE_SHIP_LOCATION', null)
+        // this.controlShip('UPDATE_SHIP_LOCATION', null)
+        this.props.updateShipLocation()
       }
 
     }, 20) // 20ms refresh rate
@@ -185,8 +202,10 @@ class Ship extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    moveShip: moveShip
-  })
+    moveShip: moveShip,
+    stopMoveShip: stopMoveShip,
+    stopShip: stopShip
+  }, dispatch)
 }
 
 const mapStateToProps = (state) => {

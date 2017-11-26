@@ -29,7 +29,7 @@ class Field extends React.Component {
   }
 
   componentDidMount() {
-    // this.drawField()
+    this.drawField()
   }
 
   drawShip = (c, ctx) => {
@@ -87,7 +87,7 @@ class Field extends React.Component {
       this.drawShip(c, ctx)
 
       // Reset path origin and draw Asteroid 
-      this.drawAsteroid(c, ctx)
+      // this.drawAsteroid(c, ctx)
 
       // Restore
       ctx.restore()
