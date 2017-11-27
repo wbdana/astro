@@ -4,6 +4,7 @@ import Ship from './Ship'
 import Asteroid from './Asteroid'
 
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
 
 class Field extends React.Component {
 
@@ -12,9 +13,9 @@ class Field extends React.Component {
   }
 
   drawShip = (c, ctx) => {
-    let shipAngle = this.props.store.getState().ship.pos.d
-    let shipDrawX = this.props.store.getState().ship.pos.x
-    let shipDrawY = this.props.store.getState().ship.pos.y
+    let shipAngle = this.props.ship.pos.d
+    let shipDrawX = this.props.ship.pos.x
+    let shipDrawY = this.props.ship.pos.y
     ctx.translate(shipDrawX, shipDrawY)
     ctx.rotate(shipAngle * Math.PI / 180)
     ctx.beginPath()
@@ -35,10 +36,10 @@ class Field extends React.Component {
   drawAsteroid = (c, ctx) => {
     let i
     ctx.beginPath()
-    ctx.translate(this.props.store.getState().asteroid.pos.x, this.props.store.getState().asteroid.pos.y)
-    for (i = 0; i < this.props.store.getState().asteroid.angles.length; i++) {
-      ctx.rotate(this.props.store.getState().asteroid.angles[i] * Math.PI / 180)
-      ctx.lineTo(0, this.props.store.getState().asteroid.sides[i])
+    ctx.translate(this.props.asteroid.pos.x, this.props.asteroid.pos.y)
+    for (i = 0; i < this.props.asteroid.angles.length; i++) {
+      ctx.rotate(this.props.asteroid.angles[i] * Math.PI / 180)
+      ctx.lineTo(0, this.props.asteroid.sides[i])
     }
     ctx.closePath()
     ctx.fill()
@@ -66,7 +67,7 @@ class Field extends React.Component {
       this.drawShip(c, ctx)
 
       // Reset path origin and draw Asteroid 
-      // this.drawAsteroid(c, ctx)
+      this.drawAsteroid(c, ctx)
 
       // Restore
       ctx.restore()
@@ -90,8 +91,14 @@ class Field extends React.Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+
+  })
+}
+
 const mapStateToProps = (state) => {
   return { ...state }
 }
 
-export default connect(mapStateToProps)(Field)
+export default connect(mapStateToProps, mapDispatchToProps)(Field)

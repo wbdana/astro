@@ -228,40 +228,6 @@ export default function shipReducer(state = {
         }
       }
       return newState
-    case 'INITIALIZE_ASTEROID':
-      return(
-        {
-          ...state,
-          asteroid: {
-            ...state.asteroid,
-            angles: action.payload.angles,
-            sides: action.payload.sides,
-            pos: {
-              ...state.asteroid.pos,
-              d: action.payload.d
-            },
-            vel: {
-              ...state.asteroid.vel,
-              x: action.payload.velX,
-              y: action.payload.velY
-            }
-          }
-        }
-      )
-    case 'UPDATE_ASTEROID_LOCATION':
-      return(
-        {
-          ...state,
-          asteroid: {
-            ...state.asteroid,
-            pos: {
-              ...state.asteroid.pos,
-              x: state.asteroid.pos.x + state.asteroid.vel.x,
-              y: state.asteroid.pos.y + state.asteroid.vel.y
-            }
-          }
-        }
-      )
     default:
       return state
   }
