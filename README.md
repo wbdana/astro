@@ -1,7 +1,3 @@
 # astro
 
-SHORT TODOS:
-
-- Controls:
-  1. Velocity
-  2. "Space brake"?
+A clone of the classic arcade game "Asteroids" using React and Redux.
