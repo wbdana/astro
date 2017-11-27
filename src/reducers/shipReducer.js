@@ -17,7 +17,6 @@ export default function shipReducer(state = {
   let newState
   switch(action.type) {
     case 'MOVE_SHIP':
-      console.log("MOVESHIP")
       // Keydown on 'w', 'a', or 'd'
       // action.payload structure: 'w', 'a', or 'd'
       newState = {
@@ -111,7 +110,6 @@ export default function shipReducer(state = {
       return newState
     case 'ROTATE_COUNTERCLOCKWISE':
       // Rotating to the left
-      console.log(state)
       newState = {
         ...state,
         pos: {

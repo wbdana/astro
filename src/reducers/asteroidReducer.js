@@ -15,6 +15,7 @@ export default function asteroidReducer(state = {
     let newState
     switch(action.type) {
         case 'INITIALIZE_ASTEROID':
+            console.log(state.asteroid)
             newState = {
                 ...state,
                 angles: action.payload.angles,
