@@ -144,11 +144,18 @@ const mapDispatchToProps = (dispatch) => {
   }, dispatch)
 }
 
-
-adjustTopLeft, adjustTopRight, adjustBottomLeft, adjustBottomRight, adjustLeft, adjustRight, adjustTop, adjustBottom, updateAsteroidLocation
-
 const mapStateToProps = (state) => {
-  return { ...state.asteroid }
+  return {
+    pos: {
+      x: state.asteroid.pos.x,
+      y: state.asteroid.pos.y,
+      d: state.asteroid.pos.d
+    },
+    vel: {
+      x: state.asteroid.vel.x,
+      y: state.asteroid.vel.y
+    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Asteroid)

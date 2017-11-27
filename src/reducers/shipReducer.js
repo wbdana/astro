@@ -16,8 +16,8 @@ export default function shipReducer(state = {
 }, action) {
   let newState
   switch(action.type) {
-    // Something is breaking here. It breaks everything. This is a bad reducer. It doesn't work because I did it wrong.
     case 'MOVE_SHIP':
+      console.log("MOVESHIP")
       // Keydown on 'w', 'a', or 'd'
       // action.payload structure: 'w', 'a', or 'd'
       newState = {
@@ -111,6 +111,7 @@ export default function shipReducer(state = {
       return newState
     case 'ROTATE_COUNTERCLOCKWISE':
       // Rotating to the left
+      console.log(state)
       newState = {
         ...state,
         pos: {

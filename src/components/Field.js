@@ -27,10 +27,13 @@ class Field extends React.Component {
     ctx.closePath()
     ctx.fill()
     ctx.stroke()
+  }
 
+  resetCanvas = (c, ctx) => {
     // Reset canvas path origin for Asteroid
-    ctx.translate((shipDrawX * -1), (shipDrawY * -1
+    ctx.translate((this.props.ship.pos.x * -1), (this.props.ship.pos.y * -1
     ))
+    ctx.rotate(0 * Math.PI / 180)
   }
 
   drawAsteroid = (c, ctx) => {
@@ -67,6 +70,7 @@ class Field extends React.Component {
       this.drawShip(c, ctx)
 
       // Reset path origin and draw Asteroid 
+      this.resetCanvas(c, ctx)
       this.drawAsteroid(c, ctx)
 
       // Restore

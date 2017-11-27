@@ -215,7 +215,22 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-  return { ...state.ship }
+  return {
+    pos: {
+      x: state.ship.pos.x,
+      y: state.ship.pos.y,
+      d: state.ship.pos.d
+    },
+    vel: {
+      x: state.ship.vel.x,
+      y: state.ship.vel.y
+    },
+    keys: {
+      w: state.ship.keys.w,
+      a: state.ship.keys.a,
+      d: state.ship.keys.d
+    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Ship)

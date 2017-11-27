@@ -30,7 +30,7 @@ export default function asteroidReducer(state = {
                 }
             }
             return newState
-        case 'ADJUST_TOP_LEFT':
+        case 'ADJUST_ASTEROID_TOP_LEFT':
             // Move to top left
             newState = {
                 ...state,
@@ -41,7 +41,7 @@ export default function asteroidReducer(state = {
                 }
             }
             return newState
-        case 'ADJUST_TOP_RIGHT':
+        case 'ADJUST_ASTEROID_TOP_RIGHT':
             // Move to top right
             newState = {
                 ...state,
@@ -52,7 +52,7 @@ export default function asteroidReducer(state = {
                 }
             }
             return newState
-        case 'ADJUST_BOTTOM_LEFT':
+        case 'ADJUST_ASTEROID_BOTTOM_LEFT':
             // Move to bottom left
             newState = {
                 ...state,
@@ -63,7 +63,7 @@ export default function asteroidReducer(state = {
                 }
             }
             return newState
-        case 'ADJUST_BOTTOM_RIGHT':
+        case 'ADJUST_ASTEROID_BOTTOM_RIGHT':
             // Move to bottom right
             newState = {
                 ...state,
@@ -74,7 +74,7 @@ export default function asteroidReducer(state = {
                 }
             }
             return newState
-        case 'ADJUST_LEFT':
+        case 'ADJUST_ASTEROID_LEFT':
             // Move to left side of Field
             newState = {
                 ...state,
@@ -85,7 +85,7 @@ export default function asteroidReducer(state = {
                 }
             }
             return newState
-        case 'ADJUST_RIGHT':
+        case 'ADJUST_ASTEROID_RIGHT':
             // Move to right side of Field
             newState = {
                 ...state,
@@ -96,7 +96,7 @@ export default function asteroidReducer(state = {
                 }
             }
             return newState
-        case 'ADJUST_TOP':
+        case 'ADJUST_ASTEROID_TOP':
             // Move to top of Field
             newState = {
                 ...state,
@@ -107,7 +107,7 @@ export default function asteroidReducer(state = {
                 }
             }
             return newState
-        case 'ADJUST_BOTTOM':
+        case 'ADJUST_ASTEROID_BOTTOM':
             // Move to bottom of Field
             newState = {
                 ...state,
@@ -134,38 +134,3 @@ export default function asteroidReducer(state = {
             return state
     }
 }
-
-//     case 'INITIALIZE_ASTEROID':
-// return (
-//     {
-//         ...state,
-//         asteroid: {
-//             ...state.asteroid,
-//             angles: action.payload.angles,
-//             sides: action.payload.sides,
-//             pos: {
-//                 ...state.asteroid.pos,
-//                 d: action.payload.d
-//             },
-//             vel: {
-//                 ...state.asteroid.vel,
-//                 x: action.payload.velX,
-//                 y: action.payload.velY
-//             }
-//         }
-//     }
-// )
-//     case 'UPDATE_ASTEROID_LOCATION':
-// return (
-//     {
-//         ...state,
-//         asteroid: {
-//             ...state.asteroid,
-//             pos: {
-//                 ...state.asteroid.pos,
-//                 x: state.asteroid.pos.x + state.asteroid.vel.x,
-//                 y: state.asteroid.pos.y + state.asteroid.vel.y
-//             }
-//         }
-//     }
-// )
