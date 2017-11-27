@@ -13,6 +13,7 @@ class Field extends React.Component {
   }
 
   drawShip = (c, ctx) => {
+    ctx.save()
     let shipAngle = this.props.ship.pos.d
     let shipDrawX = this.props.ship.pos.x
     let shipDrawY = this.props.ship.pos.y
@@ -27,16 +28,18 @@ class Field extends React.Component {
     ctx.closePath()
     ctx.fill()
     ctx.stroke()
+    ctx.restore()
   }
 
   resetCanvas = (c, ctx) => {
     // Reset canvas path origin for Asteroid
     ctx.translate((this.props.ship.pos.x * -1), (this.props.ship.pos.y * -1
     ))
-    ctx.rotate(0 * Math.PI / 180)
+    ctx.rotate(this.props.ship.pos.d * Math.PI / 180)
   }
 
   drawAsteroid = (c, ctx) => {
+    ctx.save()
     let i
     ctx.beginPath()
     ctx.translate(this.props.asteroid.pos.x, this.props.asteroid.pos.y)
@@ -47,6 +50,7 @@ class Field extends React.Component {
     ctx.closePath()
     ctx.fill()
     ctx.stroke()
+    ctx.restore()
   }
 
   drawField = () => {
@@ -59,7 +63,6 @@ class Field extends React.Component {
 
       // Reset and save
       ctx.clearRect(0, 0, c.width, c.height)
-      ctx.save()
 
       // Styling
       ctx.strokeStyle = '#FFFFFF'
@@ -69,12 +72,11 @@ class Field extends React.Component {
       // Draw Ship
       this.drawShip(c, ctx)
 
-      // Reset path origin and draw Asteroid 
-      this.resetCanvas(c, ctx)
+      // Draw Asteroid 
       this.drawAsteroid(c, ctx)
 
       // Restore
-      ctx.restore()
+      // ctx.restore()
     }, 20) // 20ms canvas refresh
   }
 
@@ -87,7 +89,6 @@ class Field extends React.Component {
       >
         <Ship />
         <Asteroid
-          store={this.props.store}
           size={2}
         />
       </canvas>
