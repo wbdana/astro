@@ -1,6 +1,6 @@
 import React from 'react'
 import Ship from './Ship'
-// import AsteroidContainer from './AsteroidContainer'
+import AsteroidContainer from './AsteroidContainer'
 import Asteroid from './Asteroid'
 
 import { connect } from 'react-redux'
@@ -75,8 +75,6 @@ class Field extends React.Component {
       // Draw Asteroid 
       this.drawAsteroid(c, ctx)
 
-      // Restore
-      // ctx.restore()
     }, 20) // 20ms canvas refresh
   }
 
@@ -88,6 +86,7 @@ class Field extends React.Component {
         height='961px'
       >
         <Ship />
+        <AsteroidContainer />
         <Asteroid
           size={2}
         />

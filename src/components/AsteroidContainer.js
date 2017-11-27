@@ -1,14 +1,14 @@
 import React from 'react'
 import Asteroid from './Asteroid'
 
-class AsteroidContainer extends React.Component {
-  state = {
-    asteroids: this.props.asteroids
-  }
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
+class AsteroidContainer extends React.Component {
   componentDidMount() {
-    this.checkIfNeedAsteroids()
-    this.createAsteroids(1,2)
+    console.log(this.props)
+    // this.checkIfNeedAsteroids()
+    // this.createAsteroids(1,2)
   }
 
   checkIfNeedAsteroids = () => {
@@ -19,24 +19,16 @@ class AsteroidContainer extends React.Component {
         let number = Math.random(1, 4)
         this.createAsteroids(number, 2)
       }
-    }, 100)
+    }, 60000)
 
   }
 
   createAsteroids = (number, size) => {
     return(
       <Asteroid
-        updateAsteroidContainer={this.updateAsteroidContainer}
         size={size}
       />
     )
-  }
-
-  updateAsteroidContainer = (asteroidState) => {
-    this.setState({
-      ...this.state,
-
-    })
   }
 
   render() {
@@ -46,4 +38,17 @@ class AsteroidContainer extends React.Component {
   }
 }
 
-export default AsteroidContainer
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+
+  })
+}
+
+const mapStateToProps = (state) => {
+  return {
+    asteroids: [state.asteroid]
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AsteroidContainer)

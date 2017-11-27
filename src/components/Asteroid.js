@@ -29,8 +29,8 @@ class Asteroid extends React.Component {
     let angles = []
     let sides = []
     let d = getRandomIntInclusive(0,359)
-    let velX = getRandomIntInclusive(1,10)
-    let velY = getRandomIntInclusive(1,10)
+    let velX = getRandomIntInclusive(1,5)
+    let velY = getRandomIntInclusive(1,5)
     for (i = 0; i < numSides; i++) {
       let newAngle = getRandomIntInclusive(min,45)
       let newSideMultiplier = getRandomIntInclusive(10,100)
@@ -45,13 +45,6 @@ class Asteroid extends React.Component {
       velX: velX,
       velY: velY
     })
-    // this.controlAsteroid('INITIALIZE_ASTEROID', {
-    //   angles,
-    //   sides,
-    //   d,
-    //   velX,
-    //   velY
-    // })
   }
 
   updateAndConfineAsteroidToField = () => {
