@@ -1,21 +1,22 @@
+import { getRandomIntInclusive } from '../Helpers'
+
 export default function asteroidReducer(state = {
-    // asteroids: [] // In actual game, we will spawn many asteroids
-    size: 2, // default size = 2 (large)
-    angles: [],
-    sides: [],
-    pos: {
-        x: 500, // default testing starting position
-        y: 500 // default testing starting position
-    },
-    vel: {
-        x: 0, // default testing static
-        y: 0  // default testing static
-    }
+    asteroids: []
 }, action) {
     let newState
     switch(action.type) {
+        case 'CREATE_ASTEROIDS':
+            console.log("HIT CREATE_ASTEROIDS IN REDUCER")
+            console.log("action.payload", action.payload)
+            let newState = {
+                ...state,
+                asteroids: [
+                    ...state.asteroids,
+                    action.payload
+                ]
+            }
+            return newState
         case 'INITIALIZE_ASTEROID':
-            console.log(state.asteroid)
             newState = {
                 ...state,
                 angles: action.payload.angles,
@@ -33,6 +34,7 @@ export default function asteroidReducer(state = {
             return newState
         case 'ADJUST_ASTEROID_TOP_LEFT':
             // Move to top left
+            // action.payload must include asteroid ID
             newState = {
                 ...state,
                 pos: {
@@ -44,6 +46,7 @@ export default function asteroidReducer(state = {
             return newState
         case 'ADJUST_ASTEROID_TOP_RIGHT':
             // Move to top right
+            // action.payload must include asteroid ID
             newState = {
                 ...state,
                 pos: {
@@ -55,6 +58,7 @@ export default function asteroidReducer(state = {
             return newState
         case 'ADJUST_ASTEROID_BOTTOM_LEFT':
             // Move to bottom left
+            // action.payload must include asteroid ID
             newState = {
                 ...state,
                 pos: {
@@ -66,6 +70,7 @@ export default function asteroidReducer(state = {
             return newState
         case 'ADJUST_ASTEROID_BOTTOM_RIGHT':
             // Move to bottom right
+            // action.payload must include asteroid ID
             newState = {
                 ...state,
                 pos: {
@@ -77,6 +82,7 @@ export default function asteroidReducer(state = {
             return newState
         case 'ADJUST_ASTEROID_LEFT':
             // Move to left side of Field
+            // action.payload must include asteroid ID
             newState = {
                 ...state,
                 pos: {
@@ -88,6 +94,7 @@ export default function asteroidReducer(state = {
             return newState
         case 'ADJUST_ASTEROID_RIGHT':
             // Move to right side of Field
+            // action.payload must include asteroid ID
             newState = {
                 ...state,
                 pos: {
@@ -99,6 +106,7 @@ export default function asteroidReducer(state = {
             return newState
         case 'ADJUST_ASTEROID_TOP':
             // Move to top of Field
+            // action.payload must include asteroid ID
             newState = {
                 ...state,
                 pos: {
@@ -110,6 +118,7 @@ export default function asteroidReducer(state = {
             return newState
         case 'ADJUST_ASTEROID_BOTTOM':
             // Move to bottom of Field
+            // action.payload must include asteroid ID
             newState = {
                 ...state,
                 pos: {
@@ -121,6 +130,7 @@ export default function asteroidReducer(state = {
             return newState
         case 'UPDATE_ASTEROID_LOCATION':
             // Move asteroid within boundaries
+            // action.payload must include asteroid ID
             newState = {
                 ...state,
                 pos: {

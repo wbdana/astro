@@ -1,3 +1,12 @@
+export function createAsteroids(payload) {
+    return dispatch => {
+        dispatch({
+            type: 'CREATE_ASTEROIDS',
+            payload: payload
+        })
+    }
+}
+
 export function initializeAsteroid(payload) {
     return dispatch => {
         dispatch({

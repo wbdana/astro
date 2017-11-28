@@ -73,7 +73,7 @@ class Field extends React.Component {
       this.drawShip(c, ctx)
 
       // Draw Asteroid 
-      this.drawAsteroid(c, ctx)
+      // this.drawAsteroid(c, ctx)
 
     }, 20) // 20ms canvas refresh
   }
@@ -87,9 +87,6 @@ class Field extends React.Component {
       >
         <Ship />
         <AsteroidContainer />
-        <Asteroid
-          size={2}
-        />
       </canvas>
     )
   }
