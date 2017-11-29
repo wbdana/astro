@@ -1,7 +1,6 @@
 import React from 'react'
 import Ship from './Ship'
 import AsteroidContainer from './AsteroidContainer'
-import Asteroid from './Asteroid'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
@@ -32,7 +31,7 @@ class Field extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log(this.props.asteroidContainer)
+    // console.log(this.props.asteroidContainer)
   }
 
   resetCanvas = (c, ctx) => {

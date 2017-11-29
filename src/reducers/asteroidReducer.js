@@ -1,13 +1,9 @@
-import { getRandomIntInclusive } from '../Helpers'
-
 export default function asteroidReducer(state = {
     asteroids: []
 }, action) {
     let newState
     switch(action.type) {
         case 'CREATE_ASTEROIDS':
-            console.log("HIT CREATE_ASTEROIDS IN REDUCER")
-            console.log("action.payload", action.payload)
             let newState = {
                 ...state,
                 asteroids: [
