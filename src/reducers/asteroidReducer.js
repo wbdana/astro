@@ -12,7 +12,7 @@ export default function asteroidReducer(state = {
                 ...state,
                 asteroids: [
                     ...state.asteroids,
-                    action.payload
+                    {...action.payload}
                 ]
             }
             return newState
@@ -34,7 +34,6 @@ export default function asteroidReducer(state = {
             return newState
         case 'ADJUST_ASTEROID_TOP_LEFT':
             // Move to top left
-            // action.payload must include asteroid ID
             newState = {
                 ...state,
                 pos: {
@@ -46,7 +45,6 @@ export default function asteroidReducer(state = {
             return newState
         case 'ADJUST_ASTEROID_TOP_RIGHT':
             // Move to top right
-            // action.payload must include asteroid ID
             newState = {
                 ...state,
                 pos: {
@@ -58,7 +56,6 @@ export default function asteroidReducer(state = {
             return newState
         case 'ADJUST_ASTEROID_BOTTOM_LEFT':
             // Move to bottom left
-            // action.payload must include asteroid ID
             newState = {
                 ...state,
                 pos: {
@@ -70,7 +67,6 @@ export default function asteroidReducer(state = {
             return newState
         case 'ADJUST_ASTEROID_BOTTOM_RIGHT':
             // Move to bottom right
-            // action.payload must include asteroid ID
             newState = {
                 ...state,
                 pos: {
@@ -82,7 +78,6 @@ export default function asteroidReducer(state = {
             return newState
         case 'ADJUST_ASTEROID_LEFT':
             // Move to left side of Field
-            // action.payload must include asteroid ID
             newState = {
                 ...state,
                 pos: {
@@ -94,7 +89,6 @@ export default function asteroidReducer(state = {
             return newState
         case 'ADJUST_ASTEROID_RIGHT':
             // Move to right side of Field
-            // action.payload must include asteroid ID
             newState = {
                 ...state,
                 pos: {
@@ -106,7 +100,6 @@ export default function asteroidReducer(state = {
             return newState
         case 'ADJUST_ASTEROID_TOP':
             // Move to top of Field
-            // action.payload must include asteroid ID
             newState = {
                 ...state,
                 pos: {
@@ -118,7 +111,6 @@ export default function asteroidReducer(state = {
             return newState
         case 'ADJUST_ASTEROID_BOTTOM':
             // Move to bottom of Field
-            // action.payload must include asteroid ID
             newState = {
                 ...state,
                 pos: {
@@ -130,7 +122,6 @@ export default function asteroidReducer(state = {
             return newState
         case 'UPDATE_ASTEROID_LOCATION':
             // Move asteroid within boundaries
-            // action.payload must include asteroid ID
             newState = {
                 ...state,
                 pos: {

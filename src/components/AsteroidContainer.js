@@ -10,53 +10,29 @@ import { setInterval } from 'core-js/library/web/timers';
 
 class AsteroidContainer extends React.Component {
   componentDidMount() {
-    if (this.props.asteroids.length === 0) {
-      let number = Math.random(2,4)
-      let i
-      for (i = 0; i < number; i++) {
-        this.createAsteroid(2)
-      }
-    }
-    console.log("asteroidContainer props", this.props)
+    this.spawnAsteroids = this.spawnAsteroids.bind(this)
+    this.spawnAsteroids()
+    // setInterval(()=>{this.checkIfNeedAsteroids()}, 5000)
   }
 
-  componentDidUpdate(nextProps) {
-  //   if (this.props.asteroids.length === 0) {
-  //     this.createAsteroid(2)
-  //     this.createAsteroid(2)
-  //   }
-    // console.log(nextProps)
+  async spawnAsteroids() {
+    let firstAsteroid = await this.createAsteroid(2)
+    let secondAsteroid = (firstAsteroid) => {
+      this.createAsteroid(2)
+    }
+    secondAsteroid(firstAsteroid)
   }
 
   checkIfNeedAsteroids = () => {
     if (this.props.asteroids.length === 0) {
       console.log("Need asteroids!")
-      let number = Math.random(2,4)
-      let i
-      for (i = 0; i < number; i++) {
-        this.createAsteroid(2)
-      }
+      this.spawnAsteroids()
     }
   }
 
-  // checkIfNeedAsteroids = () => {
-  //   // Set interval at which to check if Field needs more asteroids
-  //   // Current interval: 60 seconds (60,000ms)
-  //   setInterval(()=>{
-  //     console.log("Hit checkIfNeed")
-  //     console.log("this.props.asteroids", this.props.asteroids)
-  //     if (!this.props.asteroids.length) {
-  //       console.log("We need")
-  //       let number = Math.random(2, 4)
-  //       // this.createAsteroids(3, 2)
-  //       let i
-  //       for (i = 0; i < number; i++) {
-  //         this.createAsteroid(2) // size
-  //       }
-  //     }
-  //   }, 5000)
-
-  // }
+  componentDidUpdate() {
+    // this.checkIfNeedAsteroids()
+  }
 
   createAsteroid = (size) => {
     let numSides = getRandomIntInclusive(3,9)
@@ -92,6 +68,7 @@ class AsteroidContainer extends React.Component {
       }
     }
     this.props.createAsteroids(newAsteroid)
+    return(0)
   }
 
   createAsteroids = (number, size) => {
@@ -164,7 +141,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    asteroids: [...state.asteroids]
+    asteroids: [...state.asteroidContainer]
   }
 }
 

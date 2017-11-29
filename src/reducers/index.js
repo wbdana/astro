@@ -4,5 +4,5 @@ import asteroidReducer from './asteroidReducer'
 
 export default combineReducers({
     ship: shipReducer,
-    asteroids: asteroidReducer
+    asteroidContainer: asteroidReducer
 })
