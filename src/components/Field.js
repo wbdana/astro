@@ -31,6 +31,10 @@ class Field extends React.Component {
     ctx.restore()
   }
 
+  componentDidUpdate() {
+    console.log(this.props.asteroidContainer)
+  }
+
   resetCanvas = (c, ctx) => {
     // Reset canvas path origin for Asteroid
     ctx.translate((this.props.ship.pos.x * -1), (this.props.ship.pos.y * -1
@@ -38,14 +42,14 @@ class Field extends React.Component {
     ctx.rotate(this.props.ship.pos.d * Math.PI / 180)
   }
 
-  drawAsteroid = (c, ctx) => {
+  drawAsteroid = (c, ctx, j) => {
     ctx.save()
     let i
     ctx.beginPath()
-    ctx.translate(this.props.asteroid.pos.x, this.props.asteroid.pos.y)
-    for (i = 0; i < this.props.asteroid.angles.length; i++) {
-      ctx.rotate(this.props.asteroid.angles[i] * Math.PI / 180)
-      ctx.lineTo(0, this.props.asteroid.sides[i])
+    ctx.translate(this.props.asteroidContainer.asteroids[j].pos.x, this.props.asteroidContainer.asteroids[j].pos.y)
+    for (i = 0; i < this.props.asteroidContainer.asteroids[j].angles.length; i++) {
+      ctx.rotate(this.props.asteroidContainer.asteroids[j].angles[i] * Math.PI / 180)
+      ctx.lineTo(0, this.props.asteroidContainer.asteroids[j].sides[i])
     }
     ctx.closePath()
     ctx.fill()
@@ -73,6 +77,10 @@ class Field extends React.Component {
       this.drawShip(c, ctx)
 
       // Draw Asteroid 
+      let i
+      for (i = 0; i < this.props.asteroidContainer.asteroids.length; i++) {
+        this.drawAsteroid(c, ctx, i)
+      }
       // this.drawAsteroid(c, ctx)
 
     }, 20) // 20ms canvas refresh
