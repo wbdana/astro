@@ -6,21 +6,7 @@ export default function asteroidReducer(state = {
     let newState
     switch(action.type) {
         case 'CREATE_ASTEROIDS':
-            console.log("Creating asteroids")
-            // const newArray = update(initialArray, { $push: [4] }); // => [1, 2, 3, 4]
             newState = update(state, { asteroids: { $push: [{...action.payload}] } })
-
-            // newState = {
-            //     ...state,
-            //     asteroids: [
-            //         ...state.asteroids,
-            //         {...action.payload}
-            //     ]
-            
-            // }
-            // newState = Object.assign({}, state, {asteroids: [...state.asteroids, {...action.payload}]})
-            console.log(newState)
-            console.log(state.asteroids[0])
             return newState
         case 'INITIALIZE_ASTEROID':
             newState = {
@@ -217,9 +203,6 @@ export default function asteroidReducer(state = {
             return newState
         case 'UPDATE_ASTEROID_LOCATION':
             // Move asteroid within boundaries
-            console.log("HIT UPDATE_ASTEROID_LOCATION")
-            console.log("x pos:", state.asteroids[action.payload].pos.x)
-            console.log("x vel:", state.asteroids[action.payload].vel.x)
             newState = update(state, {
                 asteroids: {
                     [action.payload]: {
