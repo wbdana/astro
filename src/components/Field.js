@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 class Field extends React.Component {
 
   componentDidMount() {
+    console.log(this.props)
     this.drawField()
   }
 
@@ -42,6 +43,7 @@ class Field extends React.Component {
   }
 
   drawAsteroid = (c, ctx, j) => {
+    console.log(this.props.asteroidContainer.asteroids[j])
     ctx.save()
     let i
     ctx.beginPath()
