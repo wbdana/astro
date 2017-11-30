@@ -13,19 +13,7 @@ class AsteroidContainer extends React.Component {
     let createdAsteroids = await this.spawnAsteroids()
     setInterval((createdAsteroids) => {
       this.updateAsteroids()
-      console.log(this.props.asteroids)
     }, 20)
-  }
-
-  componentDidUpdate() {
-    // if (this._timeout) {
-    //   clearTimeout(this._timeout)
-    // }
-    // this._timeout = setTimeout(()=>{
-    //   this.updateAsteroids()
-    // }, 20) // 20ms delay
-    // console.log(this.props)
-
   }
 
   async spawnAsteroids() {
@@ -40,17 +28,14 @@ class AsteroidContainer extends React.Component {
 
   checkIfNeedAsteroids = () => {
     if (this.props.asteroids.length === 0) {
-      console.log("Need asteroids!")
       this.spawnAsteroids()
     }
   }
 
   async updateAsteroids() {
-    console.log("this.updateAsteroids() props:", this.props)
     // if (this.props.asteroids.length) {
       let firstAsteroid = await this.updateAndConfineAsteroidToField(0)
       let secondAsteroid = (firstAsteroid) => {
-        console.log("SECOND UPDATE")
         this.updateAndConfineAsteroidToField(1)
       }
       secondAsteroid(firstAsteroid)
@@ -96,7 +81,6 @@ class AsteroidContainer extends React.Component {
   }
 
   updateAndConfineAsteroidToField = (id) => {
-    console.log("updateAndConfineAsteroidToField(id)", this.props.asteroids, "id:", id)
     // CONFINE ASTEROID TO FIELD
 
     // If Asteroid goes off screen bottom right corner,
@@ -171,7 +155,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-  // console.log([...state.asteroidContainer.asteroids])
   return {
     asteroids: [...state.asteroidContainer.asteroids]
   }

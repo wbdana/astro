@@ -151,8 +151,6 @@ class Ship extends React.Component {
         this.props.updateShipLocation()
       }
 
-      // Put in check for collision with Ship here
-
     }, 20) // 20ms refresh rate
   
   }
