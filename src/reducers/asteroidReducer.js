@@ -1,16 +1,26 @@
+import update from 'immutability-helper'
+
 export default function asteroidReducer(state = {
     asteroids: []
 }, action) {
     let newState
     switch(action.type) {
         case 'CREATE_ASTEROIDS':
-            let newState = {
-                ...state,
-                asteroids: [
-                    ...state.asteroids,
-                    {...action.payload}
-                ]
-            }
+            console.log("Creating asteroids")
+            // const newArray = update(initialArray, { $push: [4] }); // => [1, 2, 3, 4]
+            newState = update(state, { asteroids: { $push: [{...action.payload}] } })
+
+            // newState = {
+            //     ...state,
+            //     asteroids: [
+            //         ...state.asteroids,
+            //         {...action.payload}
+            //     ]
+            
+            // }
+            // newState = Object.assign({}, state, {asteroids: [...state.asteroids, {...action.payload}]})
+            console.log(newState)
+            console.log(state.asteroids[0])
             return newState
         case 'INITIALIZE_ASTEROID':
             newState = {
@@ -28,7 +38,9 @@ export default function asteroidReducer(state = {
                 }
             }
             return newState
+        // payload for below actions is id of asteroid
         case 'ADJUST_ASTEROID_TOP_LEFT':
+            state.asteroids[action.payload] = state.asteroids[action.payload]
             // Move to top left
             newState = {
                 ...state,
@@ -118,16 +130,25 @@ export default function asteroidReducer(state = {
             return newState
         case 'UPDATE_ASTEROID_LOCATION':
             // Move asteroid within boundaries
-            newState = {
-                ...state,
-                pos: {
-                    ...state.pos,
-                    x: state.pos.x + state.vel.x,
-                    y: state.pos.y + state.vel.y
+            console.log("HIT UPDATE_ASTEROID_LOCATION")
+            newState = update(state, {
+                asteroids: {
+                    [action.payload]: {
+                        $set: {
+                            pos: {
+                                x: state.asteroids[action.payload].pos.x + state.asteroids[action.payload].vel.x,
+                                y: state.asteroids[action.payload].pos.y + state.asteroids[action.payload].vel.y,
+                                d: state.asteroids[action.payload].pos.d + 5
+                            },
+                            vel: {
+                                x: state.asteroids[action.payload].vel.x,
+                                y: state.asteroids[action.payload].vel.y
+                            }
+                        }
+                    }
                 }
-            }
+            })
             return newState
-            
         default:
             return state
     }

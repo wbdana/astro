@@ -16,83 +16,83 @@ export function initializeAsteroid(payload) {
     }
 }
 
-export function adjustTopLeft() {
+export function adjustTopLeft(payload) {
     return dispatch => {
         dispatch({
             type: 'ADJUST_ASTEROID_TOP_LEFT',
-            payload: null
+            payload: payload
         })
     }
 }
 
-export function adjustTopRight() {
+export function adjustTopRight(payload) {
     return dispatch => {
         dispatch({
             type: 'ADJUST_ASTEROID_TOP_RIGHT',
-            payload: null
+            payload: payload
         })
     }
 }
 
-export function adjustBottomLeft() {
+export function adjustBottomLeft(payload) {
     return dispatch => {
         dispatch({
             type: 'ADJUST_ASTEROID_BOTTOM_LEFT',
-            payload: null
+            payload: payload
         })
     }
 }
 
-export function adjustBottomRight() {
+export function adjustBottomRight(payload) {
     return dispatch => {
         dispatch({
             type: 'ADJUST_ASTEROID_BOTTOM_RIGHT',
-            payload: null
+            payload: payload
         })
     }
 }
 
-export function adjustLeft() {
+export function adjustLeft(payload) {
     return dispatch => {
         dispatch({
             type: 'ADJUST_ASTEROID_LEFT',
-            payload: null
+            payload: payload
         })
     }
 }
 
-export function adjustRight() {
+export function adjustRight(payload) {
     return dispatch => {
         dispatch({
             type: 'ADJUST_ASTEROID_RIGHT',
-            payload: null
+            payload: payload
         })
     }
 }
 
-export function adjustTop() {
+export function adjustTop(payload) {
     return dispatch => {
         dispatch({
             type: 'ADJUST_ASTEROID_TOP',
-            payload: null
+            payload: payload
         })
     }
 }
 
-export function adjustBottom() {
+export function adjustBottom(payload) {
     return dispatch => {
         dispatch({
             type: 'ADJUST_ASTEROID_BOTTOM',
-            payload: null
+            payload: payload
         })
     }
 }
 
-export function updateAsteroidLocation() {
+export function updateAsteroidLocation(payload) {
     return dispatch => {
         dispatch({
             type: 'UPDATE_ASTEROID_LOCATION',
-            payload: null
+            payload: payload
         })
     }
 }
