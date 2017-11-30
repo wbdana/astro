@@ -71,7 +71,7 @@ class Field extends React.Component {
 
       // Put in check for collision with Ship here
       for (i = 0; i < this.props.asteroidContainer.asteroids.length; i++) {
-        if ((Math.abs(this.props.ship.pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= 20) && (Math.abs(this.props.ship.pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= 20)) {
+        if ((Math.abs(this.props.ship.pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= 100) && (Math.abs(this.props.ship.pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= 100)) {
           console.log("SHIP HIT ASTEROID")
           break;
         }

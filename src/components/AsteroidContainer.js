@@ -44,7 +44,8 @@ class AsteroidContainer extends React.Component {
   }
 
   createAsteroid = (size) => {
-    let numSides = getRandomIntInclusive(3,9)
+    let numSides = getRandomIntInclusive(4,7)
+    // let numSides = 5
     let min = 0
     let angles = []
     let sides = []
@@ -57,8 +58,8 @@ class AsteroidContainer extends React.Component {
     let i
     let newSideMultiplier
     for (i = 0; i < numSides; i++) {
-      newAngle = getRandomIntInclusive(min, 45)
-      newSideMultiplier = getRandomIntInclusive(10,100)
+      newAngle = getRandomIntInclusive(min, 20)
+      newSideMultiplier = getRandomIntInclusive(40,80)
       angles.push(newAngle)
       sides.push(size*newSideMultiplier)
       min = newAngle
