@@ -19,7 +19,6 @@ class Field extends React.Component {
     ctx.translate(shipDrawX, shipDrawY)
     ctx.rotate(shipAngle * Math.PI / 180)
     ctx.beginPath()
-    ctx.arc(0,0,25,0,2*Math.PI)
     ctx.moveTo(0, -8.5)
     ctx.lineTo(-7, 17)
     ctx.lineTo(-4, 12)
@@ -36,10 +35,13 @@ class Field extends React.Component {
     let i
     ctx.beginPath()
     ctx.translate(this.props.asteroidContainer.asteroids[j].pos.x, this.props.asteroidContainer.asteroids[j].pos.y)
-    ctx.arc(0, 0, 25, 0, 2 * Math.PI)
+    ctx.arc(0, 0, 150, 0, 2 * Math.PI)
+    ctx.moveTo(0,this.props.asteroidContainer.asteroids[j].sides[0])
     for (i = 0; i < this.props.asteroidContainer.asteroids[j].angles.length; i++) {
       ctx.rotate(this.props.asteroidContainer.asteroids[j].angles[i] * Math.PI / 180)
       ctx.lineTo(0, this.props.asteroidContainer.asteroids[j].sides[i])
+      // if (i === 0) {console.log(this.props.asteroidContainer.asteroids[j].angles[i] * Math.PI / 180)}
+      ctx.rotate(0 * Math.PI / 180)
     }
     ctx.closePath()
     ctx.fill()
@@ -73,7 +75,7 @@ class Field extends React.Component {
 
       // Put in check for collision with Ship here
       for (i = 0; i < this.props.asteroidContainer.asteroids.length; i++) {
-        if ((Math.abs(this.props.ship.pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= 100) && (Math.abs(this.props.ship.pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= 100)) {
+        if ((Math.abs(this.props.ship.pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= 150) && (Math.abs(this.props.ship.pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= 150)) {
           console.log("SHIP HIT ASTEROID")
           break;
         }
