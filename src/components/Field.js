@@ -19,6 +19,7 @@ class Field extends React.Component {
     ctx.translate(shipDrawX, shipDrawY)
     ctx.rotate(shipAngle * Math.PI / 180)
     ctx.beginPath()
+    ctx.arc(0,0,25,0,2*Math.PI)
     ctx.moveTo(0, -8.5)
     ctx.lineTo(-7, 17)
     ctx.lineTo(-4, 12)
@@ -35,6 +36,7 @@ class Field extends React.Component {
     let i
     ctx.beginPath()
     ctx.translate(this.props.asteroidContainer.asteroids[j].pos.x, this.props.asteroidContainer.asteroids[j].pos.y)
+    ctx.arc(0, 0, 25, 0, 2 * Math.PI)
     for (i = 0; i < this.props.asteroidContainer.asteroids[j].angles.length; i++) {
       ctx.rotate(this.props.asteroidContainer.asteroids[j].angles[i] * Math.PI / 180)
       ctx.lineTo(0, this.props.asteroidContainer.asteroids[j].sides[i])

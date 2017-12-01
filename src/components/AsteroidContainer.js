@@ -45,7 +45,6 @@ class AsteroidContainer extends React.Component {
 
   createAsteroid = (size) => {
     let numSides = getRandomIntInclusive(4,7)
-    // let numSides = 5
     let min = 0
     let angles = []
     let sides = []
