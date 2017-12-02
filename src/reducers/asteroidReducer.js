@@ -9,6 +9,14 @@ export default function asteroidReducer(state = {
             newState = update(state, { asteroids: { $push: [{...action.payload}] } })
             return newState
         // payload for below actions is id of asteroid
+        case 'REMOVE_ASTEROID':
+            console.log("HIT REMOVE ASTEROID")
+            newState = {
+                asteroids: [
+                    ...state.asteroids.slice(0, action.payload), ...state.asteroids.slice(action.payload + 1)
+                ]
+            }
+            return newState
         case 'ADJUST_ASTEROID_TOP_LEFT':
             // Move to top left
             newState = update(state, {

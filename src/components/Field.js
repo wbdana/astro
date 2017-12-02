@@ -5,10 +5,12 @@ import ShotContainer from './ShotContainer'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
+import { removeAsteroid } from '../actions/asteroidActions'
 
 class Field extends React.Component {
 
   componentDidMount() {
+    this.checkHit = this.checkHit.bind(this)
     this.drawField()
   }
 
@@ -36,7 +38,7 @@ class Field extends React.Component {
     let i
     ctx.beginPath()
     ctx.translate(this.props.asteroidContainer.asteroids[j].pos.x, this.props.asteroidContainer.asteroids[j].pos.y)
-    ctx.arc(0, 0, 150, 0, 2 * Math.PI) // hitbox
+    // ctx.arc(0, 0, 150, 0, 2 * Math.PI) // hitbox
     // ctx.arc(0, 0, 10, 0, 2 * Math.PI) // center
     ctx.moveTo(0,this.props.asteroidContainer.asteroids[j].sides[0]) // move away from center
     for (i = 0; i < this.props.asteroidContainer.asteroids[j].angles.length; i++) {
@@ -107,13 +109,16 @@ class Field extends React.Component {
     }
   }
 
-  checkHit = () => {
+  async checkHit() {
     let i, j;
-    console.log(this.props.asteroidContainer.asteroids, this.props.shotContainer.shots)
+    // console.log(this.props.asteroidContainer.asteroids, this.props.shotContainer.shots)
     for (i = 0; i < this.props.asteroidContainer.asteroids.length; i++) {
       for (j = 0; j < this.props.shotContainer.shots.length; j++) {
         if ((Math.abs(this.props.shotContainer.shots[j].pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= 150) && (Math.abs(this.props.shotContainer.shots[j].pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= 150)) {
           console.log("SHOT HIT ASTEROID")
+          let asteroidRemoved = await this.props.removeAsteroid(i)
+          break
+          break
         }
       }
     }
@@ -136,8 +141,8 @@ class Field extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-
-  })
+    removeAsteroid: removeAsteroid
+  }, dispatch)
 }
 
 const mapStateToProps = (state) => {

@@ -13,7 +13,7 @@ class AsteroidContainer extends React.Component {
     let createdAsteroids = await this.spawnAsteroids()
     setInterval((createdAsteroids) => {
       this.updateAsteroids()
-    }, 20)
+    }, 40)
   }
 
   async spawnAsteroids() {
@@ -32,11 +32,20 @@ class AsteroidContainer extends React.Component {
   }
 
   async updateAsteroids() {
-    let firstAsteroid = await this.updateAndConfineAsteroidToField(0)
-    let secondAsteroid = (firstAsteroid) => {
-      this.updateAndConfineAsteroidToField(1)
+    if (this.props.asteroids.length === 2) {
+      let firstAsteroid = await this.updateAndConfineAsteroidToField(0)
+      let secondAsteroid = (firstAsteroid) => {
+        this.updateAndConfineAsteroidToField(1)
+      }
+      secondAsteroid(firstAsteroid)
+    } else if (this.props.asteroids.length === 1) {
+      let firstAsteroid = await this.updateAndConfineAsteroidToField(0)
+      let done = (firstAsteroid) => {
+        return(0)
+      }
+    } else if (!this.props.asteroids.length) {
+      this.spawnAsteroids()
     }
-    secondAsteroid(firstAsteroid)
     return(0)
   }
 
