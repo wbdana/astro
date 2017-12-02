@@ -33,7 +33,8 @@ export default function asteroidReducer(state = {
                                 y: state.asteroids[action.payload].vel.y
                             },
                             angles: [...state.asteroids[action.payload].angles],
-                            sides: [...state.asteroids[action.payload].sides]
+                            sides: [...state.asteroids[action.payload].sides],
+                            size: state.asteroids[action.payload].size
                         }
                     }
                 }
@@ -55,7 +56,8 @@ export default function asteroidReducer(state = {
                                 y: state.asteroids[action.payload].vel.y
                             },
                             angles: [...state.asteroids[action.payload].angles],
-                            sides: [...state.asteroids[action.payload].sides]
+                            sides: [...state.asteroids[action.payload].sides],
+                            size: state.asteroids[action.payload].size
                         }
                     }
                 }
@@ -77,7 +79,8 @@ export default function asteroidReducer(state = {
                                 y: state.asteroids[action.payload].vel.y
                             },
                             angles: [...state.asteroids[action.payload].angles],
-                            sides: [...state.asteroids[action.payload].sides]
+                            sides: [...state.asteroids[action.payload].sides],
+                            size: state.asteroids[action.payload].size
                         }
                     }
                 }
@@ -99,7 +102,8 @@ export default function asteroidReducer(state = {
                                 y: state.asteroids[action.payload].vel.y
                             },
                             angles: [...state.asteroids[action.payload].angles],
-                            sides: [...state.asteroids[action.payload].sides]
+                            sides: [...state.asteroids[action.payload].sides],
+                            size: state.asteroids[action.payload].size
                         }
                     }
                 }
@@ -121,7 +125,8 @@ export default function asteroidReducer(state = {
                                 y: state.asteroids[action.payload].vel.y
                             },
                             angles: [...state.asteroids[action.payload].angles],
-                            sides: [...state.asteroids[action.payload].sides]
+                            sides: [...state.asteroids[action.payload].sides],
+                            size: state.asteroids[action.payload].size
                         }
                     }
                 }
@@ -143,7 +148,8 @@ export default function asteroidReducer(state = {
                                 y: state.asteroids[action.payload].vel.y
                             },
                             angles: [...state.asteroids[action.payload].angles],
-                            sides: [...state.asteroids[action.payload].sides]
+                            sides: [...state.asteroids[action.payload].sides],
+                            size: state.asteroids[action.payload].size
                         }
                     }
                 }
@@ -165,7 +171,8 @@ export default function asteroidReducer(state = {
                                 y: state.asteroids[action.payload].vel.y
                             },
                             angles: [...state.asteroids[action.payload].angles],
-                            sides: [...state.asteroids[action.payload].sides]
+                            sides: [...state.asteroids[action.payload].sides],
+                            size: state.asteroids[action.payload].size
                         }
                     }
                 }
@@ -187,7 +194,8 @@ export default function asteroidReducer(state = {
                                 y: state.asteroids[action.payload].vel.y
                             },
                             angles: [...state.asteroids[action.payload].angles],
-                            sides: [...state.asteroids[action.payload].sides]
+                            sides: [...state.asteroids[action.payload].sides],
+                            size: state.asteroids[action.payload].size
                         }
                     }
                 }
@@ -209,7 +217,8 @@ export default function asteroidReducer(state = {
                                 y: state.asteroids[action.payload].vel.y
                             },
                             angles: [...state.asteroids[action.payload].angles],
-                            sides: [...state.asteroids[action.payload].sides]
+                            sides: [...state.asteroids[action.payload].sides],
+                            size: state.asteroids[action.payload].size
                         }
                     }
                 }

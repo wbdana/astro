@@ -2,15 +2,17 @@ import React from 'react'
 import Ship from './Ship'
 import AsteroidContainer from './AsteroidContainer'
 import ShotContainer from './ShotContainer'
+import { getRandomIntInclusive } from '../Helpers'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { removeAsteroid } from '../actions/asteroidActions'
+import { createAsteroid, removeAsteroid } from '../actions/asteroidActions'
 import { removeShot } from '../actions/shotActions'
 
 class Field extends React.Component {
 
   componentDidMount() {
+    this.breakAsteroidInTwo = this.breakAsteroidInTwo.bind(this)
     this.checkHit = this.checkHit.bind(this)
     this.drawField()
   }
@@ -39,7 +41,7 @@ class Field extends React.Component {
     let i
     ctx.beginPath()
     ctx.translate(this.props.asteroidContainer.asteroids[j].pos.x, this.props.asteroidContainer.asteroids[j].pos.y)
-    // ctx.arc(0, 0, 150, 0, 2 * Math.PI) // hitbox
+    ctx.arc(0, 0, 150, 0, 2 * Math.PI) // hitbox
     // ctx.arc(0, 0, 10, 0, 2 * Math.PI) // center
     ctx.moveTo(0,this.props.asteroidContainer.asteroids[j].sides[0]) // move away from center
     for (i = 0; i < this.props.asteroidContainer.asteroids[j].angles.length; i++) {
@@ -117,6 +119,9 @@ class Field extends React.Component {
       for (j = 0; j < this.props.shotContainer.shots.length; j++) {
         if ((Math.abs(this.props.shotContainer.shots[j].pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= 150) && (Math.abs(this.props.shotContainer.shots[j].pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= 150)) {
           console.log("SHOT HIT ASTEROID")
+          if (this.props.asteroidContainer.asteroids[i].size == 2) {
+            this.breakAsteroidInTwo(1, this.props.asteroidContainer.asteroids[i].pos.x, this.props.asteroidContainer.asteroids[i].pos.y)
+          }
           let asteroidRemoved = await this.props.removeAsteroid(i)
           this.props.removeShot(j)
           break
@@ -126,12 +131,81 @@ class Field extends React.Component {
     }
   }
 
+  async breakAsteroidInTwo(newSize, posX, posY) {
+    let numSides = getRandomIntInclusive(7, 9)
+    let min = 0
+    let angles = []
+    let sides = []
+    let posD = getRandomIntInclusive(0, 359)
+    let velX = getRandomIntInclusive(-5, 5)
+    let velY = getRandomIntInclusive(-5, 5)
+    let newAngle = 45
+    let i
+    let newSideMultiplier
+    for (i = 0; i < numSides; i++) {
+      // newAngle = getRandomIntInclusive(45, 45)
+      newSideMultiplier = getRandomIntInclusive(70, 80)
+      angles.push(newAngle)
+      sides.push(newSize * newSideMultiplier)
+      // min = newAngle
+    }
+    let newAsteroid = {
+      angles: angles,
+      sides: sides,
+      pos: {
+        x: posX,
+        y: posY,
+        d: posD
+      },
+      vel: {
+        x: velX,
+        y: velY // TODO: should add spin
+      },
+      size: newSize
+    }
+    let firstAsteroid = await this.props.createAsteroid(newAsteroid)
+    let secondAsteroid = (firstAsteroid) => {
+      numSides = getRandomIntInclusive(7, 9)
+      min = 0
+      angles = []
+      sides = []
+      posD = getRandomIntInclusive(0, 359)
+      velX = getRandomIntInclusive(-5, 5)
+      velY = getRandomIntInclusive(-5, 5)
+      newAngle = 45
+      i
+      newSideMultiplier
+      for (i = 0; i < numSides; i++) {
+        // newAngle = getRandomIntInclusive(45, 45)
+        newSideMultiplier = getRandomIntInclusive(70, 80)
+        angles.push(newAngle)
+        sides.push(newSize * newSideMultiplier)
+        // min = newAngle
+      }
+      newAsteroid = {
+        angles: angles,
+        sides: sides,
+        pos: {
+          x: posX,
+          y: posY,
+          d: posD
+        },
+        vel: {
+          x: velX,
+          y: velY // TODO: should add spin
+        },
+        size: newSize
+      }
+      this.props.createAsteroid(newAsteroid)
+    }
+  }
+
   render() {
     return(
       <canvas
         id='AstroField'
-        width='1905px'
-        height='961px'
+        width={window.innerWidth}
+        height={window.innerHeight}
       >
         <Ship />
         <AsteroidContainer />
@@ -143,6 +217,7 @@ class Field extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
+    createAsteroid: createAsteroid,
     removeAsteroid: removeAsteroid,
     removeShot: removeShot
   }, dispatch)
