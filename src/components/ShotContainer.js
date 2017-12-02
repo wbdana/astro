@@ -16,6 +16,7 @@ class ShotContainer extends React.Component {
         setInterval(()=>{
             this.updateShots()
         }, 20)
+        console.log(window.innerHeight, window.innerWidth)
     }
 
     async takeShot() {

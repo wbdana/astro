@@ -13,24 +13,31 @@ export default function shotReducer(state = {
             // if shot goes off screen without hitting asteroid, remove shot from state
             return state
         case 'UPDATE_SHOT_LOCATION':
-            console.log("Hit UPDATE_SHOT_LOCATION")
-            newState = update(state, {
-                shots: {
-                    [action.payload]: {
-                        $set: {
-                            pos: {
-                                x: state.shots[action.payload].pos.x + state.shots[action.payload].vel.x,
-                                y: state.shots[action.payload].pos.y - state.shots[action.payload].vel.y,
-                                d: state.shots[action.payload].pos.d
-                            },
-                            vel: {
-                                x: state.shots[action.payload].vel.x,
-                                y: state.shots[action.payload].vel.y
+            if (state.shots[action.payload].pos.x >= window.innerWidth || state.shots[action.payload].pos.x < 0 || state.shots[action.payload].pos.y >= window.innerHeight || state.shots[action.payload].pos.y < 0) {
+                newState = {
+                    shots: [
+                        ...state.shots.slice(0, action.payload), ...state.shots.slice(action.payload + 1)
+                    ]
+                }
+            } else {
+                newState = update(state, {
+                    shots: {
+                        [action.payload]: {
+                            $set: {
+                                pos: {
+                                    x: state.shots[action.payload].pos.x + state.shots[action.payload].vel.x,
+                                    y: state.shots[action.payload].pos.y - state.shots[action.payload].vel.y,
+                                    d: state.shots[action.payload].pos.d
+                                },
+                                vel: {
+                                    x: state.shots[action.payload].vel.x,
+                                    y: state.shots[action.payload].vel.y
+                                }
                             }
                         }
                     }
-                }
-            })
+                })
+            }
             return newState
         default:
             return state
