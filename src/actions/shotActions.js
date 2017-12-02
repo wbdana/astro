@@ -6,3 +6,12 @@ export function newShot(payload) {
         })
     }
 }
+
+export function updateShotLocation(payload) {
+    return dispatch => {
+        dispatch({
+            type: 'UPDATE_SHOT_LOCATION',
+            payload: payload
+        })
+    }
+}

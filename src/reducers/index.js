@@ -6,5 +6,5 @@ import shotReducer from './shotReducer'
 export default combineReducers({
     ship: shipReducer,
     asteroidContainer: asteroidReducer,
-    shots: shotReducer
+    shotContainer: shotReducer
 })

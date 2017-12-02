@@ -1,7 +1,7 @@
 import React from 'react'
 import Ship from './Ship'
 import AsteroidContainer from './AsteroidContainer'
-import Shot from './Shot'
+import ShotContainer from './ShotContainer'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
@@ -50,6 +50,13 @@ class Field extends React.Component {
     ctx.restore()
   }
 
+  drawShot = (c, ctx, i) => {
+    ctx.save()
+    ctx.fillStyle = '#FFFFFF'
+    ctx.fillRect(this.props.shotContainer.shots[i].pos.x, this.props.shotContainer.shots[i].pos.y,2,2)
+    ctx.restore()
+  }
+
   drawField = () => {
     setInterval(() => {
 
@@ -74,6 +81,12 @@ class Field extends React.Component {
         this.drawAsteroid(c, ctx, i)
       }
 
+      // Draw Shots
+      let j
+      for (j = 0; j < this.props.shotContainer.shots.length; j++) {
+        this.drawShot(c, ctx, j)
+      }
+
       // Put in check for collision with Ship here
       for (i = 0; i < this.props.asteroidContainer.asteroids.length; i++) {
         if ((Math.abs(this.props.ship.pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= 150) && (Math.abs(this.props.ship.pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= 150)) {
@@ -94,7 +107,7 @@ class Field extends React.Component {
       >
         <Ship />
         <AsteroidContainer />
-        <Shot />
+        <ShotContainer />
       </canvas>
     )
   }
