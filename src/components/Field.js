@@ -41,7 +41,7 @@ class Field extends React.Component {
     let i
     ctx.beginPath()
     ctx.translate(this.props.asteroidContainer.asteroids[j].pos.x, this.props.asteroidContainer.asteroids[j].pos.y)
-    ctx.arc(0, 0, 150, 0, 2 * Math.PI) // hitbox
+    ctx.arc(0, 0, (this.props.asteroidContainer.asteroids[j].size * 65), 0, 2 * Math.PI) // hitbox
     // ctx.arc(0, 0, 10, 0, 2 * Math.PI) // center
     ctx.moveTo(0,this.props.asteroidContainer.asteroids[j].sides[0]) // move away from center
     for (i = 0; i < this.props.asteroidContainer.asteroids[j].angles.length; i++) {
@@ -104,7 +104,7 @@ class Field extends React.Component {
   checkAsteroidCollision = () => {
     let i
     for (i = 0; i < this.props.asteroidContainer.asteroids.length; i++) {
-      if ((Math.abs(this.props.ship.pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= 130) && (Math.abs(this.props.ship.pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= 130)) {
+      if ((Math.abs(this.props.ship.pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= (this.props.asteroidContainer.asteroids[i].size * 65)) && (Math.abs(this.props.ship.pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= (this.props.asteroidContainer.asteroids[i].size * 65))) {
         console.log("SHIP HIT ASTEROID")
         clearInterval(this._interval)
         break
@@ -117,7 +117,7 @@ class Field extends React.Component {
     // console.log(this.props.asteroidContainer.asteroids, this.props.shotContainer.shots)
     for (i = 0; i < this.props.asteroidContainer.asteroids.length; i++) {
       for (j = 0; j < this.props.shotContainer.shots.length; j++) {
-        if ((Math.abs(this.props.shotContainer.shots[j].pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= 150) && (Math.abs(this.props.shotContainer.shots[j].pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= 150)) {
+        if ((Math.abs(this.props.shotContainer.shots[j].pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= (this.props.asteroidContainer.asteroids[i].size * 65)) && (Math.abs(this.props.shotContainer.shots[j].pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= (this.props.asteroidContainer.asteroids[i].size * 65))) {
           console.log("SHOT HIT ASTEROID")
           if (this.props.asteroidContainer.asteroids[i].size == 2) {
             this.breakAsteroidInTwo(1, this.props.asteroidContainer.asteroids[i].pos.x, this.props.asteroidContainer.asteroids[i].pos.y)
@@ -176,11 +176,9 @@ class Field extends React.Component {
       i
       newSideMultiplier
       for (i = 0; i < numSides; i++) {
-        // newAngle = getRandomIntInclusive(45, 45)
         newSideMultiplier = getRandomIntInclusive(70, 80)
         angles.push(newAngle)
         sides.push(newSize * newSideMultiplier)
-        // min = newAngle
       }
       newAsteroid = {
         angles: angles,
@@ -196,7 +194,7 @@ class Field extends React.Component {
         },
         size: newSize
       }
-      this.props.createAsteroid(newAsteroid)
+      secondAsteroid(firstAsteroid)
     }
   }
 

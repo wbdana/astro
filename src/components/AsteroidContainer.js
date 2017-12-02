@@ -13,7 +13,7 @@ class AsteroidContainer extends React.Component {
     let createdAsteroids = await this.spawnAsteroids()
     setInterval((createdAsteroids) => {
       this.updateAsteroids()
-    }, 40)
+    }, 20)
   }
 
   async spawnAsteroids() {
