@@ -25,12 +25,6 @@ class AsteroidContainer extends React.Component {
     return(this.props.asteroids)
   }
 
-  checkIfNeedAsteroids = () => {
-    if (this.props.asteroids.length === 0) {
-      this.spawnAsteroids()
-    }
-  }
-
   async updateAsteroids() {
     if (this.props.asteroids.length === 2) {
       let firstAsteroid = await this.updateAndConfineAsteroidToField(0)

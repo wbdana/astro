@@ -26,7 +26,7 @@ export default function asteroidReducer(state = {
                             pos: {
                                 x: 0,
                                 y: 0,
-                                d: state.asteroids[action.payload].pos.d + 5
+                                d: state.asteroids[action.payload].pos.d
                             },
                             vel: {
                                 x: state.asteroids[action.payload].vel.x,
@@ -48,7 +48,7 @@ export default function asteroidReducer(state = {
                             pos: {
                                 x: window.innerWidth,
                                 y: 0,
-                                d: state.asteroids[action.payload].pos.d + 5
+                                d: state.asteroids[action.payload].pos.d
                             },
                             vel: {
                                 x: state.asteroids[action.payload].vel.x,
@@ -70,7 +70,7 @@ export default function asteroidReducer(state = {
                             pos: {
                                 x: 0,
                                 y: window.innerHeight,
-                                d: state.asteroids[action.payload].pos.d + 5
+                                d: state.asteroids[action.payload].pos.d
                             },
                             vel: {
                                 x: state.asteroids[action.payload].vel.x,
@@ -92,7 +92,7 @@ export default function asteroidReducer(state = {
                             pos: {
                                 x: window.innerWidth,
                                 y: window.innerHeight,
-                                d: state.asteroids[action.payload].pos.d + 5
+                                d: state.asteroids[action.payload].pos.d
                             },
                             vel: {
                                 x: state.asteroids[action.payload].vel.x,
@@ -114,7 +114,7 @@ export default function asteroidReducer(state = {
                             pos: {
                                 x: 0,
                                 y: state.asteroids[action.payload].pos.y + state.asteroids[action.payload].vel.y,
-                                d: state.asteroids[action.payload].pos.d + 5
+                                d: state.asteroids[action.payload].pos.d
                             },
                             vel: {
                                 x: state.asteroids[action.payload].vel.x,
@@ -136,7 +136,7 @@ export default function asteroidReducer(state = {
                             pos: {
                                 x: window.innerWidth,
                                 y: state.asteroids[action.payload].pos.y + state.asteroids[action.payload].vel.y,
-                                d: state.asteroids[action.payload].pos.d + 5
+                                d: state.asteroids[action.payload].pos.d
                             },
                             vel: {
                                 x: state.asteroids[action.payload].vel.x,
@@ -158,7 +158,7 @@ export default function asteroidReducer(state = {
                             pos: {
                                 x: state.asteroids[action.payload].pos.x + state.asteroids[action.payload].vel.x,
                                 y: 0,
-                                d: state.asteroids[action.payload].pos.d + 5
+                                d: state.asteroids[action.payload].pos.d
                             },
                             vel: {
                                 x: state.asteroids[action.payload].vel.x,
@@ -180,7 +180,7 @@ export default function asteroidReducer(state = {
                             pos: {
                                 x: state.asteroids[action.payload].pos.x + state.asteroids[action.payload].vel.x,
                                 y: window.innerHeight,
-                                d: state.asteroids[action.payload].pos.d + 5
+                                d: state.asteroids[action.payload].pos.d
                             },
                             vel: {
                                 x: state.asteroids[action.payload].vel.x,
@@ -202,7 +202,7 @@ export default function asteroidReducer(state = {
                             pos: {
                                 x: state.asteroids[action.payload].pos.x + state.asteroids[action.payload].vel.x,
                                 y: state.asteroids[action.payload].pos.y + state.asteroids[action.payload].vel.y,
-                                d: state.asteroids[action.payload].pos.d + 5
+                                d: state.asteroids[action.payload].pos.d
                             },
                             vel: {
                                 x: state.asteroids[action.payload].vel.x,

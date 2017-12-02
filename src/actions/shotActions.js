@@ -15,3 +15,12 @@ export function updateShotLocation(payload) {
         })
     }
 }
+
+export function removeShot(payload) {
+    return dispatch => {
+        dispatch({
+            type: 'REMOVE_SHOT',
+            payload
+        })
+    }
+}

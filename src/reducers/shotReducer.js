@@ -39,6 +39,13 @@ export default function shotReducer(state = {
                 })
             }
             return newState
+        case 'REMOVE_SHOT':
+            newState = {
+                shots: [
+                    ...state.shots.slice(0, action.payload), ...state.shots.slice(action.payload + 1)
+                ]
+            }
+            return newState
         default:
             return state
     }

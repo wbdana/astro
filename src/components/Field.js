@@ -6,6 +6,7 @@ import ShotContainer from './ShotContainer'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { removeAsteroid } from '../actions/asteroidActions'
+import { removeShot } from '../actions/shotActions'
 
 class Field extends React.Component {
 
@@ -117,6 +118,7 @@ class Field extends React.Component {
         if ((Math.abs(this.props.shotContainer.shots[j].pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= 150) && (Math.abs(this.props.shotContainer.shots[j].pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= 150)) {
           console.log("SHOT HIT ASTEROID")
           let asteroidRemoved = await this.props.removeAsteroid(i)
+          this.props.removeShot(j)
           break
           break
         }
@@ -141,7 +143,8 @@ class Field extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    removeAsteroid: removeAsteroid
+    removeAsteroid: removeAsteroid,
+    removeShot: removeShot
   }, dispatch)
 }
 
