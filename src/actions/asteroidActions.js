@@ -1,4 +1,4 @@
-export function createAsteroid(payload) {
+export function createAsteroids(payload) {
     return dispatch => {
         dispatch({
             type: 'CREATE_ASTEROIDS',

@@ -7,6 +7,7 @@ export default function asteroidReducer(state = {
     switch(action.type) {
         case 'CREATE_ASTEROIDS':
             newState = update(state, { asteroids: { $push: [{...action.payload}] } })
+            // newState = update(state, { asteroids: { $push: [...action.payload] } })
             return newState
         // payload for below actions is id of asteroid
         case 'REMOVE_ASTEROID':

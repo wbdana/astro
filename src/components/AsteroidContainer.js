@@ -4,7 +4,7 @@ import Asteroid from './Asteroid'
 import { getRandomIntInclusive } from '../Helpers'
 
 import { connect } from 'react-redux'
-import { createAsteroid, adjustTopLeft, adjustTopRight, adjustBottomLeft, adjustBottomRight, adjustLeft, adjustRight, adjustTop, adjustBottom, updateAsteroidLocation } from '../actions/asteroidActions'
+import { createAsteroids, adjustTopLeft, adjustTopRight, adjustBottomLeft, adjustBottomRight, adjustLeft, adjustRight, adjustTop, adjustBottom, updateAsteroidLocation } from '../actions/asteroidActions'
 import { bindActionCreators } from 'redux'
 
 class AsteroidContainer extends React.Component {
@@ -79,7 +79,7 @@ class AsteroidContainer extends React.Component {
       },
       size: size
     }
-    this.props.createAsteroid(newAsteroid)
+    this.props.createAsteroids(newAsteroid)
     return(0)
   }
 
@@ -144,7 +144,7 @@ class AsteroidContainer extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    createAsteroid: createAsteroid,
+    createAsteroids: createAsteroids,
     adjustTopLeft: adjustTopLeft,
     adjustTopRight: adjustTopRight,
     adjustBottomLeft: adjustBottomLeft,

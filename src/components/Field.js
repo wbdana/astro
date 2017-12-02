@@ -6,7 +6,7 @@ import { getRandomIntInclusive } from '../Helpers'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { createAsteroid, removeAsteroid } from '../actions/asteroidActions'
+import { createAsteroids, removeAsteroid } from '../actions/asteroidActions'
 import { removeShot } from '../actions/shotActions'
 
 class Field extends React.Component {
@@ -163,7 +163,7 @@ class Field extends React.Component {
       },
       size: newSize
     }
-    let firstAsteroid = await this.props.createAsteroid(newAsteroid)
+    let firstAsteroid = await this.props.createAsteroids(newAsteroid)
     let secondAsteroid = (firstAsteroid) => {
       numSides = getRandomIntInclusive(7, 9)
       min = 0
@@ -215,7 +215,7 @@ class Field extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    createAsteroid: createAsteroid,
+    createAsteroids: createAsteroids,
     removeAsteroid: removeAsteroid,
     removeShot: removeShot
   }, dispatch)
