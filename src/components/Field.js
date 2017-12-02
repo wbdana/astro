@@ -120,6 +120,7 @@ class Field extends React.Component {
         if ((Math.abs(this.props.shotContainer.shots[j].pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= (this.props.asteroidContainer.asteroids[i].size * 65)) && (Math.abs(this.props.shotContainer.shots[j].pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= (this.props.asteroidContainer.asteroids[i].size * 65))) {
           console.log("SHOT HIT ASTEROID")
           if (this.props.asteroidContainer.asteroids[i].size == 2) {
+            console.log("SIZE", this.props.asteroidContainer.asteroids[i].size)
             this.breakAsteroidInTwo(1, this.props.asteroidContainer.asteroids[i].pos.x, this.props.asteroidContainer.asteroids[i].pos.y)
           }
           let asteroidRemoved = await this.props.removeAsteroid(i)
