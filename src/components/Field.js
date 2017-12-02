@@ -1,6 +1,7 @@
 import React from 'react'
 import Ship from './Ship'
 import AsteroidContainer from './AsteroidContainer'
+import Shot from './Shot'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
@@ -35,12 +36,12 @@ class Field extends React.Component {
     let i
     ctx.beginPath()
     ctx.translate(this.props.asteroidContainer.asteroids[j].pos.x, this.props.asteroidContainer.asteroids[j].pos.y)
-    ctx.arc(0, 0, 150, 0, 2 * Math.PI)
-    ctx.moveTo(0,this.props.asteroidContainer.asteroids[j].sides[0])
+    ctx.arc(0, 0, 150, 0, 2 * Math.PI) // hitbox
+    // ctx.arc(0, 0, 10, 0, 2 * Math.PI) // center
+    ctx.moveTo(0,this.props.asteroidContainer.asteroids[j].sides[0]) // move away from center
     for (i = 0; i < this.props.asteroidContainer.asteroids[j].angles.length; i++) {
       ctx.rotate(this.props.asteroidContainer.asteroids[j].angles[i] * Math.PI / 180)
       ctx.lineTo(0, this.props.asteroidContainer.asteroids[j].sides[i])
-      // if (i === 0) {console.log(this.props.asteroidContainer.asteroids[j].angles[i] * Math.PI / 180)}
       ctx.rotate(0 * Math.PI / 180)
     }
     ctx.closePath()
@@ -93,6 +94,7 @@ class Field extends React.Component {
       >
         <Ship />
         <AsteroidContainer />
+        <Shot />
       </canvas>
     )
   }
