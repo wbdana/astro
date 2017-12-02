@@ -1,6 +1,6 @@
 export default function shipReducer(state = {
     pos: {
-      x: 950,
+      x: 550,
       y: 550,
       d: 360
     },
@@ -145,7 +145,7 @@ export default function shipReducer(state = {
         ...state,
         pos: {
           ...state.pos,
-          x: 1898,
+          x: window.innerWidth,
           y: 0
         }
       }
@@ -157,7 +157,7 @@ export default function shipReducer(state = {
         pos: {
           ...state.pos,
           x: 0,
-          y: 954
+          y: window.innerHeight
         }
       }
       return newState
@@ -167,8 +167,8 @@ export default function shipReducer(state = {
         ...state,
         pos: {
           ...state.pos,
-          x: 1898,
-          y: 954
+          x: window.innerWidth,
+          y: window.innerHeight
         }
       }
       return newState
@@ -189,7 +189,7 @@ export default function shipReducer(state = {
         ...state,
         pos: {
           ...state.pos,
-          x: 1898,
+          x: window.innerWidth,
           y: state.pos.y + state.vel.y
         }
       }
@@ -212,7 +212,7 @@ export default function shipReducer(state = {
         pos: {
           ...state.pos,
           x: state.pos.x + state.vel.x,
-          y: 954
+          y: window.innerHeight
         }
       }
       return newState

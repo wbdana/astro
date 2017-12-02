@@ -8,22 +8,6 @@ export default function asteroidReducer(state = {
         case 'CREATE_ASTEROIDS':
             newState = update(state, { asteroids: { $push: [{...action.payload}] } })
             return newState
-        case 'INITIALIZE_ASTEROID':
-            newState = {
-                ...state,
-                angles: action.payload.angles,
-                sides: action.payload.sides,
-                pos: {
-                    ...state.pos,
-                    d: action.payload.d
-                },
-                vel: {
-                    ...state.vel,
-                    x: action.payload.velX,
-                    y: action.payload.velY
-                }
-            }
-            return newState
         // payload for below actions is id of asteroid
         case 'ADJUST_ASTEROID_TOP_LEFT':
             // Move to top left
@@ -54,7 +38,7 @@ export default function asteroidReducer(state = {
                     [action.payload]: {
                         $set: {
                             pos: {
-                                x: 1898,
+                                x: window.innerWidth,
                                 y: 0,
                                 d: state.asteroids[action.payload].pos.d + 5
                             },
@@ -77,7 +61,7 @@ export default function asteroidReducer(state = {
                         $set: {
                             pos: {
                                 x: 0,
-                                y: 954,
+                                y: window.innerHeight,
                                 d: state.asteroids[action.payload].pos.d + 5
                             },
                             vel: {
@@ -98,8 +82,8 @@ export default function asteroidReducer(state = {
                     [action.payload]: {
                         $set: {
                             pos: {
-                                x: 1898,
-                                y: 954,
+                                x: window.innerWidth,
+                                y: window.innerHeight,
                                 d: state.asteroids[action.payload].pos.d + 5
                             },
                             vel: {
@@ -142,7 +126,7 @@ export default function asteroidReducer(state = {
                     [action.payload]: {
                         $set: {
                             pos: {
-                                x: 1898,
+                                x: window.innerWidth,
                                 y: state.asteroids[action.payload].pos.y + state.asteroids[action.payload].vel.y,
                                 d: state.asteroids[action.payload].pos.d + 5
                             },
@@ -187,7 +171,7 @@ export default function asteroidReducer(state = {
                         $set: {
                             pos: {
                                 x: state.asteroids[action.payload].pos.x + state.asteroids[action.payload].vel.x,
-                                y: 954,
+                                y: window.innerHeight,
                                 d: state.asteroids[action.payload].pos.d + 5
                             },
                             vel: {

@@ -1,13 +1,13 @@
 import React from 'react'
 import { getRandomIntInclusive } from '../Helpers'
-import { initializeAsteroid, adjustTopLeft, adjustTopRight, adjustBottomLeft, adjustBottomRight, adjustLeft, adjustRight, adjustTop, adjustBottom, updateAsteroidLocation } from '../actions/asteroidActions'
+import { adjustTopLeft, adjustTopRight, adjustBottomLeft, adjustBottomRight, adjustLeft, adjustRight, adjustTop, adjustBottom, updateAsteroidLocation } from '../actions/asteroidActions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 class Asteroid extends React.Component {
 
   componentDidMount() {
-    this.initializeAsteroid()
+    // this.initializeAsteroid()
     this.updateAndConfineAsteroidToField()
   }
 
@@ -18,34 +18,34 @@ class Asteroid extends React.Component {
     })
   }
 
-  initializeAsteroid = (props)  => {
-    let numSides = getRandomIntInclusive(3,9)
-    console.log("numSides " + numSides)
-    let min = 0;
-    let i;
-    // Assign angles and sides for the asteroid, making sure that
-    // each angle is greater than the last angle (so it makes a nice closed
-    // shape) using min
-    let angles = []
-    let sides = []
-    let d = getRandomIntInclusive(0,359)
-    let velX = getRandomIntInclusive(1,5)
-    let velY = getRandomIntInclusive(1,5)
-    for (i = 0; i < numSides; i++) {
-      let newAngle = getRandomIntInclusive(min,45)
-      let newSideMultiplier = getRandomIntInclusive(10,100)
-      angles.push(newAngle)
-      sides.push(this.props.size*newSideMultiplier)
-      min = newAngle
-    }
-    this.props.initializeAsteroid({
-      angles: angles,
-      sides: sides,
-      d: d,
-      velX: velX,
-      velY: velY
-    })
-  }
+  // initializeAsteroid = (props)  => {
+  //   let numSides = getRandomIntInclusive(3,9)
+  //   console.log("numSides " + numSides)
+  //   let min = 0;
+  //   let i;
+  //   // Assign angles and sides for the asteroid, making sure that
+  //   // each angle is greater than the last angle (so it makes a nice closed
+  //   // shape) using min
+  //   let angles = []
+  //   let sides = []
+  //   let d = getRandomIntInclusive(0,359)
+  //   let velX = getRandomIntInclusive(1,5)
+  //   let velY = getRandomIntInclusive(1,5)
+  //   for (i = 0; i < numSides; i++) {
+  //     let newAngle = getRandomIntInclusive(min,45)
+  //     let newSideMultiplier = getRandomIntInclusive(10,100)
+  //     angles.push(newAngle)
+  //     sides.push(this.props.size*newSideMultiplier)
+  //     min = newAngle
+  //   }
+  //   this.props.initializeAsteroid({
+  //     angles: angles,
+  //     sides: sides,
+  //     d: d,
+  //     velX: velX,
+  //     velY: velY
+  //   })
+  // }
 
   updateAndConfineAsteroidToField = () => {
 
@@ -124,7 +124,6 @@ class Asteroid extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    initializeAsteroid: initializeAsteroid,
     adjustTopLeft: adjustTopLeft,
     adjustTopRight: adjustTopRight,
     adjustBottomLeft: adjustBottomLeft,

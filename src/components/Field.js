@@ -58,7 +58,7 @@ class Field extends React.Component {
   }
 
   drawField = () => {
-    setInterval(() => {
+    this._interval = setInterval(() => {
 
       // Canvas context
       let c = document.getElementById('AstroField')
@@ -88,14 +88,35 @@ class Field extends React.Component {
       }
 
       // Put in check for collision with Ship here
-      for (i = 0; i < this.props.asteroidContainer.asteroids.length; i++) {
-        if ((Math.abs(this.props.ship.pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= 150) && (Math.abs(this.props.ship.pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= 150)) {
-          console.log("SHIP HIT ASTEROID")
-          break;
-        }
-      }
+      this.checkAsteroidCollision()
+
+      // and for hits
+      this.checkHit()
 
     }, 20) // 20ms canvas refresh
+  }
+
+  checkAsteroidCollision = () => {
+    let i
+    for (i = 0; i < this.props.asteroidContainer.asteroids.length; i++) {
+      if ((Math.abs(this.props.ship.pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= 130) && (Math.abs(this.props.ship.pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= 130)) {
+        console.log("SHIP HIT ASTEROID")
+        clearInterval(this._interval)
+        break
+      }
+    }
+  }
+
+  checkHit = () => {
+    let i, j;
+    console.log(this.props.asteroidContainer.asteroids, this.props.shotContainer.shots)
+    for (i = 0; i < this.props.asteroidContainer.asteroids.length; i++) {
+      for (j = 0; j < this.props.shotContainer.shots.length; j++) {
+        if ((Math.abs(this.props.shotContainer.shots[j].pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= 150) && (Math.abs(this.props.shotContainer.shots[j].pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= 150)) {
+          console.log("SHOT HIT ASTEROID")
+        }
+      }
+    }
   }
 
   render() {

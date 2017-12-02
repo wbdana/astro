@@ -22,7 +22,6 @@ class AsteroidContainer extends React.Component {
       this.createAsteroid(2)
     }
     secondAsteroid(firstAsteroid)
-    console.log(this.props.asteroids)
     return(this.props.asteroids)
   }
 
@@ -33,13 +32,11 @@ class AsteroidContainer extends React.Component {
   }
 
   async updateAsteroids() {
-    // if (this.props.asteroids.length) {
-      let firstAsteroid = await this.updateAndConfineAsteroidToField(0)
-      let secondAsteroid = (firstAsteroid) => {
-        this.updateAndConfineAsteroidToField(1)
-      }
-      secondAsteroid(firstAsteroid)
-    // }
+    let firstAsteroid = await this.updateAndConfineAsteroidToField(0)
+    let secondAsteroid = (firstAsteroid) => {
+      this.updateAndConfineAsteroidToField(1)
+    }
+    secondAsteroid(firstAsteroid)
     return(0)
   }
 
@@ -49,11 +46,11 @@ class AsteroidContainer extends React.Component {
     let min = 0
     let angles = []
     let sides = []
-    let posX = getRandomIntInclusive(5,1800) // TODO - move away from starting pos of ship
+    let posX = getRandomIntInclusive(5,200) // TODO - move away from starting pos of ship
     let posY = getRandomIntInclusive(5,1000)
     let posD = getRandomIntInclusive(0,359)
-    let velX = getRandomIntInclusive(1,1)
-    let velY = getRandomIntInclusive(1,1)
+    let velX = getRandomIntInclusive(-5,5)
+    let velY = getRandomIntInclusive(-5,5)
     let newAngle =45
     let i
     let newSideMultiplier
@@ -86,17 +83,17 @@ class AsteroidContainer extends React.Component {
 
     // If Asteroid goes off screen bottom right corner,
     // come out top left corner
-    if (((this.props.asteroids[id].pos.x + this.props.asteroids[id].vel.x) >= 1898) && ((this.props.asteroids[id].pos.y + this.props.asteroids[id].vel.y) >= 954)) {
+    if (((this.props.asteroids[id].pos.x + this.props.asteroids[id].vel.x) >= window.innerWidth) && ((this.props.asteroids[id].pos.y + this.props.asteroids[id].vel.y) >= window.innerHeight)) {
       this.props.adjustTopLeft(id)
     }
 
     // If Asteroid goes off screen bottom left corner, come out on top right side
-    else if (((this.props.asteroids[id].pos.x + this.props.asteroids[id].vel.x) <= 0) && ((this.props.asteroids[id].pos.y + this.props.asteroids[id].vel.y) >= 954)) {
+    else if (((this.props.asteroids[id].pos.x + this.props.asteroids[id].vel.x) <= 0) && ((this.props.asteroids[id].pos.y + this.props.asteroids[id].vel.y) >= window.innerHeight)) {
       this.props.adjustTopRight(id)
     }
 
     // If Asteroid goes off screen top right corner, come out on bottom left corner
-    else if (((this.props.asteroids[id].pos.x + this.props.asteroids[id].vel.x) >= 1898) && ((this.props.asteroids[id].pos.y + this.props.asteroids[id].vel.y) <= 0)) {
+    else if (((this.props.asteroids[id].pos.x + this.props.asteroids[id].vel.x) >= window.innerWidth) && ((this.props.asteroids[id].pos.y + this.props.asteroids[id].vel.y) <= 0)) {
       this.props.adjustBottomLeft(id)
     }
 
@@ -106,7 +103,7 @@ class AsteroidContainer extends React.Component {
     }
 
     // If Asteroid goes off screen right, come out on left side
-    else if ((this.props.asteroids[id].pos.x + this.props.asteroids[id].vel.x) >= 1898) {
+    else if ((this.props.asteroids[id].pos.x + this.props.asteroids[id].vel.x) >= window.innerWidth) {
       this.props.adjustLeft(id)
     }
 
@@ -116,7 +113,7 @@ class AsteroidContainer extends React.Component {
     }
 
     // If Asteroid goes off screen bottom, come out on top side
-    else if ((this.props.asteroids[id].pos.y + this.props.asteroids[id].vel.y) >= 954) {
+    else if ((this.props.asteroids[id].pos.y + this.props.asteroids[id].vel.y) >= window.innerHeight) {
       this.props.adjustTop(id)
     }
 

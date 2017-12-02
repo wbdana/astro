@@ -107,17 +107,17 @@ class Ship extends React.Component {
 
       // If Ship goes off screen bottom right corner,
       // come out top left corner
-      if (((this.props.pos.x + this.props.vel.x) >= 1898) && ((this.props.pos.y + this.props.vel.y) >= 954)) {
+      if (((this.props.pos.x + this.props.vel.x) >= window.innerWidth) && ((this.props.pos.y + this.props.vel.y) >= window.innerHeight)) {
         this.props.adjustTopLeft()
       }
 
       // If Ship goes off screen bottom left corner, come out on top right side
-      else if (((this.props.pos.x + this.props.vel.x) <= 0) && ((this.props.pos.y + this.props.vel.y) >= 954)) {
+      else if (((this.props.pos.x + this.props.vel.x) <= 0) && ((this.props.pos.y + this.props.vel.y) >= window.innerHeight)) {
         this.props.adjustTopRight()
       }
 
       // If Ship goes off screen top right corner, come out on bottom left corner
-      else if (((this.props.pos.x + this.props.vel.x) >= 1898) && ((this.props.pos.y + this.props.vel.y) <= 0)) {
+      else if (((this.props.pos.x + this.props.vel.x) >= window.innerWidth) && ((this.props.pos.y + this.props.vel.y) <= 0)) {
         this.props.adjustBottomLeft()
       }
 
@@ -127,7 +127,7 @@ class Ship extends React.Component {
       }
 
       // If Ship goes off screen right, come out on left side
-      else if ((this.props.pos.x + this.props.vel.x) >= 1898) {
+      else if ((this.props.pos.x + this.props.vel.x) >= window.innerWidth) {
         this.props.adjustLeft()
       }
 
@@ -137,7 +137,7 @@ class Ship extends React.Component {
       }
 
       // If Ship goes off screen bottom, come out on top side
-      else if ((this.props.pos.y + this.props.vel.y) >= 954) {
+      else if ((this.props.pos.y + this.props.vel.y) >= window.innerHeight) {
         this.props.adjustTop()
       }
 

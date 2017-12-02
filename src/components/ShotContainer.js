@@ -9,14 +9,12 @@ class ShotContainer extends React.Component {
         this.updateShots = this.updateShots.bind(this)
         window.addEventListener('keydown', (event) => {
             if (event.key === " ") {
-                console.log("Space")
                 this.takeShot()
             }
         })
         setInterval(()=>{
             this.updateShots()
         }, 20)
-        console.log(window.innerHeight, window.innerWidth)
     }
 
     async takeShot() {
@@ -27,8 +25,8 @@ class ShotContainer extends React.Component {
                 d: this.props.ship.pos.d
             },
             vel: {
-                x: (4 * (Math.sin(this.props.ship.pos.d*Math.PI/180))),
-                y: (4 * (Math.cos(this.props.ship.pos.d*Math.PI/180)))
+                x: (20 * (Math.sin(this.props.ship.pos.d*Math.PI/180))),
+                y: (20 * (Math.cos(this.props.ship.pos.d*Math.PI/180)))
             }
         }
         let shotFired = await this.props.newShot(newShot)
@@ -37,10 +35,7 @@ class ShotContainer extends React.Component {
     async updateShots() {
         let i
         let shots = await this.props.shots
-        console.log(shots)
-        console.log("Hit update shots")
         for (i = 0; i < this.props.shots.length; i++) {
-            console.log("Hit updateShots() loop")
             this.updateShotLocation(i)
         }
     }
