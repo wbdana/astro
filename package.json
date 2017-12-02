@@ -16,6 +16,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "immutability-helper": "^2.5.1"
   }
 }
