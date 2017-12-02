@@ -143,6 +143,7 @@ class Field extends React.Component {
     let newAngle = 45
     let i
     let newSideMultiplier
+    let newAsteroids = []
     for (i = 0; i < numSides; i++) {
       // newAngle = getRandomIntInclusive(45, 45)
       newSideMultiplier = getRandomIntInclusive(70, 80)
