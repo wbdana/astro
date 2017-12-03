@@ -9,6 +9,9 @@ class Astro extends React.Component {
   render() {
     return (
       <div className="Astro">
+        <span id='Score'>
+          Score: {this.props.shotContainer.score}
+        </span>
         <Field store={this.props.store} />
       </div>
     );
@@ -16,7 +19,7 @@ class Astro extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { state }
+  return { ...state }
 }
 
 export default connect(mapStateToProps)(Astro);

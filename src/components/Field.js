@@ -175,9 +175,6 @@ class Field extends React.Component {
         <Ship />
         <AsteroidContainer />
         <ShotContainer />
-        <div className='Score'>
-          Score: {this.props.shotContainer.score}
-        </div>
       </canvas>
     )
   }
