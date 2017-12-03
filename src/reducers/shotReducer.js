@@ -10,7 +10,7 @@ export default function shotReducer(state = {
             newState = update(state, { shots: { $push: [{...action.payload}] } })
             return newState
         case 'MISSED_SHOT':
-            // if shot goes off screen without hitting asteroid, remove shot from state
+            // If shot goes off screen without hitting asteroid, remove shot from state
             return state
         case 'UPDATE_SHOT_LOCATION':
             if (state.shots[action.payload].pos.x >= window.innerWidth || state.shots[action.payload].pos.x < 0 || state.shots[action.payload].pos.y >= window.innerHeight || state.shots[action.payload].pos.y < 0) {

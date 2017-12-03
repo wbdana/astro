@@ -12,7 +12,7 @@ class AsteroidContainer extends React.Component {
     this.spawnAsteroids = this.spawnAsteroids.bind(this)
     let createdAsteroids = await this.createAsteroids(2, 2)
     console.log(createdAsteroids)
-    setInterval((createdAsteroids) => {
+    this._interval = setInterval((createdAsteroids) => {
       this.updateAsteroids()
     }, 40)
   }
@@ -28,6 +28,9 @@ class AsteroidContainer extends React.Component {
 
   updateAsteroids = () => {
     console.log("LENGTH", this.props.asteroids)
+    if (this.props.asteroids.length === 0) {
+      this.createAsteroids(2, 2)
+    }
     let i
     for (i = 0; i < this.props.asteroids.length; i++) {
       this.props.updateAsteroidLocation(i)
