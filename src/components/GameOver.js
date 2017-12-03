@@ -1,6 +1,8 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
-import { reset } from '../actions/astroActions'
+import { resetShip } from '../actions/shipActions'
+import { resetAsteroids } from '../actions/asteroidActions'
+import { resetShots } from '../actions/shotActions'
 import { connect } from 'react-redux'
 
 class GameOver extends React.Component {
@@ -10,8 +12,12 @@ class GameOver extends React.Component {
 
     // I've really got to figure this one out
     restartGame = () => {
-        // this.props.restartGame()
-        window.location.reload()
+        return Promise.all(
+            [this.props.resetShip(),
+            this.props.resetAsteroids(),
+            this.props.resetShots()]
+        )
+        // window.location.reload()
     }
     
     render() {
@@ -28,7 +34,9 @@ class GameOver extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        restartGame: reset
+        resetShip: resetShip,
+        resetAsteroids: resetAsteroids,
+        resetShots: resetShots
     }, dispatch)
 }
 

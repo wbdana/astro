@@ -46,6 +46,11 @@ export default function shotReducer(state = {
                 score: state.score + 5
             }
             return newState
+        case 'RESET_SHOTS':
+            newState = {
+                shots: [],
+                score: 0
+            }
         default:
             return state
     }

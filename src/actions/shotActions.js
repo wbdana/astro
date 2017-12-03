@@ -24,3 +24,11 @@ export function removeShot(payload) {
         })
     }
 }
+
+export function resetShots() {
+    return dispatch => {
+        dispatch({
+            type: 'RESET_SHOTS'
+        })
+    }
+}

@@ -65,6 +65,11 @@ export default function asteroidReducer(state = {
                 ]
             }
             return newState
+        case 'RESET_ASTEROIDS':
+            newState = {
+                asteroids: []
+            }
+            return newState
         default:
             return state
     }

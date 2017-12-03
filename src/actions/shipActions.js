@@ -186,3 +186,11 @@ export function endGame() {
         })
     }
 }
+
+export function resetShip() {
+    return dispatch => {
+        dispatch({
+            type: 'RESET'
+        })
+    }
+}

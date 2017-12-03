@@ -96,3 +96,11 @@ export function updateAsteroidLocation(payload) {
         })
     }
 }
+
+export function resetAsteroids() {
+    return dispatch => {
+        dispatch({
+            type: 'RESET_ASTEROIDS'
+        })
+    }
+}

@@ -13,7 +13,8 @@ export default function shipReducer(state = {
       a: false,
       d: false
     },
-    game: true
+    game: true,
+    field: true
 }, action) {
   let newState
   switch(action.type) {
@@ -232,7 +233,29 @@ export default function shipReducer(state = {
       console.log("HIT END GAME")
       newState = {
         ...state,
-        game: false
+        game: false,
+        field: false
+      }
+      return newState
+    case 'RESET':
+      console.log("HIT RESET")
+      newState = {
+        pos: {
+          x: 550,
+          y: 550,
+          d: 360
+        },
+        vel: {
+          x: 0,
+          y: 0
+        },
+        keys: {
+          w: false,
+          a: false,
+          d: false
+        },
+        game: true,
+        field: true
       }
       return newState
     default:
