@@ -9,21 +9,11 @@ import { bindActionCreators } from 'redux'
 
 class AsteroidContainer extends React.Component {
   async componentDidMount() {
-    this.spawnAsteroids = this.spawnAsteroids.bind(this)
     let createdAsteroids = await this.createAsteroids(2, 2)
     console.log(createdAsteroids)
     this._interval = setInterval((createdAsteroids) => {
       this.updateAsteroids()
     }, 40)
-  }
-
-  async spawnAsteroids() {
-    let firstAsteroid = await this.createAsteroid(2)
-    let secondAsteroid = (firstAsteroid) => {
-      this.createAsteroid(2)
-    }
-    secondAsteroid(firstAsteroid)
-    return(this.props.asteroids)
   }
 
   updateAsteroids = () => {
@@ -49,7 +39,6 @@ class AsteroidContainer extends React.Component {
       posD = getRandomIntInclusive(0, 359)
       velX = getRandomIntInclusive(-5, 5)
       velY = getRandomIntInclusive(-5, 5)
-      // console.log(posX, posY, posD, velX, velY)
       for (j = 0; j < numSides; j++) {
         newSideMultiplier = getRandomIntInclusive(70,80)
         angles.push(45)
