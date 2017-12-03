@@ -74,14 +74,16 @@ class Field extends React.Component {
       ctx.clearRect(0, 0, c.width, c.height)
 
       // Styling
-      ctx.strokeStyle = '#1CC8EF'
+      // ctx.strokeStyle = '#1CC8EF' // blue ship
+      ctx.strokeStyle = '#09B703' // green ship
       ctx.fillStyle = '#000000'
       ctx.lineWidth = 2
 
       // Draw Ship
       this.drawShip(c, ctx)
 
-      ctx.strokeStyle = '#EF9E1C'
+      // ctx.strokeStyle = '#EF9E1C' // orange asteroids
+      ctx.strokeStyle = '#5E04CC' // purple asteroids
       // Draw Asteroid 
       let i
       for (i = 0; i < this.props.asteroidContainer.asteroids.length; i++) {

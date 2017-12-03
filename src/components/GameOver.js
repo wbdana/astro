@@ -8,15 +8,19 @@ class GameOver extends React.Component {
         console.log(this.props.restartGame)
     }
 
+    // I've really got to figure this one out
     restartGame = () => {
-        this.props.restartGame()
+        // this.props.restartGame()
+        window.location.reload()
     }
     
     render() {
         return(
             <div id='GameOver'>
-                You lost. Your score was {this.props.score}.
-                <button onClick={this.restartGame} />
+                Dang that came out of nowhere! Your score was {this.props.score}.<br/><br/>
+                <button onClick={this.restartGame}>
+                    Reset
+                </button>
             </div>
         )
     }

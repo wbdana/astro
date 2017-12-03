@@ -15,10 +15,10 @@ canvas {
 
 div#GameOver {
   display: block;
-  background-color: white;
+  background-color: rgb(65, 65, 65);
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 0%;
+  left: 40%;
   padding: 16px;
   text-align: center;
   color: rgb(151, 151, 151);
@@ -27,6 +27,10 @@ div#GameOver {
   width: auto;
   overflow: hidden;
   z-index: 5;
+}
+
+div#GameOver button {
+  background-color: white;
 }
 
 span, a {
