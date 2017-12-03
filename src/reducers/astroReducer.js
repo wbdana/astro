@@ -1,11 +1,37 @@
-import combineReducers from './index.js'
+import combineReducers from './index'
 
-export default function astroReducer(state, action) {
+export default function astroReducer(state = {
+    ship: {
+        pos: {
+            x: 550,
+            y: 550,
+            d: 360
+        },
+        vel: {
+            x: 0,
+            y: 0
+        },
+        keys: {
+            w: false,
+            a: false,
+            d: false
+        },
+        game: true
+    },
+    asteroidContainer: {
+        asteroids: []
+    },
+    shotContainer: {
+        shots: []
+    }
+}, action) {
+    console.log("HIT SWITCH")
+    let newState    
     switch(action.type) {
         case 'RESET':
-            state = undefined
+            return state
         default:
-            state = undefined
+            return state
     }
-    return combineReducers(state, action)
+    return combineReducers(newState, action)
 }
