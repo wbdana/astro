@@ -17,3 +17,10 @@ span.VectorVelocity {
   height: auto;
   width: auto;
 }
+
+div.Score {
+  position: absolute;
+  z-index: -1;
+  background-color: grey;
+  color: red;
+}

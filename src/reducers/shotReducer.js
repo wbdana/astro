@@ -1,7 +1,8 @@
 import update from 'immutability-helper'
 
 export default function shotReducer(state = {
-    shots: []
+    shots: [],
+    score: 0
 }, action) {
     let newState
     switch(action.type) {
@@ -9,15 +10,13 @@ export default function shotReducer(state = {
             console.log("TOOK SHOT")
             newState = update(state, { shots: { $push: [{...action.payload}] } })
             return newState
-        case 'MISSED_SHOT':
-            // If shot goes off screen without hitting asteroid, remove shot from state
-            return state
         case 'UPDATE_SHOT_LOCATION':
             if (state.shots[action.payload].pos.x >= window.innerWidth || state.shots[action.payload].pos.x < 0 || state.shots[action.payload].pos.y >= window.innerHeight || state.shots[action.payload].pos.y < 0) {
                 newState = {
                     shots: [
                         ...state.shots.slice(0, action.payload), ...state.shots.slice(action.payload + 1)
-                    ]
+                    ],
+                    score: state.score
                 }
             } else {
                 newState = update(state, {
@@ -43,7 +42,8 @@ export default function shotReducer(state = {
             newState = {
                 shots: [
                     ...state.shots.slice(0, action.payload), ...state.shots.slice(action.payload + 1)
-                ]
+                ],
+                score: state.score + 5
             }
             return newState
         default:

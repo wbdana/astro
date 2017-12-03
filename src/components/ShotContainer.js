@@ -10,6 +10,7 @@ class ShotContainer extends React.Component {
         window.addEventListener('keydown', (event) => {
             if (event.key === " ") {
                 this.takeShot()
+                setTimeout(()=>{this.takeShot()}, 100)
             }
         })
         setInterval(()=>{

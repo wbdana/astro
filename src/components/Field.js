@@ -123,6 +123,7 @@ class Field extends React.Component {
           }
           let asteroidRemoved = await this.props.removeAsteroid(i)
           this.props.removeShot(j)
+          console.log(this.props)
           break
           break
         }
@@ -174,6 +175,9 @@ class Field extends React.Component {
         <Ship />
         <AsteroidContainer />
         <ShotContainer />
+        <div className='Score'>
+          Score: {this.props.shotContainer.score}
+        </div>
       </canvas>
     )
   }
