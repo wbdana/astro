@@ -10,9 +10,8 @@ import { bindActionCreators } from 'redux'
 class AsteroidContainer extends React.Component {
   async componentDidMount() {
     this.spawnAsteroids = this.spawnAsteroids.bind(this)
-    this.updateAsteroids = this.updateAsteroids.bind(this)
     let createdAsteroids = await this.createAsteroids(2, 2)
-    // console.log(createdAsteroids)
+    console.log(createdAsteroids)
     setInterval((createdAsteroids) => {
       this.updateAsteroids()
     }, 40)
@@ -27,31 +26,12 @@ class AsteroidContainer extends React.Component {
     return(this.props.asteroids)
   }
 
-  // updateAsteroids = () => {
-  //   let i
-  //   for (i = 0; i < this.props.asteroids.length; i++) {
-  //     this.updateAndConfineAsteroidToField(0)
-  //   }
-  // }
-
-  async updateAsteroids() {
-    // console.log(this.props.asteroids)
-    if (this.props.asteroids.length === 2) {
-      let firstAsteroid = await this.updateAndConfineAsteroidToField(0)
-      let secondAsteroid = (firstAsteroid) => {
-        this.updateAndConfineAsteroidToField(1)
-      }
-      secondAsteroid(firstAsteroid)
-    } else if (this.props.asteroids.length === 1) {
-      let firstAsteroid = await this.updateAndConfineAsteroidToField(0)
-      let done = (firstAsteroid) => {
-        return(0)
-      }
+  updateAsteroids = () => {
+    console.log("LENGTH", this.props.asteroids)
+    let i
+    for (i = 0; i < this.props.asteroids.length; i++) {
+      this.props.updateAsteroidLocation(i)
     }
-    // } else if (!this.props.asteroids.length) {
-    //   this.spawnAsteroids()
-    // }
-    return(0)
   }
 
   createAsteroids = (numAsteroids, size) => {
@@ -90,13 +70,6 @@ class AsteroidContainer extends React.Component {
     }
     this.props.createAsteroids(newAsteroids)
     return(0)    
-  }
-
-  updateAndConfineAsteroidToField = (id) => {
-    console.log(this.props.asteroids)
-    console.log(id)
-    console.log(this.props.asteroids[id].pos)
-    this.props.updateAsteroidLocation(id)
   }
 
   render() {

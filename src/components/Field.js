@@ -12,7 +12,6 @@ import { removeShot } from '../actions/shotActions'
 class Field extends React.Component {
 
   componentDidMount() {
-    this.breakAsteroidInTwo = this.breakAsteroidInTwo.bind(this)
     this.checkHit = this.checkHit.bind(this)
     this.drawField()
   }
@@ -132,55 +131,20 @@ class Field extends React.Component {
     }
   }
 
-  async breakAsteroidInTwo(newSize, posX, posY) {
-    let numSides = getRandomIntInclusive(7, 9)
-    let min = 0
-    let angles = []
-    let sides = []
-    let posD = getRandomIntInclusive(0, 359)
-    let velX = getRandomIntInclusive(-5, 5)
-    let velY = getRandomIntInclusive(-5, 5)
-    let newAngle = 45
-    let i
-    let newSideMultiplier
+  breakAsteroidInTwo = (newSize, posX, posY) => {
+    let i, j, numSides, angles, sides, posD, velX, velY, newSideMultiplier, newAsteroid;
     let newAsteroids = []
-    for (i = 0; i < numSides; i++) {
-      // newAngle = getRandomIntInclusive(45, 45)
-      newSideMultiplier = getRandomIntInclusive(70, 80)
-      angles.push(newAngle)
-      sides.push(newSize * newSideMultiplier)
-      // min = newAngle
-    }
-    let newAsteroid = {
-      angles: angles,
-      sides: sides,
-      pos: {
-        x: posX,
-        y: posY,
-        d: posD
-      },
-      vel: {
-        x: velX,
-        y: velY // TODO: should add spin
-      },
-      size: newSize
-    }
-    let firstAsteroid = await this.props.createAsteroids(newAsteroid)
-    let secondAsteroid = (firstAsteroid) => {
-      numSides = getRandomIntInclusive(7, 9)
-      min = 0
+    for (i = 0; i < 2; i++) {
+      numSides = getRandomIntInclusive(7,9)
       angles = []
       sides = []
-      posD = getRandomIntInclusive(0, 359)
-      velX = getRandomIntInclusive(-5, 5)
-      velY = getRandomIntInclusive(-5, 5)
-      newAngle = 45
-      i
-      newSideMultiplier
-      for (i = 0; i < numSides; i++) {
-        newSideMultiplier = getRandomIntInclusive(70, 80)
-        angles.push(newAngle)
-        sides.push(newSize * newSideMultiplier)
+      posD = getRandomIntInclusive(0,359)
+      velX = getRandomIntInclusive(-5,5)
+      velY = getRandomIntInclusive(-5,5)
+      for (j = 0; j < numSides; j++) {
+        newSideMultiplier = getRandomIntInclusive(70,80)
+        angles.push(45)
+        sides.push(newSize*newSideMultiplier)
       }
       newAsteroid = {
         angles: angles,
@@ -192,12 +156,13 @@ class Field extends React.Component {
         },
         vel: {
           x: velX,
-          y: velY // TODO: should add spin
+          y: velY
         },
         size: newSize
       }
-      secondAsteroid(firstAsteroid)
+      newAsteroids.push(newAsteroid)
     }
+    this.props.createAsteroids(newAsteroids)
   }
 
   render() {
