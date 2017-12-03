@@ -40,7 +40,7 @@ class Field extends React.Component {
     let i
     ctx.beginPath()
     ctx.translate(this.props.asteroidContainer.asteroids[j].pos.x, this.props.asteroidContainer.asteroids[j].pos.y)
-    ctx.arc(0, 0, (this.props.asteroidContainer.asteroids[j].size * 65), 0, 2 * Math.PI) // hitbox
+    // ctx.arc(0, 0, (this.props.asteroidContainer.asteroids[j].size * 65), 0, 2 * Math.PI) // hitbox
     // ctx.arc(0, 0, 10, 0, 2 * Math.PI) // center
     ctx.moveTo(0,this.props.asteroidContainer.asteroids[j].sides[0]) // move away from center
     for (i = 0; i < this.props.asteroidContainer.asteroids[j].angles.length; i++) {
@@ -113,7 +113,6 @@ class Field extends React.Component {
 
   async checkHit() {
     let i, j;
-    // console.log(this.props.asteroidContainer.asteroids, this.props.shotContainer.shots)
     for (i = 0; i < this.props.asteroidContainer.asteroids.length; i++) {
       for (j = 0; j < this.props.shotContainer.shots.length; j++) {
         if ((Math.abs(this.props.shotContainer.shots[j].pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= (this.props.asteroidContainer.asteroids[i].size * 65)) && (Math.abs(this.props.shotContainer.shots[j].pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= (this.props.asteroidContainer.asteroids[i].size * 65))) {
