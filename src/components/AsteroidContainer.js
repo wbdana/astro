@@ -13,6 +13,9 @@ class AsteroidContainer extends React.Component {
     console.log(createdAsteroids)
     this._interval = setInterval((createdAsteroids) => {
       this.updateAsteroids()
+      if (this.props.game === false) {
+        clearInterval(this._interval)
+      }
     }, 40)
   }
 
@@ -87,7 +90,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    asteroids: [...state.asteroidContainer.asteroids]
+    asteroids: [...state.asteroidContainer.asteroids],
+    game: state.ship.game
   }
 }
 

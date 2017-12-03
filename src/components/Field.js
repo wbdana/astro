@@ -179,7 +179,6 @@ class Field extends React.Component {
         <Ship />
         <AsteroidContainer />
         <ShotContainer />
-        {this.props.ship.game === false && <GameOver />}
       </canvas>
     )
   }

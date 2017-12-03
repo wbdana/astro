@@ -1,18 +1,22 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
-import astroReducer from '../reducers/astroReducer'
+import { reset } from '../actions/astroActions'
 import { connect } from 'react-redux'
 
 class GameOver extends React.Component {
     componentDidMount() {
-        console.log(this.props)
+        console.log(this.props.restartGame)
+    }
+
+    restartGame = () => {
+        this.props.restartGame()
     }
     
     render() {
         return(
             <div id='GameOver'>
                 You lost. Your score was {this.props.score}.
-
+                <button onClick={this.restartGame} />
             </div>
         )
     }
@@ -20,8 +24,8 @@ class GameOver extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        restartGame: astroReducer
-    })
+        restartGame: reset
+    }, dispatch)
 }
 
 const mapStateToProps = (state) => {

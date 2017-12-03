@@ -86,7 +86,7 @@ class Ship extends React.Component {
     // Set interval to position (redraw) the ship based on
     // this.props.ship, as adjusted by the boundaries
     // of the Field
-    setInterval( () => {
+    this._interval = setInterval( () => {
 
       // Increase velocity while 'w' is held down
       if (this.props.keys.w === true) {
@@ -151,8 +151,12 @@ class Ship extends React.Component {
         this.props.updateShipLocation()
       }
 
-    }, 20) // 20ms refresh rate
   
+      if (this.props.game === false) {
+        clearInterval(this._interval)
+      }
+
+    }, 20) // 20ms refresh rate
   }
 
   render() {

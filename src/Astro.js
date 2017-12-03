@@ -2,6 +2,7 @@ import React from 'react'
 import './Astro.css'
 
 import Field from './components/Field'
+import GameOver from './components/GameOver'
 
 import { connect } from 'react-redux'
 
@@ -19,6 +20,7 @@ class Astro extends React.Component {
           <a href='https://github.com/wbdana/astro' target='_blank' rel="noopener noreferrer">Source</a>
         </span>
         <Field store={this.props.store} />
+        {this.props.ship.game === false && <GameOver />}
       </div>
     );
   }

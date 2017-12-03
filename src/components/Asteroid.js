@@ -18,35 +18,6 @@ class Asteroid extends React.Component {
     })
   }
 
-  // initializeAsteroid = (props)  => {
-  //   let numSides = getRandomIntInclusive(3,9)
-  //   console.log("numSides " + numSides)
-  //   let min = 0;
-  //   let i;
-  //   // Assign angles and sides for the asteroid, making sure that
-  //   // each angle is greater than the last angle (so it makes a nice closed
-  //   // shape) using min
-  //   let angles = []
-  //   let sides = []
-  //   let d = getRandomIntInclusive(0,359)
-  //   let velX = getRandomIntInclusive(1,5)
-  //   let velY = getRandomIntInclusive(1,5)
-  //   for (i = 0; i < numSides; i++) {
-  //     let newAngle = getRandomIntInclusive(min,45)
-  //     let newSideMultiplier = getRandomIntInclusive(10,100)
-  //     angles.push(newAngle)
-  //     sides.push(this.props.size*newSideMultiplier)
-  //     min = newAngle
-  //   }
-  //   this.props.initializeAsteroid({
-  //     angles: angles,
-  //     sides: sides,
-  //     d: d,
-  //     velX: velX,
-  //     velY: velY
-  //   })
-  // }
-
   updateAndConfineAsteroidToField = () => {
 
     // Set interval to position (redraw) the asteroid based on
