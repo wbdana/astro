@@ -10,23 +10,38 @@ canvas {
   width: 100%;
   height: 100%;
 }
-/* 
-span.VectorVelocity {
-  color: grey;
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  background-color: #FFFFFF;
-  z-index: -1;
-  height: auto;
-  width: auto;
-} */
 
-span#Score {
+
+
+div#GameOver {
+  background-color: white;
+  z-index: 10;
+  position: absolute;
+  color: rgb(151, 151, 151);
+  top: 50%;
+  left: 50%;
+  height: 100px;
+  width: 250px;
+}
+
+span, a {
   display: block;
   position: absolute;
   z-index: 1;
-  /* background-color: #000000; */
-  color: rgb(119, 11, 11);
+  color: rgb(151, 151, 151);
   margin-top: 0px;
+  text-decoration: none;  
+}
+
+#Title {
+  left: 50%;
+}
+
+#Source {
+  left: 97%;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #1CC8EF;
 }

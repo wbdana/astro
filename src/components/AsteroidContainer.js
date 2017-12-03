@@ -17,7 +17,6 @@ class AsteroidContainer extends React.Component {
   }
 
   updateAsteroids = () => {
-    console.log("LENGTH", this.props.asteroids)
     if (this.props.asteroids.length === 0) {
       this.createAsteroids(2, 2)
     }

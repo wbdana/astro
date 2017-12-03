@@ -12,6 +12,12 @@ class Astro extends React.Component {
         <span id='Score'>
           Score: {this.props.shotContainer.score}
         </span>
+        <span id='Title'>
+          Asteroids Online
+        </span>
+        <span id='Source'>
+          <a href='https://github.com/wbdana/astro' target='_blank' rel="noopener noreferrer">Source</a>
+        </span>
         <Field store={this.props.store} />
       </div>
     );

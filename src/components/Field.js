@@ -2,12 +2,14 @@ import React from 'react'
 import Ship from './Ship'
 import AsteroidContainer from './AsteroidContainer'
 import ShotContainer from './ShotContainer'
+import GameOver from './GameOver'
 import { getRandomIntInclusive } from '../Helpers'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { createAsteroids, removeAsteroid } from '../actions/asteroidActions'
 import { removeShot } from '../actions/shotActions'
+import { endGame } from '../actions/shipActions'
 
 class Field extends React.Component {
 
@@ -72,14 +74,14 @@ class Field extends React.Component {
       ctx.clearRect(0, 0, c.width, c.height)
 
       // Styling
-      ctx.strokeStyle = '#09B703'
+      ctx.strokeStyle = '#1CC8EF'
       ctx.fillStyle = '#000000'
       ctx.lineWidth = 2
 
       // Draw Ship
       this.drawShip(c, ctx)
 
-      ctx.strokeStyle = '#5E04CC'
+      ctx.strokeStyle = '#EF9E1C'
       // Draw Asteroid 
       let i
       for (i = 0; i < this.props.asteroidContainer.asteroids.length; i++) {
@@ -107,6 +109,7 @@ class Field extends React.Component {
       if ((Math.abs(this.props.ship.pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= (this.props.asteroidContainer.asteroids[i].size * 65)) && (Math.abs(this.props.ship.pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= (this.props.asteroidContainer.asteroids[i].size * 65))) {
         console.log("SHIP HIT ASTEROID")
         clearInterval(this._interval)
+        this.props.endGame()
         break
       }
     }
@@ -176,6 +179,7 @@ class Field extends React.Component {
         <Ship />
         <AsteroidContainer />
         <ShotContainer />
+        {this.props.ship.game === false && <GameOver />}
       </canvas>
     )
   }
@@ -185,7 +189,8 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     createAsteroids: createAsteroids,
     removeAsteroid: removeAsteroid,
-    removeShot: removeShot
+    removeShot: removeShot,
+    endGame: endGame
   }, dispatch)
 }
 

@@ -12,7 +12,8 @@ export default function shipReducer(state = {
       w: false,
       a: false,
       d: false
-    }
+    },
+    game: true
 }, action) {
   let newState
   switch(action.type) {
@@ -225,6 +226,13 @@ export default function shipReducer(state = {
           x: state.pos.x + state.vel.x,
           y: state.pos.y + state.vel.y
         }
+      }
+      return newState
+    case 'END_GAME':
+      console.log("HIT END GAME")
+      newState = {
+        ...state,
+        game: false
       }
       return newState
     default:

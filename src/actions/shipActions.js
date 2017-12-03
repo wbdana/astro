@@ -177,3 +177,12 @@ export function updateShipLocation() {
         })
     }
 }
+
+export function endGame() {
+    return dispatch => {
+        dispatch({
+            type: 'END_GAME',
+            payload: null
+        })
+    }
+}

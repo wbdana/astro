@@ -203,7 +203,8 @@ const mapStateToProps = (state) => {
       w: state.ship.keys.w,
       a: state.ship.keys.a,
       d: state.ship.keys.d
-    }
+    },
+    game: state.ship.game
   }
 }
 
