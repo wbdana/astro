@@ -13,7 +13,7 @@ class ShotContainer extends React.Component {
                 setTimeout(()=>{this.takeShot()}, 100)
             }
         })
-        setInterval(()=>{
+        this._interval = setInterval(()=>{
             this.updateShots()
         }, 20)
     }

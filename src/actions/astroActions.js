@@ -6,3 +6,12 @@ export function reset() {
         })
     }
 }
+
+export function restartGame() {
+    return dispatch => {
+        dispatch({
+            type: 'RESTART_GAME',
+            payload: null
+        })
+    }
+}
