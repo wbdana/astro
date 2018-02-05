@@ -109,7 +109,6 @@ class Field extends React.Component {
     let i
     for (i = 0; i < this.props.asteroidContainer.asteroids.length; i++) {
       if ((Math.abs(this.props.ship.pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= (this.props.asteroidContainer.asteroids[i].size * 65)) && (Math.abs(this.props.ship.pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= (this.props.asteroidContainer.asteroids[i].size * 65))) {
-        console.log("SHIP HIT ASTEROID")
         clearInterval(this._interval)
         this.props.endGame()
         break
@@ -122,16 +121,13 @@ class Field extends React.Component {
     for (i = 0; i < this.props.asteroidContainer.asteroids.length; i++) {
       for (j = 0; j < this.props.shotContainer.shots.length; j++) {
         if ((Math.abs(this.props.shotContainer.shots[j].pos.x - this.props.asteroidContainer.asteroids[i].pos.x) <= (this.props.asteroidContainer.asteroids[i].size * 65)) && (Math.abs(this.props.shotContainer.shots[j].pos.y - this.props.asteroidContainer.asteroids[i].pos.y) <= (this.props.asteroidContainer.asteroids[i].size * 65))) {
-          console.log("SHOT HIT ASTEROID")
           if (this.props.asteroidContainer.asteroids[i].size >= .5) {
-            console.log("SIZE", this.props.asteroidContainer.asteroids[i].size)
             this.breakAsteroidInTwo(this.props.asteroidContainer.asteroids[i].size / 2, this.props.asteroidContainer.asteroids[i].pos.x, this.props.asteroidContainer.asteroids[i].pos.y)
           }
           let asteroidRemoved = await this.props.removeAsteroid(i)
-          this.props.removeShot(j)
-          console.log(this.props)
+          let shotRemoved = await this.props.removeShot(j)
           break
-          break
+          // break
         }
       }
     }

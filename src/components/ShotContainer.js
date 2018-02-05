@@ -10,15 +10,25 @@ class ShotContainer extends React.Component {
         window.addEventListener('keydown', (event) => {
             if (event.key === " ") {
                 this.takeShot()
-                setTimeout(()=>{this.takeShot()}, 100)
+                // setTimeout(()=>{this.takeShot()}, 100)
             }
         })
-        this._interval = setInterval(()=>{
+        this.updateAndCheckToResetShots()
+    }
+
+    updateAndCheckToResetShots = () => {
+        this._interval = setInterval(() => {
             this.updateShots()
+            if (this.props.ship.game === false || this.props.ship.field === false) {
+                console.log("CLEAR SHOT INTERVAL")
+                clearInterval(this._interval)
+                console.log(this.props)
+            }
         }, 20)
     }
 
     async takeShot() {
+        console.log(this.props.ship)
         let newShot = {
             pos: {
                 x: this.props.ship.pos.x,

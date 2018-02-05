@@ -66,6 +66,7 @@ export default function asteroidReducer(state = {
             }
             return newState
         case 'RESET_ASTEROIDS':
+            console.log("Hit reset asteroids")
             newState = {
                 asteroids: []
             }

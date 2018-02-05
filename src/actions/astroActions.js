@@ -9,6 +9,7 @@ export function reset() {
 
 export function restartGame() {
     return dispatch => {
+        console.log("Dispatching restart game")
         dispatch({
             type: 'RESTART_GAME',
             payload: null

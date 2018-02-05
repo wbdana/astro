@@ -19,6 +19,7 @@ class GameOver extends React.Component {
         //     this.props.resetShots()]
         // )
         this.props.restartGame()
+        console.log(this.props)
         // window.location.reload()
     }
     

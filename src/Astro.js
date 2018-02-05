@@ -19,7 +19,7 @@ class Astro extends React.Component {
         <span id='Source'>
           <a href='https://github.com/wbdana/astro' target='_blank' rel="noopener noreferrer">Source</a>
         </span>
-        <Field key={this.props.ship.game} />
+        {this.props.ship.field === true && <Field key={this.props.ship.game} />}
         {this.props.ship.game === false && <GameOver />}
       </div>
     );
